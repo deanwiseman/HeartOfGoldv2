@@ -1,0 +1,14 @@
+﻿@model HeartOfGold.Models.Item
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>View Item</h3>
+
+<ul class="list-group">
+    <li class="list-group-item">Item Name:@Model.Name</li>
+    <li class="list-group-item">Category: @Model.Category.Name</li>
+    <li class="list-group-item">Description: @Model.Description</li>
+</ul>

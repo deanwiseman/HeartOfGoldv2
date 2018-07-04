@@ -1,0 +1,41 @@
+﻿@model HeartOfGold.Models.Item
+@{
+    /**/
+
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("View Inventory", "Index", "Item")</li>
+    <li class="active">Add New Item</li>
+</ol>
+
+<h3>New Item</h3>
+<p class="lead">Record a donated item on the system</p>
+
+@using (Html.BeginForm("Create", "Item"))
+{
+    <div class="well well-lg bg-info well-width">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Quantity)
+        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+    </div>
+    <br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        @Html.ActionLink("Back to Inventory", "Index", "Item", new { @class = "btn btn-default" })
+    </div>
+    </div>
+}
+
+  

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HeartOfGold.Models.Item>
+
+@{
+    ViewBag.Title = "Inventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">View Inventory</li>
+</ol>
+
+<h3>Inventory</h3>
+<p class="lead">The collection of donated items.</p>
+
+
+    @Html.ActionLink("+ New Donation", "New", "Item", new { @class = "btn btn-primary" })
+
+
+<br />
+<br />
+
+@if (!Model.Any())
+{
+    <p>We don't have any items in the inventory yet.</p>
+}
+
+else
+
+{
+    <table id="Inventory" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Donated By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Name, "Details", "Item", new { id = item.Id }, null)</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Donor.FirstName @item.Donor.LastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Inventory").DataTable();
+        })
+
+    </script>
+}
+
