@@ -11,7 +11,8 @@
 </ol>
 
 <h3>Inventory</h3>
-<p class="lead">The collection of donated items.</p>
+<hr />
+<p class="lead">Collection of donated items</p>
 
 
     @Html.ActionLink("+ New Donation", "New", "Item", new { @class = "btn btn-primary" })
@@ -31,7 +32,7 @@ else
     <table id="Inventory" class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Donation</th>
                 <th>Category</th>
                 <th>Description</th>
                 <th>Quantity</th>
@@ -51,6 +52,8 @@ else
             }
         </tbody>
     </table>
+    <br />
+    <hr />
 }
 @section scripts
 {

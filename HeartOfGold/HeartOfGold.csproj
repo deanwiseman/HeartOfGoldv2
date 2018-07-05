@@ -196,9 +196,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -249,6 +251,18 @@
     <Compile Include="Migrations\201807031450209_TestFullNameDonor.cs" />
     <Compile Include="Migrations\201807031450209_TestFullNameDonor.Designer.cs">
       <DependentUpon>201807031450209_TestFullNameDonor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807042343115_AddDummyDataToInventory.cs" />
+    <Compile Include="Migrations\201807042343115_AddDummyDataToInventory.Designer.cs">
+      <DependentUpon>201807042343115_AddDummyDataToInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807042357417_ChangeDisplayNameOfItem.cs" />
+    <Compile Include="Migrations\201807042357417_ChangeDisplayNameOfItem.Designer.cs">
+      <DependentUpon>201807042357417_ChangeDisplayNameOfItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807042359492_ReMigratePrevious.cs" />
+    <Compile Include="Migrations\201807042359492_ReMigratePrevious.Designer.cs">
+      <DependentUpon>201807042359492_ReMigratePrevious.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -497,6 +511,8 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\Details.cshtml" />
     <Content Include="Views\Item\New.cshtml" />
+    <Content Include="Views\Help\ViewHelp.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -550,6 +566,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807031450209_TestFullNameDonor.resx">
       <DependentUpon>201807031450209_TestFullNameDonor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807042343115_AddDummyDataToInventory.resx">
+      <DependentUpon>201807042343115_AddDummyDataToInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807042357417_ChangeDisplayNameOfItem.resx">
+      <DependentUpon>201807042357417_ChangeDisplayNameOfItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807042359492_ReMigratePrevious.resx">
+      <DependentUpon>201807042359492_ReMigratePrevious.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

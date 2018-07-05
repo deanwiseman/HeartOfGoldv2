@@ -18,10 +18,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Heart of Gold", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
             </div>
             <div class="navbar-collapse collapse navbar-fontsize">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inventory", "Index", "Item")</li>
+                    <li>@Html.ActionLink("Student Requests", "Index", "Request")</li>
+                    <li>@Html.ActionLink("About us", "About", "Home")</li>
+                    <li>@Html.ActionLink("Need help?", "ViewHelp", "Help")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -30,10 +34,17 @@
     <br /> <br />
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Developed by Dean Wiseman</p>
-        </footer>
+        
+        
+        <div class="footer">
+            <hr />
+            <ul class="list-inline text-center">
+                <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
+                <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
+                <li>&copy; Developed by Dean Wiseman</li>
+            </ul>
+            @*<p class="text-center">&copy; Developed by Dean Wiseman</p>*@
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

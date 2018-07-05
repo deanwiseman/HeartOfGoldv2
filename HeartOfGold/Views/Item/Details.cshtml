@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("View Inventory", "Index", "Item")</li>
+    <li class="active">View Item</li>
+</ol>
 <h3>View Item</h3>
 
 <ul class="list-group">
