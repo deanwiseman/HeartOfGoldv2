@@ -21,11 +21,11 @@ namespace HeartOfGold.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
-        // DbSet entities from database.
-    
+        // DbSet entities from database.  
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> ItemCategory  { get; set; }
         public DbSet<Donor> Donors { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

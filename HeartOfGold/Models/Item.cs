@@ -21,6 +21,7 @@ namespace HeartOfGold.Models
 
         [Required]
         public int Quantity { get; set; }
+
         public bool IsActive { get; set; }
 
         public Category Category { get; set; }

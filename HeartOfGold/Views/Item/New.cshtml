@@ -1,4 +1,4 @@
-﻿@model HeartOfGold.Models.Item
+﻿@model HeartOfGold.ViewModels.NewItemViewModel
 @{
     /**/
 
@@ -13,29 +13,38 @@
 </ol>
 
 <h3>New Item</h3>
-<p class="lead">Record a donated item on the system</p>
+<p class="lead">Save a donation on the system</p>
 
 @using (Html.BeginForm("Create", "Item"))
 {
-    <div class="well well-lg bg-info well-width">
+<div class="well well-lg bg-info well-width">
     <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Item.Name)
+        @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Description)
-        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Item.Description)
+        @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Quantity)
-        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Item.Donor)
+        @Html.DropDownListFor(m => m.Item.Donor, new SelectList(Model.Donors, "Id", "FullName"), "Who donated this item?", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item.Quantity)
+        @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Item.Category)
+        @Html.DropDownListFor(m => m.Item.Category, new SelectList(Model.Categories, "Id", "Name"), "Select Item Category", new { @class = "form-control" })
     </div>
     <br />
+    @Html.HiddenFor(m => m.Item.Id)
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Save Donation</button>
         @Html.ActionLink("Back to Inventory", "Index", "Item", new { @class = "btn btn-default" })
     </div>
-    </div>
+</div>
 }
 
   

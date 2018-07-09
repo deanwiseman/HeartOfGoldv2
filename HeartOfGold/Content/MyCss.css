@@ -1,9 +1,17 @@
 ﻿body {
     font-size: 15px;
+    padding-bottom: 0;
 }
 .navbar-fontsize {
-    font-size: 18px;
-    color: #444444;
+    font-size: 15px;
+}
+
+.div-width {
+    width: 100%;
+}
+
+.navbar-color {
+    background-color: #103a5c;
 }
 
 .well-width {
@@ -11,11 +19,52 @@
 }
 
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: 100px;
     width: 100%;
+    background-color: #103a5c;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+}
+
+.center {
     text-align: center;
+    
+}
+
+.img-center {
+    width: 50%;
+}
+
+.nmu-img {
+    width: 70%;
+}
+
+.p-margin {
+    margin-bottom: 5px;
+}
+
+.navbar-items-center {
+    text-align: center;
+    display: inline-block;
+}
+
+.nav-li{
+    display: inline-block;
+}
+
+.li {
+    text-align: center;
+}
+
+.nav {
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+}
+
+.footer-padding {
+    padding-bottom: 10em;
 }
 

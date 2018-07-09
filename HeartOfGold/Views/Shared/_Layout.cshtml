@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-color" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,13 +18,13 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Heart of Gold", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                
+
             </div>
-            <div class="navbar-collapse collapse navbar-fontsize">
+            <div class="navbar-collapse collapse navbar-fontsize center">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inventory", "Index", "Item")</li>
                     <li>@Html.ActionLink("Student Requests", "Index", "Request")</li>
-                    <li>@Html.ActionLink("About us", "About", "Home")</li>
+                    <li>@Html.ActionLink("Our Mission", "About", "Home")</li>
                     <li>@Html.ActionLink("Need help?", "ViewHelp", "Help")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -34,18 +34,29 @@
     <br /> <br />
     <div class="container body-content">
         @RenderBody()
-        
-        
-        <div class="footer">
-            <hr />
+
+    </div>
+
+    @*<div class="footer">
             <ul class="list-inline text-center">
                 <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
                 <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
                 <li>&copy; Developed by Dean Wiseman</li>
             </ul>
-            @*<p class="text-center">&copy; Developed by Dean Wiseman</p>*@
+        </div>*@
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-bottom navbar-color">
+        <div class="navbar-collapse collapse navbar-fontsize center">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
+                <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
+            </ul>
+            </a>
         </div>
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
