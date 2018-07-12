@@ -264,6 +264,22 @@
     <Compile Include="Migrations\201807042359492_ReMigratePrevious.Designer.cs">
       <DependentUpon>201807042359492_ReMigratePrevious.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807102231597_ChangeItemModelCategoryId.cs" />
+    <Compile Include="Migrations\201807102231597_ChangeItemModelCategoryId.Designer.cs">
+      <DependentUpon>201807102231597_ChangeItemModelCategoryId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807102308095_TestingAgainCategory.cs" />
+    <Compile Include="Migrations\201807102308095_TestingAgainCategory.Designer.cs">
+      <DependentUpon>201807102308095_TestingAgainCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111230149_ChangeIdInCategoryTableToByte.cs" />
+    <Compile Include="Migrations\201807111230149_ChangeIdInCategoryTableToByte.Designer.cs">
+      <DependentUpon>201807111230149_ChangeIdInCategoryTableToByte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111311453_AddFKCategoryToItem.cs" />
+    <Compile Include="Migrations\201807111311453_AddFKCategoryToItem.Designer.cs">
+      <DependentUpon>201807111311453_AddFKCategoryToItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -577,6 +593,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807042359492_ReMigratePrevious.resx">
       <DependentUpon>201807042359492_ReMigratePrevious.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807102231597_ChangeItemModelCategoryId.resx">
+      <DependentUpon>201807102231597_ChangeItemModelCategoryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807102308095_TestingAgainCategory.resx">
+      <DependentUpon>201807102308095_TestingAgainCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111230149_ChangeIdInCategoryTableToByte.resx">
+      <DependentUpon>201807111230149_ChangeIdInCategoryTableToByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111311453_AddFKCategoryToItem.resx">
+      <DependentUpon>201807111311453_AddFKCategoryToItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

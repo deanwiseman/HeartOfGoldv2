@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.nav-text-color {
+    color: white;
+}
+
 .navbar-color {
     background-color: #103a5c;
 }
@@ -66,5 +70,25 @@
 
 .footer-padding {
     padding-bottom: 10em;
+}
+
+.register-button {
+    background-color: #103a5c;
+    color: white;
+}
+
+.div-center {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.help-div-width {
+    width: 70%;
+}
+
+.panel-default > .panel-heading {
+    background-color: #103a5c;
+    color: white;
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HeartOfGold.Models
 {
@@ -25,6 +26,10 @@ namespace HeartOfGold.Models
         public bool IsActive { get; set; }
 
         public Category Category { get; set; }
+
+        [ForeignKey("Category")]
+        [Display(Name = "Category")]
+        public byte CategoryId { get; set; }
 
         public Donor Donor { get; set; }
     }

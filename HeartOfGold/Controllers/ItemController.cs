@@ -30,13 +30,15 @@ namespace HeartOfGold.Controllers
                 .Include(i => i.Donor)
                 .ToList();
 
+           
+
             return View(items);
         }
 
         //View a single item in more detail
         public ActionResult Details(int id)
         {
-            var item = _context.Items.Include(i => i.Category).SingleOrDefault(i => i.Id == id);
+            var item = _context.Items.Include(i => i.CategoryId).SingleOrDefault(i => i.Id == id);
 
             if (item == null)
                 return HttpNotFound();
@@ -62,17 +64,20 @@ namespace HeartOfGold.Controllers
         [HttpPost]
         public ActionResult Create(Item item)
         {
-            if (item.Id == 0)
-                _context.Items.Add(item);
-            else
-            {
-                var itemInDb = _context.Items.Single(i => i.Id == item.Id);
-                itemInDb.Name = item.Name;
-                itemInDb.Description = item.Description;
-                itemInDb.Quantity = item.Quantity;
-                itemInDb.Donor = item.Donor;
-                itemInDb.Category = item.Category;
-            }
+            //if (item.Id == 0)
+            //    _context.Items.Add(item);
+            //else
+            //{
+            //    var customerInDb = _context.Items.Single(c => c.Id == item.Id);
+            //    customerInDb.Name = item.Name;
+            //    customerInDb.Description = item.Description;
+            //    customerInDb.Quantity = item.Quantity; 
+            //    customerInDb.CategoryId = item.CategoryId;
+            //    customerInDb.Donor = item.Donor;
+            //    customerInDb.IsActive = true;
+            //}
+
+            _context.Items.Add(item);
 
             _context.SaveChanges();
 
