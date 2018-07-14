@@ -38,7 +38,7 @@ namespace HeartOfGold.Controllers
         //View a single item in more detail
         public ActionResult Details(int id)
         {
-            var item = _context.Items.Include(i => i.CategoryId).SingleOrDefault(i => i.Id == id);
+            var item = _context.Items.Include(i => i.Category).SingleOrDefault(i => i.Id == id);
 
             if (item == null)
                 return HttpNotFound();
@@ -51,33 +51,50 @@ namespace HeartOfGold.Controllers
             var itemCategories = _context.ItemCategory.ToList();
             var donors = _context.Donors.ToList();
 
-            var viewModel = new NewItemViewModel
+            var viewModel = new ItemFormViewModel
             {
                 Categories = itemCategories,
                 Donors = donors
             };
 
-            return View("New", viewModel);
+            return View("ItemForm", viewModel);
         }
 
-        // Create a new item.
+        // Save or update a donation item.
         [HttpPost]
-        public ActionResult Create(Item item)
+        public ActionResult Save(Item item)
         {
-            //if (item.Id == 0)
-            //    _context.Items.Add(item);
-            //else
-            //{
-            //    var customerInDb = _context.Items.Single(c => c.Id == item.Id);
-            //    customerInDb.Name = item.Name;
-            //    customerInDb.Description = item.Description;
-            //    customerInDb.Quantity = item.Quantity; 
-            //    customerInDb.CategoryId = item.CategoryId;
-            //    customerInDb.Donor = item.Donor;
-            //    customerInDb.IsActive = true;
-            //}
+           
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new ItemFormViewModel
+                {
+                    Item = item,
+                    Categories = _context.ItemCategory.ToList(),
+                    Donors = _context.Donors.ToList()
+                    
+                };
 
-            _context.Items.Add(item);
+                return View("ItemForm", viewModel);
+            }
+                                  
+            
+            // If item doesn't exist, add it
+            if (item.Id == 0)
+            {
+                item.IsActive = true;
+                _context.Items.Add(item);
+            }
+            // Else, update it
+            else
+            {
+                var itemInDb = _context.Items.Single(c => c.Id == item.Id);
+                itemInDb.Name = item.Name;
+                itemInDb.Description = item.Description;
+                itemInDb.Quantity = item.Quantity;
+                itemInDb.CategoryId = item.CategoryId;
+                itemInDb.Donor = item.Donor;
+            }
 
             _context.SaveChanges();
 
@@ -91,7 +108,15 @@ namespace HeartOfGold.Controllers
             if (item == null)
                 return HttpNotFound();
 
-            return View(item);
+            var viewModel = new ItemFormViewModel
+            {
+                Item = item,
+                Categories = _context.ItemCategory.ToList(),
+                Donors = _context.Donors.ToList()
+
+            };
+
+            return View("ItemForm", viewModel);
         }
     }
 }

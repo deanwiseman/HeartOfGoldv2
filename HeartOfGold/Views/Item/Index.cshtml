@@ -6,7 +6,7 @@
 }
 
 <ol class="breadcrumb">
-    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Home", "Index", "Home", null)</li>
     <li class="active">View Inventory</li>
 </ol>
 
@@ -15,7 +15,7 @@
 <p class="lead">Collection of donated items</p>
 
 
-    @Html.ActionLink("+ New Donation", "New", "Item", new { @class = "btn btn-primary" })
+    @Html.ActionLink("+ New Donation", "New", "Item", null, new { @class = "btn btn-primary" })
 
 
 <br />
@@ -42,7 +42,7 @@ else*@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(item.Name, "Details", "Item", new { id = item.Id }, null)</td>
+                    <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
                     <td>@Html.DisplayFor(m => item.Category.Name)</td>
                     <td>@item.Description</td>
                     <td>@item.Quantity</td>

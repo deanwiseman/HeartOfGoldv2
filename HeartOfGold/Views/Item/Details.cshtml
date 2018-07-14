@@ -13,7 +13,20 @@
 <h3>View Item</h3>
 
 <ul class="list-group">
-    <li class="list-group-item">Item Name:@Model.Name</li>
-    <li class="list-group-item">Category: @Model.Category.Name</li>
-    <li class="list-group-item">Description: @Model.Description</li>
+    <li class="list-group-item">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+    </li>
+    <li class="list-group-item">
+    @Html.LabelFor(m => m.Category)
+    @Html.TextBoxFor(m => m.Category.Name)
+    </li>
+    <li class="list-group-item">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description)
+    </li>
+    <li class="list-group-item">
+        @Html.LabelFor(m => m.Quantity)
+        @Html.TextBoxFor(m =>  m.Quantity)
+    </li>
 </ul>

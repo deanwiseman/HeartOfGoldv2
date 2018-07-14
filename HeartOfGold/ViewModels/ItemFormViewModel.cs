@@ -7,7 +7,7 @@ using HeartOfGold.Models;
 
 namespace HeartOfGold.ViewModels
 {
-    public class NewItemViewModel
+    public class ItemFormViewModel
     {
         public IEnumerable<Category> Categories { get; set; }
         public int SelectedCategory { get; set; }

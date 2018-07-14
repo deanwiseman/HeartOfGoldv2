@@ -1,4 +1,4 @@
-﻿@model HeartOfGold.ViewModels.NewItemViewModel
+﻿@model HeartOfGold.ViewModels.ItemFormViewModel
 @{
     /**/
 
@@ -15,12 +15,13 @@
 <h3>New Item</h3>
 <p class="lead">Save a donation on the system</p>
 
-@using (Html.BeginForm("Create", "Item"))
+@using (Html.BeginForm("Save", "Item"))
 {
 <div class="well well-lg bg-info well-width">
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Name)
         @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Item.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Description)
@@ -42,7 +43,7 @@
     @Html.HiddenFor(m => m.Item.Id)
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Save Donation</button>
-        @Html.ActionLink("Back to Inventory", "Index", "Item", new { @class = "btn btn-default" })
+        @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
     </div>
 </div>
 }
