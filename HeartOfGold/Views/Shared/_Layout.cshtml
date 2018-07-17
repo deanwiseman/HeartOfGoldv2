@@ -23,7 +23,8 @@
             <div class="navbar-collapse collapse navbar-fontsize center">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inventory", "Index", "Item")</li>
-                    <li>@Html.ActionLink("Student Requests", "Index", "Request")</li>
+                    <li>@Html.ActionLink("Student Requests", "SubmitRequest", "Request")</li>
+                    <li>@Html.ActionLink("Donors", "Index", "Donors")</li>
                     <li>@Html.ActionLink("Our Mission", "About", "Home")</li>
                     <li>@Html.ActionLink("Need help?", "ViewHelp", "Help")</li>
                 </ul>
@@ -47,7 +48,7 @@
 
 
 
-    <div class="navbar navbar-inverse navbar-color nav-padding">
+    <div class="navbar navbar-inverse navbar-color">
         <div class="navbar-collapse collapse navbar-fontsize center">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Contact Us", "About", "Home")</li>

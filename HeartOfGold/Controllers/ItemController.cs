@@ -62,6 +62,7 @@ namespace HeartOfGold.Controllers
 
         // Save or update a donation item.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Item item)
         {
            

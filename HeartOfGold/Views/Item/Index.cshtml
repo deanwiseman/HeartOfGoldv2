@@ -6,16 +6,29 @@
 }
 
 <ol class="breadcrumb">
-    <li>@Html.ActionLink("Home", "Index", "Home", null)</li>
-    <li class="active">View Inventory</li>
+    <li>
+        <a href="@Url.Action("Index", "Home")">
+            <span class="glyphicon glyphicon-home"></span>
+            &nbsp;Home
+        </a>
+    </li>
+    <li class="active">
+            <span class="glyphicon glyphicon-th-list"></span>
+            &nbsp;View Inventory      
+    </li>
 </ol>
 
 <h3>Inventory</h3>
 <hr />
 <p class="lead">Collection of donated items</p>
 
+<a href="@Url.Action("New", "Item")" class="btn btn-primary">
 
-    @Html.ActionLink("+ New Donation", "New", "Item", null, new { @class = "btn btn-primary" })
+    <span class="glyphicon glyphicon-saved"></span>
+    &nbsp;New Donation
+</a>
+
+    @*@Html.ActionLink("New Donation", "New", "Item", null, new { @class = "btn btn-primary" })*@
 
 
 <br />

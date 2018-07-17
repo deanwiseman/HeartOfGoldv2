@@ -12,7 +12,7 @@ namespace HeartOfGold.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter the name of the donation.")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -20,6 +20,7 @@ namespace HeartOfGold.Models
         [StringLength(255)]
         public string Description { get; set; }
 
+        [Range(1, 999)]
         [Required]
         public int Quantity { get; set; }
 

@@ -9,9 +9,9 @@ namespace HeartOfGold.Controllers
     public class RequestController : Controller
     {
         // GET: Request
-        public ActionResult Index()
+        public ActionResult SubmitRequest()
         {
-            return View();
+            return View("RequestForm");
         }
     }
 }
