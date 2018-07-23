@@ -47,6 +47,8 @@ namespace HeartOfGold.Controllers
        
         public ActionResult New()
         {
+            ViewBag.Text = "New";
+
             var itemCategories = _context.ItemCategory.ToList();
             var donors = _context.Donors.ToList();
 
@@ -101,6 +103,8 @@ namespace HeartOfGold.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.Text = "Edit";
+
             var item = _context.Items.SingleOrDefault(i => i.Id == id);
 
             if (item == null)

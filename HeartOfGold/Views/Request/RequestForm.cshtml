@@ -1,13 +1,37 @@
-﻿
+﻿@model HeartOfGold.Models.Request
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Student Requests";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="container center">
 <h3>Submit a Request</h3>
 <hr />
 <p class="lead">Let us know what you need</p>
+@using (Html.BeginForm("Save", "Request"))
+{
+
+<div class="well well-lg bg-info well-width">
+        <div class="form-group">
+            @Html.LabelFor(m => m.StudentNumber)
+            @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Date)
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+        </div>
+
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary register-button">
+                <i class="fas fa-check"></i>&nbsp;&nbsp;Submit Request
+            </button>
+        </div>
 </div>
+}
 

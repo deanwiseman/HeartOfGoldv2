@@ -25,35 +25,35 @@
     </li>
 </ol>
 
-<h3>New Donation</h3>
+<h3>@ViewBag.Text Donation</h3>
 <hr />
-<p class="lead">Save a donation on the system</p>
+<p class="lead">@ViewBag.Text a donation on the system</p>
 
-@using (Html.BeginForm("Save", "Item"))
+@using (Html.BeginForm("Save", "Item", new { id = "Donations" }))
 {
 <div class="well well-lg bg-info well-width">
     <div class="form-group">
-        @Html.LabelFor(m => m.Item.Name)
+        @Html.LabelFor(m => m.Item.Name, new { @class = "bold-text" })
         @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
         @Html.ValidationMessageFor(m => m.Item.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Item.Description)
+        @Html.LabelFor(m => m.Item.Description, new { @class = "bold-text" })
         @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control", @placeholder = "Describe the donation briefly" })
         @Html.ValidationMessageFor(m => m.Item.Description)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Item.DonorId)
+        @Html.LabelFor(m => m.Item.DonorId, new { @class = "bold-text" })
         @Html.DropDownListFor(m => m.Item.DonorId, new SelectList(Model.Donors, "Id", "FullName"), "Who was the donor?", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Item.DonorId)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Item.Quantity)
+        @Html.LabelFor(m => m.Item.Quantity, new { @class = "bold-text" })
         @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved" })
         @Html.ValidationMessageFor(m => m.Item.Quantity)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Item.CategoryId)
+        @Html.LabelFor(m => m.Item.CategoryId, new { @class = "bold-text" })
         @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "What type of donation is it?", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Item.CategoryId)
         <br />
@@ -62,15 +62,31 @@
 
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save Donation</button>
+        <button type="submit" class="btn btn-primary register-button">Save Donation</button>
         @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
     </div>
 </div>
 }
 
-@*@section scripts
+@section scripts
 {
     @Scripts.Render("~bundles/jqueryval")
-}*@
+
+    <script>
+        document.ready(function () {     
+
+        $("#Donations").submit(function (e) {
+            e.preventDefault()
+
+                .done(function () {
+                    toastr.success("Successfully added donation.");
+                })
+                .fail(function () {
+                    toastr.error("Error adding donation.");
+                })
+            });
+        })
+    </script>
+}
 
   
