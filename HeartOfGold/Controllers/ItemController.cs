@@ -24,13 +24,12 @@ namespace HeartOfGold.Controllers
             _context.Dispose();
         }
 
+        // GET all donated items in the database
         public ActionResult Index()
         {
             var items = _context.Items.Include(i => i.Category)
                 .Include(i => i.Donor)
                 .ToList();
-
-           
 
             return View(items);
         }
@@ -65,41 +64,39 @@ namespace HeartOfGold.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Item item)
         {
-           
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new ItemFormViewModel
-                {
-                    Item = item,
-                    Categories = _context.ItemCategory.ToList(),
-                    Donors = _context.Donors.ToList()
-                    
-                };
 
-                return View("ItemForm", viewModel);
-            }
-                                  
-            
+            //if (!ModelState.IsValid)
+            //{
+            //    var viewModel = new ItemFormViewModel
+            //    {
+            //        Item = item,
+            //        Categories = _context.ItemCategory.ToList(),
+            //        Donors = _context.Donors.ToList()
+
+            //    };
+
+            //    return View("ItemForm", viewModel);
+            //}
+
             // If item doesn't exist, add it
             if (item.Id == 0)
-            {
-                item.IsActive = true;
-                _context.Items.Add(item);
-            }
-            // Else, update it
-            else
-            {
-                var itemInDb = _context.Items.Single(c => c.Id == item.Id);
-                itemInDb.Name = item.Name;
-                itemInDb.Description = item.Description;
-                itemInDb.Quantity = item.Quantity;
-                itemInDb.CategoryId = item.CategoryId;
-                itemInDb.Donor = item.Donor;
-            }
+                {
+                    _context.Items.Add(item);
+                }
+                // Else, update it
+                else
+                {
+                    var itemInDb = _context.Items.Single(c => c.Id == item.Id);
+                    itemInDb.Name = item.Name;
+                    itemInDb.Description = item.Description;
+                    itemInDb.Quantity = item.Quantity;
+                    itemInDb.CategoryId = item.CategoryId;
+                    itemInDb.DonorId = item.DonorId;
+                }
 
-            _context.SaveChanges();
+                _context.SaveChanges();
 
-            return RedirectToAction("Index", "Item");
+                return RedirectToAction("Index", "Item");           
         }
 
         public ActionResult Edit(int id)

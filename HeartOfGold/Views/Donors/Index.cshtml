@@ -14,8 +14,7 @@
 <table id="Donors" class="table table-bordered table-hover">
     <thead>
         <tr style="background-color:#e6e6e6 ">
-            <th>Surname</th>
-            <th>First Name</th>
+            <th>Name</th>
             <th>Email Address</th>
         </tr>
     </thead>
@@ -24,8 +23,7 @@
         {
             <tr>
                @* <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>*@
-                <td>@Html.DisplayFor(m => donor.LastName)</td>
-                <td>@Html.DisplayFor(m => donor.FirstName)</td>
+                <td>@Html.DisplayFor(m => donor.FullName)</td>
                 <td>@Html.DisplayFor(m => donor.Email)</td>
             </tr>
         }

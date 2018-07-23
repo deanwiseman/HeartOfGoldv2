@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HeartOfGold.Models
 {
+    // Donors to Heart Of Gold
     public class Donor
     {
         public int Id { get; set; }

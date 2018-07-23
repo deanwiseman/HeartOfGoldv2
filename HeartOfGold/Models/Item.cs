@@ -33,5 +33,15 @@ namespace HeartOfGold.Models
         public byte CategoryId { get; set; }
 
         public Donor Donor { get; set; }
+
+        [ForeignKey("Donor")]
+        [Display(Name = "Donor")]
+        public int DonorId { get; set; }
+
+
+        public Item()
+        {
+            this.IsActive = true;
+        }
     }
 }

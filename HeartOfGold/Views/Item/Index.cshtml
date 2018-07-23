@@ -8,12 +8,12 @@
 <ol class="breadcrumb">
     <li>
         <a href="@Url.Action("Index", "Home")">
-            <span class="glyphicon glyphicon-home"></span>
+            <i class="fas fa-home"></i>
             &nbsp;Home
         </a>
     </li>
     <li class="active">
-            <span class="glyphicon glyphicon-th-list"></span>
+        <i class="fas fa-th-list"></i>
             &nbsp;View Inventory      
     </li>
 </ol>
@@ -22,9 +22,8 @@
 <hr />
 <p class="lead">Collection of donated items</p>
 
-<a href="@Url.Action("New", "Item")" class="btn btn-primary">
-
-    <span class="glyphicon glyphicon-saved"></span>
+<a href="@Url.Action("New", "Item", null)" class="btn btn-primary register-button">
+    <i class="fas fa-check"></i>
     &nbsp;New Donation
 </a>
 
@@ -73,6 +72,10 @@ else*@
         $(document).ready(function () {
             $("#Inventory").DataTable();
         })
+
+        $('#Inventory').dataTable({
+            "pageLength": 25
+        });
 
     </script>
 }

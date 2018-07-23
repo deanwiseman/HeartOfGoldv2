@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Heart of Gold</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,10 +20,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Heart of Gold", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("< Heart of Gold >", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
 
             </div>
-            <div class="navbar-collapse collapse navbar-fontsize center">
+            <div class="navbar-collapse collapse navbar-fontsize center" style="font-size:1.1em">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inventory", "Index", "Item")</li>
                     <li>@Html.ActionLink("Student Requests", "SubmitRequest", "Request")</li>

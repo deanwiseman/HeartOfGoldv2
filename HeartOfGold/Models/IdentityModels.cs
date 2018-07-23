@@ -25,6 +25,8 @@ namespace HeartOfGold.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> ItemCategory  { get; set; }
         public DbSet<Donor> Donors { get; set; }
+        public DbSet<RequestStatus> RequestStatus { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
 
         public ApplicationDbContext()

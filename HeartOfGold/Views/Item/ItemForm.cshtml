@@ -2,30 +2,31 @@
 @{
     /**/
 
-    ViewBag.Title = "New";
+    ViewBag.Title = "New Donation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <ol class="breadcrumb">
     <li>
         <a href="@Url.Action("Index", "Home")">
-            <span class="glyphicon glyphicon-home"></span>
+            <i class="fas fa-home"></i>
             &nbsp;Home
         </a>
     </li>
     <li>
         <a href="@Url.Action("Index", "Item")">
-            <span class="glyphicon glyphicon-th-list"></span>
+            <i class="fas fa-th-list"></i>
             &nbsp;View Inventory
         </a>
     </li>
     <li class="active">
-        <span class="glyphicon glyphicon-save"></span>
+        <i class="far fa-save"></i>
         &nbsp;New Donation
     </li>
 </ol>
 
-<h3>New Item</h3>
+<h3>New Donation</h3>
+<hr />
 <p class="lead">Save a donation on the system</p>
 
 @using (Html.BeginForm("Save", "Item"))
@@ -33,31 +34,32 @@
 <div class="well well-lg bg-info well-width">
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Name)
-        @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
         @Html.ValidationMessageFor(m => m.Item.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Description)
-        @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control", @placeholder = "Describe the donation briefly" })
         @Html.ValidationMessageFor(m => m.Item.Description)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Item.Donor)
-        @Html.DropDownListFor(m => m.Item.Donor, new SelectList(Model.Donors, "Id", "FullName"), "Who donated this item?", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Item.Donor)
+        @Html.LabelFor(m => m.Item.DonorId)
+        @Html.DropDownListFor(m => m.Item.DonorId, new SelectList(Model.Donors, "Id", "FullName"), "Who was the donor?", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Item.DonorId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Quantity)
-        @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved" })
         @Html.ValidationMessageFor(m => m.Item.Quantity)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Item.CategoryId)
-        @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select Item Category", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "What type of donation is it?", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Item.CategoryId)
+        <br />
     </div>
-    <br />
     @Html.HiddenFor(m => m.Item.Id)
+
     @Html.AntiForgeryToken()
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Save Donation</button>
@@ -66,9 +68,9 @@
 </div>
 }
 
-@section scripts
+@*@section scripts
 {
     @Scripts.Render("~bundles/jqueryval")
-}
+}*@
 
   
