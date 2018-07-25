@@ -20,7 +20,6 @@ namespace HeartOfGold.Controllers
         public ActionResult Save(Request request)
         {
 
-
             return View("RequestForm");
         }
     }

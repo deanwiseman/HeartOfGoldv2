@@ -38,10 +38,16 @@ namespace HeartOfGold.Models
         [Display(Name = "Donor")]
         public int DonorId { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Date Added")]
+        public DateTime DateAdded { get; set; }
+
 
         public Item()
         {
             this.IsActive = true;
+            this.DateAdded = DateTime.Now;
+            this.DateAdded.ToShortDateString();
         }
     }
 }

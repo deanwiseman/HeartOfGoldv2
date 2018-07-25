@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<HeartOfGold.Models.Item>
 
 @{
-    ViewBag.Title = "Inventory";
+    ViewBag.Title = "Donation Inventory";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -48,6 +48,7 @@ else*@
                 <th>Description</th>
                 <th>Quantity</th>
                 <th>Donated By</th>
+                <th>Date Added</th>
             </tr>
         </thead>
         <tbody>
@@ -59,6 +60,7 @@ else*@
                     <td>@item.Description</td>
                     <td>@item.Quantity</td>
                     <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
+                    <td>@Html.DisplayFor(m => item.DateAdded)</td>
                 </tr>
             }
         </tbody>

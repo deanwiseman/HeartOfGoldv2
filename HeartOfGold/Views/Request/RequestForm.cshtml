@@ -1,7 +1,7 @@
 ﻿@model HeartOfGold.Models.Request
 
 @{
-    ViewBag.Title = "Student Requests";
+    ViewBag.Title = "Submit Request";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Date)
-            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @Value = DateTime.Now.ToShortDateString(), @readonly = "readonly" })
         </div>
 
         @Html.HiddenFor(m => m.Id)

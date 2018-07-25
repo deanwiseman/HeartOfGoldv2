@@ -309,6 +309,10 @@
     <Compile Include="Migrations\201807211831217_UpdateItemModelAddDonorId.Designer.cs">
       <DependentUpon>201807211831217_UpdateItemModelAddDonorId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807241236524_AddDateToItemModel.cs" />
+    <Compile Include="Migrations\201807241236524_AddDateToItemModel.Designer.cs">
+      <DependentUpon>201807241236524_AddDateToItemModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -664,6 +668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807211831217_UpdateItemModelAddDonorId.resx">
       <DependentUpon>201807211831217_UpdateItemModelAddDonorId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807241236524_AddDateToItemModel.resx">
+      <DependentUpon>201807241236524_AddDateToItemModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

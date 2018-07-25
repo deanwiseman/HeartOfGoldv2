@@ -21,17 +21,24 @@
     </li>
     <li class="active">
         <i class="far fa-save"></i>
-        &nbsp;New Donation
+        &nbsp;@ViewBag.Text Donation
     </li>
 </ol>
 
-<h3>@ViewBag.Text Donation</h3>
-<hr />
-<p class="lead">@ViewBag.Text a donation on the system</p>
+<div class="container center">
+    <h3>@ViewBag.Text Donation</h3>
+    <hr />
+    <p class="lead">@ViewBag.Text donation on the system</p>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
 
 @using (Html.BeginForm("Save", "Item", new { id = "Donations" }))
 {
-<div class="well well-lg bg-info well-width">
+<div class="well well-lg bg-info">
     <div class="form-group">
         @Html.LabelFor(m => m.Item.Name, new { @class = "bold-text" })
         @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
@@ -64,28 +71,22 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary register-button">Save Donation</button>
         @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
+        @*@Html.ActionLink("Delete", "Delete", "Item")*@
     </div>
 </div>
 }
+            </div>
+        </div>
+    </div>
 
 @section scripts
 {
     @Scripts.Render("~bundles/jqueryval")
 
-    <script>
-        document.ready(function () {     
-
-        $("#Donations").submit(function (e) {
-            e.preventDefault()
-
-                .done(function () {
-                    toastr.success("Successfully added donation.");
-                })
-                .fail(function () {
-                    toastr.error("Error adding donation.");
-                })
-            });
-        })
+    <script>  
+        $("#Donations").submit(function () {
+            toastr.success("Successfully added donation.");
+        });
     </script>
 }
 

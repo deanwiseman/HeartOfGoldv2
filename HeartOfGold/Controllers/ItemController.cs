@@ -120,5 +120,21 @@ namespace HeartOfGold.Controllers
 
             return View("ItemForm", viewModel);
         }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var itemInDb = _context.Items.Single(i => i.Id == id);
+
+            itemInDb.IsActive = false;
+            itemInDb.Quantity = 0;
+
+            _context.SaveChanges();
+
+            return View("Index");
+
+           
+        }
     }
 }
