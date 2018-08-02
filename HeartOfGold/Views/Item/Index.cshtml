@@ -5,18 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li>
-        <a href="@Url.Action("Index", "Home")">
-            <i class="fas fa-home"></i>
-            &nbsp;Home
-        </a>
-    </li>
-    <li class="active">
-        <i class="fas fa-th-list"></i>
-            &nbsp;View Inventory      
-    </li>
-</ol>
+<div class="row">
+    <div class="col-md-5 col-sm-5 col-lg-5">
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">
+                    <i class="fas fa-home"></i>
+                    &nbsp;Home
+                </a>
+            </li>
+            <li class="active">
+                <i class="fas fa-th-list"></i>
+                &nbsp;View Inventory
+            </li>
+        </ol>
+    </div>
+</div>
 
 <h3>Inventory</h3>
 <hr />
@@ -27,53 +31,77 @@
     &nbsp;New Donation
 </a>
 
-    @*@Html.ActionLink("New Donation", "New", "Item", null, new { @class = "btn btn-primary" })*@
-
-
 <br />
 <br />
 
-@*@if (!Model.Any())
-{
-    <p>We don't have any items in the inventory yet.</p>
-}
-
-else*@
-
-    <table id="Inventory" class="table table-bordered table-hover">
-        <thead>
-            <tr style="background-color:#e6e6e6 ">
-                <th>Donation</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Donated By</th>
-                <th>Date Added</th>
+<table id="Inventory" class="table table-striped table-hover">
+    <thead>
+        <tr style="background-color:#e6e6e6 ">
+            <th>Donation</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Donated By</th>
+            <th>Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
+                <td>@Html.DisplayFor(m => item.Category.Name)</td>
+                <td>@item.Description</td>
+                <td>@item.Quantity</td>
+                <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
+                <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy}")</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
-                    <td>@Html.DisplayFor(m => item.Category.Name)</td>
-                    <td>@item.Description</td>
-                    <td>@item.Quantity</td>
-                    <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
-                    <td>@Html.DisplayFor(m => item.DateAdded)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
+
     <br />
     <hr />
 
 @section scripts
 {
     <script>
+
         $(document).ready(function () {
             $("#Inventory").DataTable();
         })
+  
+        //$('#inventory').dataTable({
+        //    ajax: {
+        //        url: "/api/donations",
+        //        dataSrc: "",
+        //        type: "GET"
+        //    },
+        //    columns: [
+        //        {
+        //            data: "Name",
+        //            render: function (data, type, item) {
+        //                return "<a href='/item/edit/" + item.id + "'>" + item.name + "</a>";
+        //            }
+        //        },
+        //        {
+        //            data: "name"
+        //        },
+        //        {
+        //            data: "description"
+        //        },
+        //        {
+        //            data: "quantity"
+        //        },
+        //        {
+        //            data: "name"
+        //        },
+        //        {
+        //            data: "dateAdded"
+        //        }
+        //    ],
+        //    pageLength: 25
+        //});
 
         $('#Inventory').dataTable({
             "pageLength": 25

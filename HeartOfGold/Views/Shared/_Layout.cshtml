@@ -9,6 +9,10 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -21,8 +25,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("< Heart of Gold >", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-
-
+               
             </div>
             <div class="navbar-collapse collapse navbar-fontsize center" style="font-size:1.1em">
                 <ul class="nav navbar-nav">
@@ -31,16 +34,20 @@
                     <li>@Html.ActionLink("Donors", "Index", "Donors")</li>
                     <li>@Html.ActionLink("Our Mission", "About", "Home")</li>
                     <li>@Html.ActionLink("Need help?", "ViewHelp", "Help")</li>
+                    <li>@Html.ActionLink("Reporting", "Index", "Reports")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <br /> <br />
-    <div class="container body-content">
-        @RenderBody()
 
+    <div>
+        <br /> <br />
+        <div class="container body-content">
+            @RenderBody()
+        </div>
     </div>
+
 
     @*<div class="footer">
             <ul class="list-inline text-center">
@@ -52,19 +59,18 @@
 
 
 
-    <div class="navbar navbar-inverse navbar-color">
+    <div class="navbar navbar-inverse navbar-color footer-bottom">
         <div class="navbar-collapse collapse navbar-fontsize center">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
                 <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
             </ul>
-            </a>
         </div>
     </div>
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -9,6 +9,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HeartOfGold.Models;
+using Galactic.ActiveDirectory;
+using System.Configuration;
+using System.Security;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HeartOfGold.Controllers
 {
@@ -61,11 +66,59 @@ namespace HeartOfGold.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Login(LoginViewModel model, string returnUrl)
+        //{
+
+        //    string serverName = ConfigurationManager.AppSettings["ADServer"];
+
+        //    if (ModelState.IsValid)
+
+        //    {
+
+        //        SecureString securePwd = null;
+
+        //        if (model.Password != null)
+        //        {
+        //            securePwd = new SecureString();
+
+        //            foreach (char chr in model.Password.ToCharArray())
+        //            {
+
+        //                securePwd.AppendChar(chr);
+
+        //            }
+
+        //        }
+        //        try
+        //        {
+        //            //Check user credentials
+
+        //            ActiveDirectory adVerifyUser = new ActiveDirectory(serverName, model.UserName, securePwd);
+        //            FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+        //            return RedirectToLocal(returnUrl);
+        //        }
+        //       catch
+        //        {
+        //            // If we got this far, something failed, redisplay form
+
+        //            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+
+        //        }
+
+        //    }
+
+        //    return View(model);
+
+        //}
+
+
+       // POST: /Account/Login
+       [HttpPost]
+       [AllowAnonymous]
+       [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -75,7 +128,7 @@ namespace HeartOfGold.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -151,10 +204,16 @@ namespace HeartOfGold.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    // Adds the student user to the student role.
+                    await UserManager.AddToRoleAsync(user.Id, "Student");
+
+
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

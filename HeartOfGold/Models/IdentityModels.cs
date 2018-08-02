@@ -13,6 +13,9 @@ namespace HeartOfGold.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+
+
+
             // Add custom user claims here
             return userIdentity;
         }
@@ -21,7 +24,7 @@ namespace HeartOfGold.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
-        // DbSet entities from database.  
+        // DbSet entities for database.
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> ItemCategory  { get; set; }
         public DbSet<Donor> Donors { get; set; }

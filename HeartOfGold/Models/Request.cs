@@ -14,11 +14,11 @@ namespace HeartOfGold.Models
 
         [Display(Name = "NMU Student Number")]
         [StringLength(9, MinimumLength = 9, ErrorMessage = "Enter a valid student number")]
-        [Required]
+        [Required(ErrorMessage = "Please enter your student number")]
         public string StudentNumber { get; set; }
 
         [Display(Name = "Describe what you're looking for")]
-        [Required]
+        [Required(ErrorMessage = "Please describe what you're looking for")]
         public string Description { get; set; }
 
         [Display(Name = "Date Today")]

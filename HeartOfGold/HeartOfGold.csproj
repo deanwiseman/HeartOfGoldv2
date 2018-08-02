@@ -46,16 +46,52 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DnDns, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.ActiveDirectory.1.3.0.499\lib\DnDns.dll</HintPath>
+    </Reference>
+    <Reference Include="Galactic.ActiveDirectory, Version=1.3.0.499, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.ActiveDirectory.1.3.0.499\lib\Galactic.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Galactic.Configuration, Version=1.3.0.499, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.Configuration.1.3.0.499\lib\Galactic.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Galactic.Cryptography, Version=1.3.0.499, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.Cryptography.1.3.0.499\lib\Galactic.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Galactic.EventLog, Version=1.3.0.499, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.EventLog.1.3.0.499\lib\Galactic.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Galactic.FileSystem, Version=1.3.0.499, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.FileSystem.1.3.0.499\lib\Galactic.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Galactic.LDAP, Version=1.3.0.499, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Galactic.LDAP.1.3.0.499\lib\Galactic.LDAP.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -193,15 +229,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\DonationsController.cs" />
     <Compile Include="Controllers\DonorsController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Dtos\DonationDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +354,14 @@
     <Compile Include="Migrations\201807241236524_AddDateToItemModel.Designer.cs">
       <DependentUpon>201807241236524_AddDateToItemModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808020949033_SeedUsers.cs" />
+    <Compile Include="Migrations\201808020949033_SeedUsers.Designer.cs">
+      <DependentUpon>201808020949033_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808021240116_SeedStudents.cs" />
+    <Compile Include="Migrations\201808021240116_SeedStudents.Designer.cs">
+      <DependentUpon>201808021240116_SeedStudents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -322,6 +371,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\RequestStatus.cs" />
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ItemFormViewModel.cs" />
@@ -456,6 +506,8 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.foundation.js" />
@@ -572,6 +624,7 @@
     <Content Include="Views\Help\ViewHelp.cshtml" />
     <Content Include="Views\Request\RequestForm.cshtml" />
     <Content Include="Views\Donors\Index.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -671,6 +724,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807241236524_AddDateToItemModel.resx">
       <DependentUpon>201807241236524_AddDateToItemModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808020949033_SeedUsers.resx">
+      <DependentUpon>201808020949033_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808021240116_SeedStudents.resx">
+      <DependentUpon>201808021240116_SeedStudents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

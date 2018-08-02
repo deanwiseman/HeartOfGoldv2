@@ -121,6 +121,30 @@
     font-weight: bold;
 }
 
+.footer-bottom {
+    bottom: 0;
+}
+
+.well {
+    border: 2px black;
+}
+
+.panel-body {
+    padding: 20px;
+}
+
+.custom-panel {   
+    padding: 5%;
+    padding-left: 13%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.well > .well-lg > .bg-info {
+    border: 1px black;
+}
+
+
 
 
 

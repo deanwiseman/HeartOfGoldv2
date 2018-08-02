@@ -9,7 +9,8 @@ using System.Data.Entity;
 
 namespace HeartOfGold.Controllers
 {
-    
+    // This entire controller, working with donations, is only accessible to the administrator user.
+    [Authorize(Roles = Roles.Administrator)]
     public class ItemController : Controller
     {
         private ApplicationDbContext _context;
@@ -67,18 +68,18 @@ namespace HeartOfGold.Controllers
         public ActionResult Save(Item item)
         {
 
-            //if (!ModelState.IsValid)
-            //{
-            //    var viewModel = new ItemFormViewModel
-            //    {
-            //        Item = item,
-            //        Categories = _context.ItemCategory.ToList(),
-            //        Donors = _context.Donors.ToList()
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new ItemFormViewModel
+                {
+                    Item = item,
+                    Categories = _context.ItemCategory.ToList(),
+                    Donors = _context.Donors.ToList()
 
-            //    };
+                };
 
-            //    return View("ItemForm", viewModel);
-            //}
+                return View("ItemForm", viewModel);
+            }
 
             // If item doesn't exist, add it
             if (item.Id == 0)
@@ -98,7 +99,7 @@ namespace HeartOfGold.Controllers
 
                 _context.SaveChanges();
 
-                return RedirectToAction("Index", "Item");           
+            return RedirectToAction("Index");         
         }
 
         public ActionResult Edit(int id)
@@ -121,19 +122,23 @@ namespace HeartOfGold.Controllers
             return View("ItemForm", viewModel);
         }
 
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            var itemInDb = _context.Items.Single(i => i.Id == id);
 
-            itemInDb.IsActive = false;
-            itemInDb.Quantity = 0;
+        // Soft delete of donation item
+        [ValidateAntiForgeryToken]
+        [HttpPut]
+        public ActionResult Remove(Item item)
+        {
+            var itemInDb = _context.Items.Single(i => i.Id == item.Id);
+
+            if (item.Id != 0)
+            {
+                itemInDb.IsActive = false;
+                itemInDb.Quantity = 0;
+            }
 
             _context.SaveChanges();
 
             return View("Index");
-
            
         }
     }

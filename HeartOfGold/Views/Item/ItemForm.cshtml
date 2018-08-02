@@ -6,7 +6,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb">
+<div class="row">
+    <div class="col-md-5 col-sm-5 col-lg-5">
+        <ol class="breadcrumb">
     <li>
         <a href="@Url.Action("Index", "Home")">
             <i class="fas fa-home"></i>
@@ -24,6 +26,10 @@
         &nbsp;@ViewBag.Text Donation
     </li>
 </ol>
+    </div>
+</div>
+
+
 
 <div class="container center">
     <h3>@ViewBag.Text Donation</h3>
@@ -36,7 +42,7 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
 
-@using (Html.BeginForm("Save", "Item", new { id = "Donations" }))
+@using (Html.BeginForm("Save", "Item", new { id = "inventory" }))
 {
 <div class="well well-lg bg-info">
     <div class="form-group">
@@ -66,28 +72,54 @@
         <br />
     </div>
     @Html.HiddenFor(m => m.Item.Id)
-
     @Html.AntiForgeryToken()
     <div class="form-group">
         <button type="submit" class="btn btn-primary register-button">Save Donation</button>
         @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
-        @*@Html.ActionLink("Delete", "Delete", "Item")*@
+        @Html.ActionLink("Remove", "Remove", "Item", null, new { @class = "btn btn-default" })
     </div>
 </div>
 }
             </div>
         </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+          
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Successfully added donation. 
+            </div>
+
+            </div>
+        </div>
+
+
+
     </div>
 
+
+
+
+<hr />
 @section scripts
 {
-    @Scripts.Render("~bundles/jqueryval")
 
-    <script>  
-        $("#Donations").submit(function () {
-            toastr.success("Successfully added donation.");
+@*<script>
+    $(document).ready(function () {
+        $("#inventory .js-delete").on("click", function () {
+            if (confirm("Are you sure")) {
+                $.ajax({
+                    url: "/api/donations/" + $(this).attr("data-donation-id"),
+                    method: "POST",
+                    success: function () {
+                        console.log("Success");
+                    }
+                });
+            }
         });
-    </script>
+    });
+</script>*@
 }
 
   
