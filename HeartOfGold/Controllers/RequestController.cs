@@ -17,24 +17,27 @@ namespace HeartOfGold.Controllers
         }
 
         // GET: Request
+        [Authorize(Roles = Roles.Student)]
         [Authorize]
         public ActionResult SubmitRequest()
         {
             return View("RequestForm");
         }
 
-        [Authorize(Roles = Roles.Student)]
+        
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Save(Request request)
         {
-
+            if (request.Id == 0)
+            {
                 _context.Requests.Add(request);
+            }
                 _context.SaveChanges();
 
             ViewBag.Text = "Saved";
-            
-            return View("RequestForm");
+
+            return RedirectToAction("SubmitRequest");
         }
     }
 }

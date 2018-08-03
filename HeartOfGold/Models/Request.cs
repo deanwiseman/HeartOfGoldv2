@@ -13,7 +13,7 @@ namespace HeartOfGold.Models
         public int Id { get; set; }
 
         [Display(Name = "NMU Student Number")]
-        [StringLength(9, MinimumLength = 9, ErrorMessage = "Enter a valid student number")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Enter a valid student number")]
         [Required(ErrorMessage = "Please enter your student number")]
         public string StudentNumber { get; set; }
 
@@ -34,6 +34,11 @@ namespace HeartOfGold.Models
         public Request()
         {
             this.RequestStatusId = 1;
+
+            this.Date = DateTime.Now;
+            this.Date.ToShortDateString();
+
+
         }
     }
 }

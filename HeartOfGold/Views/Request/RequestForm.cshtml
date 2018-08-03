@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-sm-4 col-md-4 col-lg-4">
-        @using (Html.BeginForm("Save", "Request", FormMethod.Post))
+        @using (Html.BeginForm("Save", "Request"))
         {
             @Html.AntiForgeryToken()
             <div class="panel panel-default">
@@ -35,26 +35,24 @@
                 <div class="panel-body" id="request">
                 <div class="form-group">
                     @Html.LabelFor(m => m.StudentNumber, new { @class = "bold-text" })
-                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName(), @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName() })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Description, new { @class = "bold-text" })
                     @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Description)
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     @Html.LabelFor(m => m.Date, new { @class = "bold-text" })
                     @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @Value = DateTime.Now.ToShortDateString(), @readonly = "readonly" })
-                </div>
+                </div>*@
 
                 @Html.HiddenFor(m => m.Id)
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary register-button">
-                        <i class="fas fa-check"></i>&nbsp;&nbsp;Submit Request
-                    </button>
+                    <button type="submit" class="btn btn-primary register-button">Submit Request</button>                            
                 </div>
-</div>
+                </div>
             </div>
         }
 
@@ -73,7 +71,7 @@
 
 @section scripts 
 {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
     
     
     @*@if (ViewBag != null)
