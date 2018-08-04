@@ -7,6 +7,7 @@ using HeartOfGold.Models;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using HeartOfGold.ViewModels;
+using PagedList;
 
 namespace HeartOfGold.Controllers
 {
@@ -54,11 +55,16 @@ namespace HeartOfGold.Controllers
             return RedirectToAction("SubmitRequest");
         }
 
-        public ActionResult GetRequests()
+        public ActionResult GetRequests(int? page)
         {
-            var requests = _context.Requests.Include(r => r.RequestStatus).ToList();   
+            var requests = _context.Requests.Include(r => r.RequestStatus).OrderBy(r => r.Id).AsEnumerable();
 
-            return View("ViewRequests", requests);
+            var pageNumber = page ?? 1;
+            var _OnePageOfRequests = requests.ToPagedList(pageNumber, 2);
+
+            ViewBag.OnePageOfRequests = _OnePageOfRequests;
+
+            return View("ViewRequests", _OnePageOfRequests);
         }
 
         public ActionResult GetMyRequests()

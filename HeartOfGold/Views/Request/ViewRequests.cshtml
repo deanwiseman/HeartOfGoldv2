@@ -1,11 +1,16 @@
-﻿@model  IEnumerable<HeartOfGold.Models.Request>
+﻿@model IPagedList<HeartOfGold.Models.Request>
+@using PagedList.Mvc;
+@using PagedList;
+
 @{
     ViewBag.Title = "ViewRequests";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 <div class="center">
-    <h3>{Administrator} View Submitted Requests</h3>
+    <h3>Submitted Requests</h3>
     <hr />
     <p class="lead">Show them all</p>
 </div>
@@ -60,6 +65,15 @@
     }
     i++;
 }
+
+<div class="row center">
+    <div class="col-md-6 col-md-offset-3">
+        <h5>Browse...</h5>
+        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfRequests, page => Url.Action("GetRequests", new { page = page }))
+    </div>
+</div>
+
+<hr />
 
 @* -- Column 6/12 -- *@
 @*<div class="col-md-6">
