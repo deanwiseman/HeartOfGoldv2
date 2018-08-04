@@ -13,6 +13,7 @@ namespace HeartOfGold.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter the name of the donation.")]
+        [Display(Name = "Name of Donation")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -29,13 +30,13 @@ namespace HeartOfGold.Models
         public Category Category { get; set; }
 
         [ForeignKey("Category")]
-        [Display(Name = "Category")]
+        [Display(Name = "Type of Donation")]
         public byte CategoryId { get; set; }
 
         public Donor Donor { get; set; }
 
         [ForeignKey("Donor")]
-        [Display(Name = "Donor")]
+        [Display(Name = "Donated By")]
         public int DonorId { get; set; }
 
         [DataType(DataType.Date)]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HeartOfGold.Controllers
 {
@@ -11,6 +12,7 @@ namespace HeartOfGold.Controllers
         // GET: Reports
         public ActionResult Index()
         {
+            
             return View();
         }
     }

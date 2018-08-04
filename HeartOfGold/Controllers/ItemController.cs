@@ -30,7 +30,7 @@ namespace HeartOfGold.Controllers
         {
             var items = _context.Items.Include(i => i.Category)
                 .Include(i => i.Donor)
-                .ToList();
+                .ToList(); 
 
             return View(items);
         }
@@ -48,8 +48,6 @@ namespace HeartOfGold.Controllers
        
         public ActionResult New()
         {
-            ViewBag.Text = "New";
-
             var itemCategories = _context.ItemCategory.ToList();
             var donors = _context.Donors.ToList();
 
@@ -67,19 +65,18 @@ namespace HeartOfGold.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Item item)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    var viewModel = new ItemFormViewModel
+            //    {
+            //        Item = item,
+            //        Categories = _context.ItemCategory.ToList(),
+            //        Donors = _context.Donors.ToList()
 
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new ItemFormViewModel
-                {
-                    Item = item,
-                    Categories = _context.ItemCategory.ToList(),
-                    Donors = _context.Donors.ToList()
+            //    };
 
-                };
-
-                return View("ItemForm", viewModel);
-            }
+            //    return View("ItemForm", viewModel);
+            //}
 
             // If item doesn't exist, add it
             if (item.Id == 0)
@@ -104,8 +101,6 @@ namespace HeartOfGold.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.Text = "Edit";
-
             var item = _context.Items.SingleOrDefault(i => i.Id == id);
 
             if (item == null)
@@ -119,18 +114,18 @@ namespace HeartOfGold.Controllers
 
             };
 
-            return View("ItemForm", viewModel);
+            return View("Edit", viewModel);
         }
 
 
         // Soft delete of donation item
         [ValidateAntiForgeryToken]
-        [HttpPut]
-        public ActionResult Remove(Item item)
+        [HttpPost]
+        public ActionResult Remove(int id)
         {
-            var itemInDb = _context.Items.Single(i => i.Id == item.Id);
+            var itemInDb = _context.Items.Single(i => i.Id == id);
 
-            if (item.Id != 0)
+            if (id != 0)
             {
                 itemInDb.IsActive = false;
                 itemInDb.Quantity = 0;
@@ -138,8 +133,7 @@ namespace HeartOfGold.Controllers
 
             _context.SaveChanges();
 
-            return View("Index");
-           
+            return View("Index");           
         }
     }
 }
