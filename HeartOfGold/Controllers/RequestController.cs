@@ -31,7 +31,7 @@ namespace HeartOfGold.Controllers
             return View("RequestForm");
         }
         // GET: Requests
-        [Authorize]
+        [Authorize(Roles = Roles.Student)]
         public ActionResult SubmitRequest()
         {          
             return View("RequestForm");
@@ -69,7 +69,8 @@ namespace HeartOfGold.Controllers
 
         public ActionResult GetMyRequests()
         {
-            var myRequests = _context.Requests.Where(r => r.StudentNumber == User.Identity.GetUserName()).ToList();
+            var userId = User.Identity.GetUserId();
+            var myRequests = _context.Requests.Where(r => r.StudentNumber == userId).ToList();
 
             return View("ViewMyRequests", myRequests);
         }

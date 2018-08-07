@@ -1,8 +1,16 @@
-﻿
+﻿@model IEnumerable<HeartOfGold.Models.Request>
 @{
-    ViewBag.Title = "ViewMyRequests";
+    ViewBag.Title = "My Requests";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewMyRequests</h2>
+<h3>View My Requests</h3>
+<p class="lead">What requests have I submitted?</p>
 
+<br />
+<hr />
+
+@if(!Model.Any())
+{
+    <p>You currently have not submitted any requests!</p>
+}

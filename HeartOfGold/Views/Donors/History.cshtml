@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HeartOfGold.Models.Item>
+
+@{
+    ViewBag.Title = "Donation History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Donor History for @ViewBag.Donor</h3>
+<p class="lead">
+    View the donation history
+</p>
+
+<a href="@Url.Action("SendEmail", "Donors", null)" class="btn btn-primary register-button">
+    <i class="far fa-envelope"></i>
+    &nbsp;Send Email
+</a>
+
+<hr />
+
+<table id="DonationHistory" class="table table-condensed table-hover">
+    <thead>
+        <tr style="background-color:#e6e6e6 ">
+            <th>Date</th>
+            <th>Donation</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy")</td>
+            <td>@Html.DisplayFor(m => item.Name)</td>
+            <td>@Html.DisplayFor(m => item.Description)</td>
+            <td>@Html.DisplayFor(m => item.Category.Name)</td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+<br />
+<hr />
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#DonationHistory").DataTable();
+        });
+    </script>
+}
+

@@ -17,7 +17,7 @@ namespace HeartOfGold.Models
         [Required(ErrorMessage = "Please enter your student number")]
         public string StudentNumber { get; set; }
 
-        [Display(Name = "Describe what you're looking for")]
+        [Display(Name = "What are you in need of?")]
         [Required(ErrorMessage = "Please describe what you're looking for")]
         public string Description { get; set; }
 

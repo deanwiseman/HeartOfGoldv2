@@ -9,6 +9,14 @@
 <hr />
 <p class="lead">People that have donated</p>
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-info" role="alert">Note: Click on the name of a donor to view their donation history.</div>
+    </div>
+</div>
+
+@Html.ActionLink("Send email", "SendEmail", new { @class = "btn btn primary register-button"})
+
 <br />
 
 <table id="Donors" class="table table-bordered table-hover">
@@ -23,7 +31,7 @@
         {
             <tr>
                @* <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>*@
-                <td>@Html.DisplayFor(m => donor.FullName)</td>
+                <td>@Html.ActionLink(donor.FullName, "History", "Donors", new { id = donor.Id }, null)</td>
                 <td>@Html.DisplayFor(m => donor.Email)</td>
             </tr>
         }
