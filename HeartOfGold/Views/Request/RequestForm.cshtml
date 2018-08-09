@@ -14,28 +14,26 @@
 
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Things to remember:</div>
-            <div class="panel-body">
-                <ol>
-                    <li>You are allowed to submit one request per day.</li>
-                    <li>Indicate clearly what you are looking for.</li>
-                    <li>Remember to bring your student card when collecting a donation.</li>
+        <div class="well">
+            <h4 class="note-heading"><span>To Note:</span></h4>
+                <ol style="margin-top:2em">
+                    <li style="padding-left:1em">You are allowed to submit one request per day.</li>
+                    <li style="padding-left:1em">Indicate clearly what you are looking for.</li>
+                    <li style="padding-left:1em">Remember to bring your student card when collecting a donation.</li>
                 </ol>
-            </div>
         </div>
     </div>
 
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-5 col-md-5 col-lg-5">
         @using (Html.BeginForm("Save", "Request"))
         {
             @Html.AntiForgeryToken()
-            <div class="panel panel-default">
+            <div class="panel panel-default img-rounded">
                 <div class="panel-heading">New Request</div>
                 <div class="panel-body" id="request">
                 <div class="form-group">
                     @Html.LabelFor(m => m.StudentNumber, new { @class = "bold-text" })
-                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName() })
+                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName(), @readonly = "readonly" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Description, new { @class = "bold-text" })
@@ -49,14 +47,14 @@
 
                 @Html.HiddenFor(m => m.Id)
 
-                <div class="form-group">
+                <div class="form-group center">
                     <button type="submit" class="btn btn-primary register-button">Submit Request</button>                            
                 </div>
                 </div>
             </div>
         }
 </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">Placeholder</div>
             <div class="panel-body">

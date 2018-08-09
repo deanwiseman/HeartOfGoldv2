@@ -95,8 +95,9 @@ namespace HeartOfGold.Controllers
                 }
 
                 _context.SaveChanges();
+            ViewBag.Saved = "Saved";
 
-            return RedirectToAction("Index");         
+            return RedirectToAction("New");         
         }
 
         public ActionResult Edit(int id)

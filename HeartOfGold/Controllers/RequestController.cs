@@ -19,7 +19,8 @@ namespace HeartOfGold.Controllers
         {
             _context = new ApplicationDbContext();
         }
-
+        
+        [Authorize]
         public ActionResult Index()
         {
             if (User.IsInRole("Administrator"))
@@ -75,8 +76,14 @@ namespace HeartOfGold.Controllers
             return View("ViewMyRequests", myRequests);
         }
 
-        public ActionResult ProcessRequest()
+        [HttpPost]
+        public ActionResult ProcessRequest(Request request)
         {
+            var requestInDb = _context.Requests.Single(r => r.Id == request.Id);
+
+            requestInDb.RequestStatusId = request.RequestStatusId;
+
+
             return View();
         }
     }

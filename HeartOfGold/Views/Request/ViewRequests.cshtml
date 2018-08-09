@@ -30,24 +30,24 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label><strong>Request Body</strong></label>
-                        @Html.TextAreaFor(r => request.Description, new { @class = "form-control", rows = "3", cols = "20" })
+                        @Html.TextAreaFor(r => request.Description, new { @class = "form-control", rows = "3", cols = "20", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label><strong>Current Status</strong></label>
-                        @Html.TextBoxFor(r => request.RequestStatus.Name, new { @class = "form-control" })
+                        @Html.TextBoxFor(r => request.RequestStatus.Name, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label><strong>Date Submitted</strong></label>
-                        @Html.TextBoxFor(r => request.Date, new { @class = "form-control" })
+                        @Html.TextBoxFor(r => request.Date, "{0:dd/MM/yyyy}", new { @class = "form-control", @readonly = "readonly" })
                     </div>
-
+                    @Html.HiddenFor(r => request.Id)
                     <div class="form-group">
                         <button class="btn btn bg-primary register-button">Process...</button>
                     </div>
-
+                    
                     <div class="form-group">
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" checked>Successful
+                            <input type="radio" name="optradio">Successful
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="optradio">Unsuccessful

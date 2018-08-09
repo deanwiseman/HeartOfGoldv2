@@ -49,7 +49,7 @@ namespace HeartOfGold.Models
     public class LoginViewModel
     {
         [Display(Name = "Username")]
-        [Required]
+        [Required(ErrorMessage = "Enter your username.")]
         public string UserName { get; set; }
 
         //[Required]
@@ -57,7 +57,7 @@ namespace HeartOfGold.Models
         //[EmailAddress]
         //public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Enter your password.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using HeartOfGold.ViewModels;
 using HeartOfGold.Models;
 using Newtonsoft.Json;
+using System.Data.Entity;
 
 namespace HeartOfGold.Controllers
 {
@@ -41,6 +42,23 @@ namespace HeartOfGold.Controllers
             }
 
             return Content(JsonConvert.SerializeObject(ChartData), "application/json");
+        }
+
+        public ActionResult GetStatistics()
+        {
+            int TotalStudents = _context.Users.Count() - 1;
+            int max = _context.Requests.Where(r => r.Date.Year == 2018).Count();
+
+            var vm = new StatisticsViewModel
+            {
+                TotalRequests = _context.Requests.Count(),
+                TotalPendingRequests = _context.Requests.Where(r => r.RequestStatusId == 1).Count(),
+                TotalSuccessfulRequests = _context.Requests.Where(r => r.RequestStatusId == 2).Count(),
+                TotalRegisteredStudents = TotalStudents,
+                TotalRequestsThisYear = max
+            };
+
+            return View("Index", vm);
         }
     }
 }

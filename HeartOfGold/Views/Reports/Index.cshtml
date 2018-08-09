@@ -1,4 +1,4 @@
-﻿
+﻿@model HeartOfGold.ViewModels.StatisticsViewModel
 @{
     ViewBag.Title = "Reports";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,6 +17,34 @@
         <canvas id="myChart"></canvas>
     </div>
 </div>
+
+@Html.ActionLink("Stats", "GetStatistics")
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalPendingRequests)
+            @Html.DisplayFor(model => model.TotalPendingRequests)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalRequests)
+            @Html.DisplayFor(model => model.TotalRequests)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalRegisteredStudents)
+            @Html.DisplayFor(model => model.TotalRegisteredStudents)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalSuccessfulRequests)
+            @Html.DisplayFor(model => model.TotalSuccessfulRequests)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalRequestsThisYear)
+            @Html.DisplayFor(model => model.TotalRequestsThisYear)
+        </div>
+    </div>
+</div>
+
+
 
 @section scripts
 {
