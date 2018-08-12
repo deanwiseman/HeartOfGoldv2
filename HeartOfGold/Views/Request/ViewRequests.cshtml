@@ -12,8 +12,27 @@
 <div class="center">
     <h3>Submitted Requests</h3>
     <hr />
-    <p class="lead">Show them all</p>
 </div>
+
+<div class="row center">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.TextBox("SearchString")
+                <input type="submit" value="Search for student" class="btn btn-primary" />
+            </div>
+        }
+
+        @if (ViewBag.Results != null)
+        {
+            <p>No requests for this student number found!</p>
+        }
+
+    </div>
+</div>
+
+
 
 @{int i = 0;}
 @foreach (var request in Model)
@@ -24,9 +43,9 @@
         @:<div class="row">
         }
         @* -- Column 6/12 -- *@
-        <div class="col-md-6">
+          <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
             <div class="panel panel-default">
-                <div class="panel-heading">Heading</div>
+                <div class="panel-heading">Student Number: @request.StudentNumber</div>
                 <div class="panel-body">
                     <div class="form-group">
                         <label><strong>Request Body</strong></label>
@@ -44,7 +63,7 @@
                     <div class="form-group">
                         <button class="btn btn bg-primary register-button">Process...</button>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="radio-inline">
                             <input type="radio" name="optradio">Successful
@@ -69,7 +88,7 @@
 <div class="row center">
     <div class="col-md-6 col-md-offset-3">
         <h5>Browse...</h5>
-        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfRequests, page => Url.Action("GetRequests", new { page = page }))
+        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfRequests, page => Url.Action("GetRequests", new { page = page }), PagedListRenderOptions.MinimalWithPageCountText)
     </div>
 </div>
 

@@ -56,5 +56,10 @@ namespace HeartOfGold.Controllers
 
             return RedirectToAction("Index", "Donors");
         }
+
+        public ActionResult AddDonor(Donor donor)
+        {
+            return View();
+        }
     }
 }

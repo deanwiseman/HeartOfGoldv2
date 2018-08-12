@@ -196,3 +196,15 @@
 #loginForm {
     margin-left: 9%;
 }
+
+#navbartop {
+    margin-bottom: 0px;
+}
+
+ul.nav a:hover {
+    color: gold !important;
+}
+
+.modal {
+    overflow: visible;
+}

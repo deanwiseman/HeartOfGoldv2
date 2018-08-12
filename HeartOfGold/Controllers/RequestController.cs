@@ -56,12 +56,22 @@ namespace HeartOfGold.Controllers
             return RedirectToAction("SubmitRequest");
         }
 
-        public ActionResult GetRequests(int? page)
+        public ActionResult GetRequests(int? page, string searchString)
         {
             var requests = _context.Requests.Include(r => r.RequestStatus).OrderBy(r => r.Id).AsEnumerable();
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                requests = requests.Where(s => s.StudentNumber.Contains(searchString));
+
+                if (requests.Count() == 0)
+                {
+                    ViewBag.Results = "Nothing";
+                }
+            }
+
             var pageNumber = page ?? 1;
-            var _OnePageOfRequests = requests.ToPagedList(pageNumber, 2);
+            var _OnePageOfRequests = requests.ToPagedList(pageNumber, 1);
 
             ViewBag.OnePageOfRequests = _OnePageOfRequests;
 

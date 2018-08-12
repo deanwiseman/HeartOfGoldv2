@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top navbar-color" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-color" role="navigation" id="navbartop">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -42,7 +42,7 @@
     </div>
 
     <div>
-        <br /> <br />
+        <br />
         <div class="container body-content">
             @RenderBody()
         </div>
@@ -58,13 +58,14 @@
         </div>*@
 
 
-
-    <div class="navbar navbar-inverse navbar-color navbar-fixed-bottom container-fluid">
-        <div class="navbar-collapse collapse navbar-fontsize center">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
-                <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
-            </ul>
+    <div class="hidden-sm hidden-xs">
+        <div class="navbar navbar-inverse navbar-color navbar-fixed-bottom container-fluid">
+            <div class="navbar-collapse collapse navbar-fontsize center">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
+                    <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
+                </ul>
+            </div>
         </div>
     </div>
 

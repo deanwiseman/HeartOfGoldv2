@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HeartOfGold.Models.Donor>
+﻿@model IList<HeartOfGold.Models.Donor>
 
 @{
     ViewBag.Title = "Index";
@@ -9,15 +9,46 @@
 <hr />
 <p class="lead">People that have donated</p>
 
+@*<div class="row">
+        <div class="col-md-6">
+            <div class="alert alert-info" role="alert">Note: Click on the name of a donor to view their donation history.</div>
+        </div>
+    </div>*@
+
 <div class="row">
-    <div class="col-md-6">
-        <div class="alert alert-info" role="alert">Note: Click on the name of a donor to view their donation history.</div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <button id="donorBtn" class="btn btn-primary register-button">Add a Donor</button>
+            @Html.ActionLink("Send email", "SendEmail", null, new { @class = "btn btn-primary register-button" })
+        </div>
     </div>
 </div>
 
-@Html.ActionLink("Send email", "SendEmail", new { @class = "btn btn primary register-button"})
+<div class="row" id="addDonor" style="display:none">
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("AddDonor", "Donors"))
+        {
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" />
+            </div>
+        }
+    </div>
+</div>
 
 <br />
+<div id="ex1" class="modal">
+    <p>Thanks for clicking. That felt good.</p>
+    <a href="#" rel="modal:close">Close</a>
+</div>
+
+<!-- Link to open the modal -->
+<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
 
 <table id="Donors" class="table table-bordered table-hover">
     <thead>
@@ -30,23 +61,37 @@
         @foreach (var donor in Model)
         {
             <tr>
-               @* <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>*@
                 <td>@Html.ActionLink(donor.FullName, "History", "Donors", new { id = donor.Id }, null)</td>
                 <td>@Html.DisplayFor(m => donor.Email)</td>
             </tr>
         }
     </tbody>
 </table>
+
+
+
 <br />
 <hr />
 
 @section scripts
 {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+
     <script>
         $(document).ready(function () {
             $("#Donors").DataTable();
         })
+    </script>
 
+    <script>
+        $(document).ready(function () {
+            $("#donorBtn").click(function () {
+                $("#addDonor").show();
+            })
+        })
     </script>
 }
 
