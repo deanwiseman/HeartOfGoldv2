@@ -185,16 +185,20 @@
 }
 
 #loginDiv {
-    background-color: #e6e6e6;
+    background-color: #103a5c;
     border-radius: 6px;
 }
 
 #btnLogin {
-    width: 40%
+    width: 40%;
+    color: black;
+    background-color: gold;
 }
 
 #loginForm {
     margin-left: 9%;
+    margin-right: 8%;
+    color: #f2f2f2;
 }
 
 #navbartop {
@@ -207,4 +211,8 @@ ul.nav a:hover {
 
 .modal {
     overflow: visible;
+}
+
+#loginHr {
+    margin-top: 0px;
 }

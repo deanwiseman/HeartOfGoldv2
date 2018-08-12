@@ -68,10 +68,16 @@ namespace HeartOfGold.Models
 
     public class RegisterViewModel
     {
-        public string Email { get { return UserName + "@mandela.ac.za"; } }
+        [Display(Name = "First Name")]
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string Surname { get; set; }
 
         [Required]
-        [Display(Name = "Username")]
+        [RegularExpression("^[sS]{1}[2]{1}[0-9]*$", ErrorMessage = "Invalid student number")]
+        [Display(Name = "Student Number")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Too short.")]
         public string UserName { get; set; }
 
         [Required]
@@ -81,9 +87,11 @@ namespace HeartOfGold.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Email { get { return UserName + "@mandela.ac.za"; } }
     }
 
     public class ResetPasswordViewModel

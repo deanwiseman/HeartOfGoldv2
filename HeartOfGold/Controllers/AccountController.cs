@@ -204,7 +204,13 @@ namespace HeartOfGold.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser
+                {   UserName = model.UserName,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    Surname = model.Surname
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
