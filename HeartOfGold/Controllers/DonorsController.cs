@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using HeartOfGold.ViewModels;
 
 namespace HeartOfGold.Controllers
 {
@@ -21,9 +22,15 @@ namespace HeartOfGold.Controllers
         // GET: Donors
         public ActionResult Index()
         {
-            var donors = _context.Donors.ToList();
+            var _donors = _context.Donors.ToList();
 
-            return View(donors);
+            var viewModel = new DonorViewModel
+            {
+                Donors = _donors
+            };
+
+
+            return View(viewModel);
         }
 
         public ActionResult History(int id)
@@ -57,9 +64,26 @@ namespace HeartOfGold.Controllers
             return RedirectToAction("Index", "Donors");
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult AddDonor(Donor donor)
         {
-            return View();
+            if(donor.Id == 0)
+            {
+                _context.Donors.Add(donor);
+            }
+
+            else
+            {
+                var donorInDb = _context.Donors.Single(d => d.Id == donor.Id);
+                donorInDb.FirstName = donor.FirstName;
+                donorInDb.LastName = donor.LastName;
+                donorInDb.Email = donor.Email;       
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

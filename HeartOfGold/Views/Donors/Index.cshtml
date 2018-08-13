@@ -1,97 +1,106 @@
-﻿@model IList<HeartOfGold.Models.Donor>
+﻿@model HeartOfGold.ViewModels.DonorViewModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>List of Donors</h3>
-<hr />
-<p class="lead">People that have donated</p>
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="DonorModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">New Donor</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddDonor", "Donors"))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Donor.FirstName)
+                        @Html.TextBoxFor(m => m.Donor.FirstName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Donor.LastName)
+                        @Html.TextBoxFor(m => m.Donor.LastName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Donor.Email)
+                        @Html.TextBoxFor(m => m.Donor.Email, new { @class = "form-control" })
+                    </div>
+                    <button type="Submit" class="btn btn-primary register-button">Save</button>
+                }
+            </div>
+            <div class="modal-footer">
 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="center">
+    <h3>List of Donors</h3>
+    <hr />
+    <p class="lead">People that have donated</p>
+</div>
 @*<div class="row">
         <div class="col-md-6">
             <div class="alert alert-info" role="alert">Note: Click on the name of a donor to view their donation history.</div>
         </div>
     </div>*@
 
-<div class="row">
-    <div class="col-md-3">
+<div class="row center">
+    <div class="col-md-12">
         <div class="form-group">
-            <button id="donorBtn" class="btn btn-primary register-button">Add a Donor</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary register-button" data-toggle="modal" data-target="#DonorModal">
+                New Donor
+            </button>
             @Html.ActionLink("Send email", "SendEmail", null, new { @class = "btn btn-primary register-button" })
         </div>
     </div>
 </div>
 
-<div class="row" id="addDonor" style="display:none">
-    <div class="col-md-6">
-
-        @using (Html.BeginForm("AddDonor", "Donors"))
-        {
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" />
-            </div>
-        }
-    </div>
-</div>
+<
 
 <br />
-<div id="ex1" class="modal">
-    <p>Thanks for clicking. That felt good.</p>
-    <a href="#" rel="modal:close">Close</a>
+
+<div class="row">
+    <div class="col-md-9 col-md-offset-2">
+        <table id="Donors" class="table table-bordered table-hover">
+            <thead>
+                <tr style="background-color:#e6e6e6 ">
+                    <th>Name</th>
+                    <th>Email Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var donor in Model.Donors)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(donor.FullName, "History", "Donors", new { id = donor.Id }, null)</td>
+                        <td>@Html.DisplayFor(m => donor.Email)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<!-- Link to open the modal -->
-<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
-
-<table id="Donors" class="table table-bordered table-hover">
-    <thead>
-        <tr style="background-color:#e6e6e6 ">
-            <th>Name</th>
-            <th>Email Address</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var donor in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(donor.FullName, "History", "Donors", new { id = donor.Id }, null)</td>
-                <td>@Html.DisplayFor(m => donor.Email)</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
 
 <br />
 <hr />
 
 @section scripts
 {
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
-
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
             $("#Donors").DataTable();
         })
     </script>
 
-    <script>
-        $(document).ready(function () {
-            $("#donorBtn").click(function () {
-                $("#addDonor").show();
-            })
-        })
-    </script>
 }
 
