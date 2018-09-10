@@ -9,33 +9,34 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="DonorModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">New Donor</h4>
+            <div class="modal-header">               
+                <h4 class="modal-title note-heading"><span>New Donor</span></h4>
+                <p class="lead center">Enter details about the donor</p>
             </div>
             <div class="modal-body">
                 @using (Html.BeginForm("AddDonor", "Donors"))
                 {
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         @Html.LabelFor(m => m.Donor.FirstName)
                         @Html.TextBoxFor(m => m.Donor.FirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Donor.FirstName)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Donor.LastName)
                         @Html.TextBoxFor(m => m.Donor.LastName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Donor.LastName)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Donor.Email)
                         @Html.TextBoxFor(m => m.Donor.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Donor.Email)
                     </div>
-                    <button type="Submit" class="btn btn-primary register-button">Save</button>
+                    <div class="row center" id="donorBtnRow">
+                        <button type="Submit" class="btn btn-primary register-button">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 }
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -69,7 +70,7 @@
 <br />
 
 <div class="row">
-    <div class="col-md-9 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-3">
         <table id="Donors" class="table table-bordered table-hover">
             <thead>
                 <tr style="background-color:#e6e6e6 ">

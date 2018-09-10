@@ -6,28 +6,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-md-5 col-sm-5 col-lg-5">
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home")">
-                    <i class="fas fa-home"></i>
-                    &nbsp;Home
-                </a>
-            </li>
-            <li>
-                <a href="@Url.Action("Index", "Item")">
-                    <i class="fas fa-th-list"></i>
-                    &nbsp;View Inventory
-                </a>
-            </li>
-            <li class="active">
-                <i class="far fa-save"></i>
-                &nbsp;Edit Donation
-            </li>
-        </ol>
-    </div>
-</div>
+@*<div class="row">
+        <div class="col-md-5 col-sm-5 col-lg-5">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+                        <i class="fas fa-home"></i>
+                        &nbsp;Home
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Item")">
+                        <i class="fas fa-th-list"></i>
+                        &nbsp;View Inventory
+                    </a>
+                </li>
+                <li class="active">
+                    <i class="far fa-save"></i>
+                    &nbsp;Edit Donation
+                </li>
+            </ol>
+        </div>
+    </div>*@
 
 
 
@@ -38,70 +38,73 @@
 </div>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+<div class="row">
+    <div class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @using (Html.BeginForm("Save", "Item", new { id = "inventory" }))
+                {
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Item.Name, new { @class = "bold-text" })
+                            @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
+                            @Html.ValidationMessageFor(m => m.Item.Name)
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Item.Description, new { @class = "bold-text" })
+                            @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control", @placeholder = "Describe the donation briefly" })
+                            @Html.ValidationMessageFor(m => m.Item.Description)
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Item.DonorId, new { @class = "bold-text" })
+                            @Html.DropDownListFor(m => m.Item.DonorId, new SelectList(Model.Donors, "Id", "FullName"), "Who was the donor?", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Item.DonorId)
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Item.Quantity, new { @class = "bold-text" })
+                            @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved" })
+                            @Html.ValidationMessageFor(m => m.Item.Quantity)
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Item.CategoryId, new { @class = "bold-text" })
+                            @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "What type of donation is it?", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Item.CategoryId)
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(m => m.Item.MustDelete) Remove this donation?
+                            </label>
 
-            @using (Html.BeginForm("Save", "Item", new { id = "inventory" }))
-            {
-                <div class="well well-lg bg-info">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Item.Name, new { @class = "bold-text" })
-                        @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
-                        @Html.ValidationMessageFor(m => m.Item.Name)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Item.Description, new { @class = "bold-text" })
-                        @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control", @placeholder = "Describe the donation briefly" })
-                        @Html.ValidationMessageFor(m => m.Item.Description)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Item.DonorId, new { @class = "bold-text" })
-                        @Html.DropDownListFor(m => m.Item.DonorId, new SelectList(Model.Donors, "Id", "FullName"), "Who was the donor?", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Item.DonorId)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Item.Quantity, new { @class = "bold-text" })
-                        @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved" })
-                        @Html.ValidationMessageFor(m => m.Item.Quantity)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Item.CategoryId, new { @class = "bold-text" })
-                        @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "What type of donation is it?", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Item.CategoryId)
-                        <br />
-                    </div>
+                    <br />
                     @Html.HiddenFor(m => m.Item.Id)
                     @Html.AntiForgeryToken()
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary register-button">Save Donation</button>
-                        @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
-                        @*@Html.ActionLink("Remove", "Remove", "Item", null, new { @class = "btn btn-default", @id = Model.Item.Id })*@
+                    <div class="col-md-12 center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary register-button">Update Donation</button>
+                            @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
+                            @*@Html.ActionLink("Remove", "Remove", "Item", null, new { @class = "btn btn-default", @id = Model.Item.Id })*@
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
-
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                Successfully added donation.
+                }
             </div>
-
         </div>
     </div>
-
-
-
 </div>
 
-
-
-
 <hr />
+
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")

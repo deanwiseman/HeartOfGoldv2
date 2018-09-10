@@ -58,7 +58,11 @@ namespace HeartOfGold.Controllers
 
         public ActionResult GetRequests(int? page, string searchString)
         {
-            var requests = _context.Requests.Include(r => r.RequestStatus).OrderBy(r => r.Id).AsEnumerable();
+            // Get all requests that are currently of 'Open' status.
+            var requests = _context.Requests.Include(r => r.RequestStatus)
+                .Where(r => r.RequestStatusId == 1)
+                .OrderBy(r => r.Id)
+                .AsEnumerable();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -67,6 +71,22 @@ namespace HeartOfGold.Controllers
                 if (requests.Count() == 0)
                 {
                     ViewBag.Results = "Nothing";
+                }
+                else
+                {
+                    if (searchString.Length > 10)
+                    {
+                        ViewBag.HasResults = null;
+                    }
+                    else
+                    {
+                        int countResults = requests.Count();
+
+                        if (countResults > 1)
+                            ViewBag.HasResults = "Showing " + requests.Count() + " results for '" + searchString + "'... ";
+                        else
+                            ViewBag.HasResults = "Showing 1 result for '" + searchString + "'...";
+                    }
                 }
             }
 
@@ -91,10 +111,12 @@ namespace HeartOfGold.Controllers
         {
             var requestInDb = _context.Requests.Single(r => r.Id == request.Id);
 
-            requestInDb.RequestStatusId = request.RequestStatusId;
+            requestInDb.RequestStatusId = request.SelectedStatusId;
 
 
-            return View();
+            _context.SaveChanges();
+
+            return RedirectToAction("GetRequests");
         }
     }
 }

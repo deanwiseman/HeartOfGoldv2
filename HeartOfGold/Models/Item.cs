@@ -43,6 +43,9 @@ namespace HeartOfGold.Models
         [Display(Name = "Date Added")]
         public DateTime DateAdded { get; set; }
 
+        [NotMapped]
+        public bool MustDelete { get; set; }
+
 
         public Item()
         {

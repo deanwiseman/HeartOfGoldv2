@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using HeartOfGold.Models;
 using HeartOfGold.ViewModels;
@@ -25,15 +22,38 @@ namespace HeartOfGold.Controllers
             _context.Dispose();
         }
 
-        // GET all donated items in the database
+        // GET all donated items in the database (that have not been soft-deleted. See: IsActive property)
         public ActionResult Index()
         {
             var items = _context.Items.Include(i => i.Category)
                 .Include(i => i.Donor)
-                .ToList(); 
+                .Where(i => i.IsActive == true)
+                .ToList();
 
-            return View(items);
+            var viewModel = new InventoryViewModel
+            {
+                Donations = items
+            };
+
+            return View(viewModel);
         }
+
+        public ActionResult GetRemoved()
+        {
+            var items = _context.Items.Include(i => i.Category)
+                .Include(i => i.Donor)
+                .Where(i => i.IsActive == false)
+                .ToList();
+
+            var viewModel = new InventoryViewModel
+            {
+                Donations = items
+            };
+
+            return Json(items, JsonRequestBehavior.AllowGet);
+            //return View("Index", viewModel);
+        }
+
 
         //View a single item in more detail
         public ActionResult Details(int id)
@@ -92,12 +112,16 @@ namespace HeartOfGold.Controllers
                     itemInDb.Quantity = item.Quantity;
                     itemInDb.CategoryId = item.CategoryId;
                     itemInDb.DonorId = item.DonorId;
+
+                // Soft-delete donation.
+                if (item.MustDelete == true)
+                    itemInDb.IsActive = false;
                 }
 
                 _context.SaveChanges();
             ViewBag.Saved = "Saved";
 
-            return RedirectToAction("New");         
+            return RedirectToAction("Index");         
         }
 
         public ActionResult Edit(int id)
@@ -116,25 +140,6 @@ namespace HeartOfGold.Controllers
             };
 
             return View("Edit", viewModel);
-        }
-
-
-        // Soft delete of donation item
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult Remove(int id)
-        {
-            var itemInDb = _context.Items.Single(i => i.Id == id);
-
-            if (id != 0)
-            {
-                itemInDb.IsActive = false;
-                itemInDb.Quantity = 0;
-            }
-
-            _context.SaveChanges();
-
-            return View("Index");           
-        }
+        }      
     }
 }

@@ -10,5 +10,8 @@ namespace HeartOfGold.ViewModels
     {
         public int Quantity { get; set; }
         public string Month { get; set; }
+
+        string[] months = new string[] {"January", "February", "March", "April", "May",
+                                        "June", "July", "August", "September", "October", "November", "December"};
     }
 }

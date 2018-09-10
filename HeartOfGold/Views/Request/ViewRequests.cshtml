@@ -3,7 +3,7 @@
 @using PagedList;
 
 @{
-    ViewBag.Title = "ViewRequests";
+    ViewBag.Title = "View Requests";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,79 +11,82 @@
 
 <div class="center">
     <h3>Submitted Requests</h3>
+    <p class="lead">Current student requests.</p>
     <hr />
 </div>
 
-<div class="row center">
-    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
-        @using (Html.BeginForm())
-        {
-            <div class="form-group">
-                @Html.TextBox("SearchString")
-                <input type="submit" value="Search for student" class="btn btn-primary" />
+<div class="row">
+    <div class="col-lg-3 col-md-3">
+        <div class="panel panel-default">
+            <div class="panel body">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group" id="searchFrmGrp">
+                        <input type="submit" value="Search..." class="btn btn-primary register-button" id="srchBtn" />
+                        @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Student number" })
+
+                        @if(ViewBag.HasResults != null)
+                        {
+                            <label id="searchResults">@ViewBag.HasResults.ToString()</label>
+                        }
+                    </div>
+                }
+
             </div>
-        }
-
-        @if (ViewBag.Results != null)
-        {
-            <p>No requests for this student number found!</p>
-        }
-
+        </div>
     </div>
-</div>
 
-
-
-@{int i = 0;}
-@foreach (var request in Model)
-{
-    @* -- Row 1 -- *@
-    if (i % 2 == 0)
+    @if (ViewBag.Results != null)
     {
-        @:<div class="row">
-        }
-        @* -- Column 6/12 -- *@
-          <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+        <p>No requests for this student number found!</p>
+    }
+
+
+
+
+    @foreach (var request in Model)
+    {
+
+        <div class="col-lg-6 col-md-8 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0" style="margin-left: auto;">
             <div class="panel panel-default">
                 <div class="panel-heading">Student Number: @request.StudentNumber</div>
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label><strong>Request Body</strong></label>
-                        @Html.TextAreaFor(r => request.Description, new { @class = "form-control", rows = "3", cols = "20", @readonly = "readonly" })
-                    </div>
-                    <div class="form-group">
-                        <label><strong>Current Status</strong></label>
-                        @Html.TextBoxFor(r => request.RequestStatus.Name, new { @class = "form-control", @readonly = "readonly" })
-                    </div>
-                    <div class="form-group">
-                        <label><strong>Date Submitted</strong></label>
-                        @Html.TextBoxFor(r => request.Date, "{0:dd/MM/yyyy}", new { @class = "form-control", @readonly = "readonly" })
-                    </div>
-                    @Html.HiddenFor(r => request.Id)
-                    <div class="form-group">
-                        <button class="btn btn bg-primary register-button">Process...</button>
-                    </div>
+                    @using (Html.BeginForm("ProcessRequest", "Request"))
+                    {
+                        <div class="form-group">
+                            <label><strong>Request Body</strong></label>
+                            @Html.TextAreaFor(r => request.Description, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Current Status</strong></label>
+                            @Html.TextBoxFor(r => request.RequestStatus.Name, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Date Submitted</strong></label>
+                            @Html.TextBoxFor(r => request.Date, "{0:dd/MM/yyyy}", new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        @Html.HiddenFor(r => request.Id)
+                        @Html.HiddenFor(r => request.StudentNumber)
+                        <div class="form-group">
+                            <button type="submit" class="btn btn bg-primary register-button">Process...</button>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio">Successful
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio">Unsuccessful
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio">Empty
-                        </label>
-                    </div>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(m => request.SelectedStatusId, "2")Successful
+                            </label>
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(m => request.SelectedStatusId, "3")Unsuccessful
+                            </label>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-        if (i % 2 != 0)
-        {
-        @:</div>
     }
-    i++;
-}
+
+</div>
+
 
 <div class="row center">
     <div class="col-md-6 col-md-offset-3">
@@ -107,5 +110,4 @@
             </div>
         </div>
     </div>*@
-    </div>
-}
+    

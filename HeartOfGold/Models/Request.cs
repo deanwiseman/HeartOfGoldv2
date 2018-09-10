@@ -13,7 +13,7 @@ namespace HeartOfGold.Models
         public int Id { get; set; }
 
         [Display(Name = "NMU Student Number")]
-        [StringLength(10, MinimumLength = 10, ErrorMessage = "Enter a valid student number")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Enter a valid student number")]
         [Required(ErrorMessage = "Please enter your student number")]
         public string StudentNumber { get; set; }
 
@@ -29,6 +29,9 @@ namespace HeartOfGold.Models
         [ForeignKey("RequestStatus")]
         [Display(Name = "Status")]
         public byte RequestStatusId { get; set; }
+
+        [NotMapped]
+        public byte SelectedStatusId { get; set; }
 
         // Constructor initialises the status of a request to 'pending' (id = 1)
         public Request()

@@ -75,7 +75,7 @@
 
         $.getJSON("/Reports/GetChartData", function (data) {
             $.each(data, function (i, item) {
-                datachart.labels.push(item.Month);
+                datachart.labels.push(item.months);
                 datachart.datasets[0].data.push(item.Quantity);
                 datachart.datasets[1].data.push(item.Month);
             })

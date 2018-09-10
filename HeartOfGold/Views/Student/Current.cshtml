@@ -1,0 +1,44 @@
+﻿@model HeartOfGold.ViewModels.StudentViewModel
+@{
+    ViewBag.Title = "Current Students";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="center">
+    <h3>Registered Students</h3>
+    <hr />
+    <p class="lead">Currently signed up students</p>
+</div>
+
+<table id="Students" class="table table-bordered table-hover">
+    <thead>
+        <tr style="background-color:#e6e6e6 ">
+            <th>Student Number</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Users)
+        {
+            <tr>
+                <td>@Html.ActionLink(student.UserName, "test", "test", new { id = student.Id }, null)</td>
+                <td>@Html.DisplayFor(m => student.FirstName)</td>
+                <td>@Html.DisplayFor(m => student.Surname)</td>
+                <td>@Html.DisplayFor(m => student.Email)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Students").DataTable();
+        })
+    </script>
+
+}
+

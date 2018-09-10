@@ -7,9 +7,9 @@ namespace HeartOfGold.Migrations
     {
         public override void Up()
         {
-            Sql("INSERT INTO RequestStatus (Name) VALUES ('Pending')");
-            Sql("INSERT INTO RequestStatus (Name) VALUES ('Accepted')");
-            Sql("INSERT INTO RequestStatus (Name) VALUES ('Declined')");
+            Sql("INSERT INTO RequestStatus (Name) VALUES ('Open')");
+            Sql("INSERT INTO RequestStatus (Name) VALUES ('Successful')");
+            Sql("INSERT INTO RequestStatus (Name) VALUES ('Unsuccesful')");
         }
         
         public override void Down()

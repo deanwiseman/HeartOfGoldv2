@@ -33,7 +33,7 @@
                 <div class="panel-body" id="request">
                 <div class="form-group">
                     @Html.LabelFor(m => m.StudentNumber, new { @class = "bold-text" })
-                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName(), @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName().Remove(0, 1), @readonly = "readonly" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Description, new { @class = "bold-text" })

@@ -160,9 +160,9 @@
     .note-heading:before {
         content: "";
         display: block;
-        border-top: solid 2px #bebebe;
+        border-top: solid 1px #103a5c;
         width: 100%;
-        height: 2px;
+        height: 1px;
         position: absolute;
         top: 50%;
         z-index: 0;
@@ -215,4 +215,102 @@ ul.nav a:hover {
 
 #loginHr {
     margin-top: 0px;
+}
+
+div#ItemFormFooter {
+    left: 0px;
+    right: 0px;
+    background-color: black;
+}
+
+.modal-body {
+    margin-left: 10%;
+}
+
+.modal > .modal-dialog > .modal-content {
+    width: 70%;
+}
+
+.modal-content {
+    background: #f5f5f5;
+}
+
+#donorBtnRow {
+    margin-left: -16%;
+}
+
+.btn-primary:hover {
+    background-color: #103a5c;
+    color: gold !important;
+}
+
+#navDropMenu {
+    font-size: 16px;
+    background-color: #103a5c;
+}
+
+    #navDropMenu:hover {
+        background-color: #103a5c;
+        color: gold !important;
+    }
+
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #103a5c;
+}
+
+
+#searchFrmGrp {
+    padding: 7%;
+}
+
+#srchBtn {
+    margin-bottom: 5%;
+}
+
+#dashboardPanel {
+    padding: 1.5rem;
+}
+
+#QuickLinksHeader {
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1px;
+    font-weight: 300;
+    margin-top: auto;
+}
+
+#dashboardStudent {
+    height: 275px;
+}
+
+#dashStudIcon {
+    font-size: 150px;
+    margin-left: 25%;
+    margin-top: 10%;
+    color: #4a4b4e;
+}
+
+#studLead {
+    margin-left: 80px;
+    padding-top: 7px;
+}
+
+#mailIcon {
+    font-size: 150px;
+    margin-left: 29%;
+    margin-top: 10%;
+    color: #4a4b4e;
+}
+
+#messageBody {
+    border: black 0.1px solid;
+}
+
+#modalContent {
+    width: 120%;
+}
+
+.padBot {
+    padding-bottom: 15px;
 }

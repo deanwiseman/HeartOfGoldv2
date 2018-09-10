@@ -29,7 +29,6 @@ namespace HeartOfGold.Controllers
                 Donors = _donors
             };
 
-
             return View(viewModel);
         }
 

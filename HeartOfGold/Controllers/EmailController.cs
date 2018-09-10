@@ -15,20 +15,19 @@ namespace HeartOfGold.Controllers
             return View();
         }
 
-        public ActionResult SendEmail()
+        public ActionResult SendEmail(Email email)
         {
-            Mailer.GmailUsername = "heart.of.gold.mandela@gmail.com";
-            Mailer.GmailPassword = "Newtonpark2525";
+            Mailer.GmailUsername = "";
+            Mailer.GmailPassword = "";
 
             Mailer mailer = new Mailer();
-            mailer.ToEmail = "s212273582@mandela.ac.za";
-            mailer.Subject = "Testing email from Heart of Gold...";
-            mailer.Body = "Testing yo";
+            mailer.ToEmail = email.ToEmail;
+            mailer.Subject = email.Subject;
+            mailer.Body = email.Body;
             mailer.IsHtml = true;
             mailer.Send();
 
-
-            return RedirectToAction("Index", "Donors");
+            return RedirectToAction("Dashboard", "Home");
         }
     }
 }

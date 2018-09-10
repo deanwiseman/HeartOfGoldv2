@@ -1,5 +1,4 @@
-﻿@model IEnumerable<HeartOfGold.Models.Item>
-
+﻿@model HeartOfGold.ViewModels.InventoryViewModel
 
 @{
     ViewBag.Title = "Donation Inventory";
@@ -36,6 +35,8 @@
 <br />
 <br />
 
+@*@Html.CheckBoxFor(m => m.ShowDeletedDonations, new { data_url = Url.Action("GetRemoved", "Item"), id = "checkbox"})*@
+
 <table id="Inventory" class="table table-condensed table-hover">
     <thead>
         <tr style="background-color:#e6e6e6 ">
@@ -48,7 +49,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Donations)
         {
             <tr>
                 <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
@@ -71,45 +72,25 @@
     <script>
 
         $(document).ready(function () {
-            $("#Inventory").DataTable();
-        })
-
-        //$('#inventory').dataTable({
-        //    ajax: {
-        //        url: "/api/donations",
-        //        dataSrc: "",
-        //        type: "GET"
-        //    },
-        //    columns: [
-        //        {
-        //            data: "Name",
-        //            render: function (data, type, item) {
-        //                return "<a href='/item/edit/" + item.id + "'>" + item.name + "</a>";
-        //            }
-        //        },
-        //        {
-        //            data: "name"
-        //        },
-        //        {
-        //            data: "description"
-        //        },
-        //        {
-        //            data: "quantity"
-        //        },
-        //        {
-        //            data: "name"
-        //        },
-        //        {
-        //            data: "dateAdded"
-        //        }
-        //    ],
-        //    pageLength: 25
-        //});
+            $("#Inventory").DataTable();          
+        })       
 
         $('#Inventory').dataTable({
             "pageLength": 25
         });
 
+        //$(function () {
+        //    $('#checkbox').change(function () {
+        //        var data = {};
+        //        data[$(this).attr('name')] = $(this).is(':checked');
+
+        //        $.ajax({
+        //            url: $(this).data('url'),
+        //            type: 'POST',
+        //            data: data
+        //        });
+        //    });
+        //});
     </script>
 }
 

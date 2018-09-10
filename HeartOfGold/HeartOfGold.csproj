@@ -264,6 +264,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Dtos\DonationDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -397,10 +398,15 @@
     <Compile Include="Migrations\201808121434123_AddNameAndSurnameToApplicationUserTable.Designer.cs">
       <DependentUpon>201808121434123_AddNameAndSurnameToApplicationUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808201537390_EditRequestStudNumberValidationFrom10To9Length.cs" />
+    <Compile Include="Migrations\201808201537390_EditRequestStudNumberValidationFrom10To9Length.Designer.cs">
+      <DependentUpon>201808201537390_EditRequestStudNumberValidationFrom10To9Length.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Donor.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Mailer.cs" />
@@ -411,10 +417,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DonorViewModel.cs" />
+    <Compile Include="ViewModels\InventoryViewModel.cs" />
     <Compile Include="ViewModels\ItemFormViewModel.cs" />
     <Compile Include="ViewModels\RequestListViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-paper.css" />
@@ -670,6 +679,8 @@
     <Content Include="Views\Request\ViewMyRequests.cshtml" />
     <Content Include="Views\Item\Edit.cshtml" />
     <Content Include="Views\Donors\History.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Student\Current.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -785,6 +796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808121434123_AddNameAndSurnameToApplicationUserTable.resx">
       <DependentUpon>201808121434123_AddNameAndSurnameToApplicationUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808201537390_EditRequestStudNumberValidationFrom10To9Length.resx">
+      <DependentUpon>201808201537390_EditRequestStudNumberValidationFrom10To9Length.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
