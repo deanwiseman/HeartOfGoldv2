@@ -39,14 +39,46 @@ namespace HeartOfGold.Controllers
         [Authorize(Roles = Roles.Administrator)]
         public ViewResult Dashboard()
         {
-            int OutstandingRequests = _context.Requests.Where(r => r.RequestStatusId == 1).Count();
+
+            // Total number of oustanding requests.
+            var OutstandingRequests = _context.Requests.Where(r => r.RequestStatusId == 1).Count();
+
+            // Number of registered students, -1 to exclude administrator user.
+            var NumStudents = _context.Users.Count() - 1;
+
+            // check if not inactive
+            var ClothesItemsCount = _context.Items.Where(i => i.CategoryId == 1)
+                .Where(i => i.IsActive == true)
+                .Sum(i => i.Quantity);
+
+            var TextBooksCount = _context.Items.Where(i => i.CategoryId == 2)
+                .Where(i => i.IsActive == true)
+                .Sum(i => i.Quantity);
+
+            var StationeryItemsCount = _context.Items.Where(i => i.CategoryId == 3)
+                .Where(i => i.IsActive == true)
+                .Sum(i => i.Quantity);
+
+            var FoodItemsCount = _context.Items.Where(i => i.CategoryId == 4)
+                .Where(i => i.IsActive == true)
+                .Sum(i => i.Quantity);
+
+            var OtherItemsCount = _context.Items.Where(i => i.CategoryId == 5)
+                .Where(i => i.IsActive == true)
+                .Sum(i => i.Quantity);
+            
+
 
             var viewModel = new DashboardViewModel
             {
-                OutstandingStudentRequests = OutstandingRequests
+                OutstandingStudentRequests = OutstandingRequests,
+                NumberOfStudents = NumStudents,
+                TotalClothesItems = ClothesItemsCount,
+                TotalTextbookItems = TextBooksCount,
+                TotalStationeryItems = StationeryItemsCount,
+                TotalFoodItems = FoodItemsCount,
+                TotalOtherItems = OtherItemsCount
             };
-
-
 
             return View(viewModel);
         }

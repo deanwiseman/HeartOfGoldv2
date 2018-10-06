@@ -119,7 +119,7 @@ namespace HeartOfGold.Controllers
                 }
 
                 _context.SaveChanges();
-            ViewBag.Saved = "Saved";
+            TempData["Saved"] = "Saved";
 
             return RedirectToAction("Index");         
         }

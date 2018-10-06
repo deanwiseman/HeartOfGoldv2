@@ -5,7 +5,7 @@ namespace HeartOfGold.Controllers
     public class HelpController : Controller
     {
         // GET: Help
-        public ActionResult ViewHelp()
+        public ActionResult Index()
         {
             return View();
         }

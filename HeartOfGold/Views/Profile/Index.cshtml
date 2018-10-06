@@ -1,0 +1,118 @@
+﻿@model HeartOfGold.ViewModels.ProfileViewModel
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row center">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default" style="margin-bottom: 0;">
+            <h5 class="panel-style">Student Details</h5>
+            <div class="form-group">
+                <label>Student Number:</label>
+                <label>@User.Identity.GetUserName().Remove(0, 1)</label>
+            </div>
+            <div class="form-group">
+                <label>Name:</label>
+                <label>@Model.Name @Model.Surname</label>
+            </div>
+        </div>
+    </div>
+</div>
+<hr style="margin: 10px;" />
+
+<div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-md-3 center">
+                    <i class="fas fa-address-card" id="requestIcon"></i>
+                    <p class="lead">My Requests</p>
+                </div>
+                <div class="col-md-9">
+                    <ul class="list-group list-style">
+                        <li class="list-group-item" style="margin-top: -1px;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Status:</label>
+                                    <label id="status-0">Open</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Date Created:</label>
+                                    <label>25 August 2018</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Type:</label>
+                                    <label>Clothes</label>
+                                </div>
+                            </div>
+
+
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Status:</label>
+                                    <label id="status-1">Unsuccessful</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Date Created:</label>
+                                    <label>02 August 2018</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Type:</label>
+                                    <label>Food</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Status:</label>
+                                    <label id="status-2">Successful</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Date Created:</label>
+                                    <label>10 October 2018</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Request Type:</label>
+                                    <label>Stationery</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+
+    <script>
+        for (var i = 0; i < 3; i++) {
+            var statusLabel = document.getElementById('status-' + i);
+
+            if (statusLabel.textContent === 'Open') {
+                statusLabel.style.color = 'black';
+            } else if (statusLabel.textContent === 'Successful') {
+                statusLabel.style.color = 'green';
+            } else {
+                statusLabel.style.color = 'orange';
+            }
+            statusLabel.style.fontWeight = 700;
+        }
+
+
+    </script>
+
+
+}
+

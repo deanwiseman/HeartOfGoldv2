@@ -9,15 +9,15 @@
 
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-<div class="center">
-    <h3>Submitted Requests</h3>
-    <p class="lead">Current student requests.</p>
+@*<div class="center">
+    <p class="lead" id="Req_Header">STUDENT REQUESTS</p>
     <hr />
-</div>
+</div>*@
 
 <div class="row">
-    <div class="col-lg-3 col-md-3">
+    <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
+            <div class="panel-heading">Search</div>
             <div class="panel body">
                 @using (Html.BeginForm())
                 {
@@ -25,7 +25,7 @@
                         <input type="submit" value="Search..." class="btn btn-primary register-button" id="srchBtn" />
                         @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Student number" })
 
-                        @if(ViewBag.HasResults != null)
+                        @if (ViewBag.HasResults != null)
                         {
                             <label id="searchResults">@ViewBag.HasResults.ToString()</label>
                         }
@@ -35,10 +35,15 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row">
 
     @if (ViewBag.Results != null)
     {
+    <div class="col-md-6 col-md-offset-3">
         <p>No requests for this student number found!</p>
+    </div>
+
     }
 
 
@@ -47,7 +52,7 @@
     @foreach (var request in Model)
     {
 
-        <div class="col-lg-6 col-md-8 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0" style="margin-left: auto;">
+        <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 col-xs-12 col-offset-xs-0">
             <div class="panel panel-default">
                 <div class="panel-heading">Student Number: @request.StudentNumber</div>
                 <div class="panel-body">
@@ -84,7 +89,6 @@
             </div>
         </div>
     }
-
 </div>
 
 

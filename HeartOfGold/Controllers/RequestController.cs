@@ -31,6 +31,7 @@ namespace HeartOfGold.Controllers
 
             return View("RequestForm");
         }
+
         // GET: Requests
         [Authorize(Roles = Roles.Student)]
         public ActionResult SubmitRequest()
@@ -90,6 +91,8 @@ namespace HeartOfGold.Controllers
                 }
             }
 
+            if (requests.Count() == 0)
+                ViewBag.HasResults = "There are no outstanding student requests at this point.";
             var pageNumber = page ?? 1;
             var _OnePageOfRequests = requests.ToPagedList(pageNumber, 1);
 
@@ -98,13 +101,13 @@ namespace HeartOfGold.Controllers
             return View("ViewRequests", _OnePageOfRequests);
         }
 
-        public ActionResult GetMyRequests()
-        {
-            var userId = User.Identity.GetUserId();
-            var myRequests = _context.Requests.Where(r => r.StudentNumber == userId).ToList();
+        //public ActionResult GetMyRequests()
+        //{
+        //    //var userId = User.Identity.
+        //    //var myRequests = _context.Requests.Where(r => r.StudentNumber == userId).ToList();
 
-            return View("ViewMyRequests", myRequests);
-        }
+        //    //return View("ViewMyRequests", myRequests);
+        //}
 
         [HttpPost]
         public ActionResult ProcessRequest(Request request)

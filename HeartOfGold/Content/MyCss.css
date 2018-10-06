@@ -314,3 +314,119 @@ div#ItemFormFooter {
 .padBot {
     padding-bottom: 15px;
 }
+
+#infoIcon {
+    font-size: 100px;
+    margin-top: 55px;
+    color: #4a4b4e;
+    padding-bottom: 10px;
+}
+
+#informatics {
+    border-right: #ebebec 1px solid;
+    height: 100%;
+    text-align: center;
+}
+
+.panel-style {
+    background: #ebebec;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1px;
+    font-weight: 300;
+    margin-top: auto;
+}
+
+#requestIcon {
+    font-size: 100px;
+    margin-top: 55px;
+    color: #4a4b4e;
+    padding-bottom: 10px;
+}
+
+.list-style {
+    margin-bottom: 0;
+}
+
+#Req_Header {
+    margin-bottom: 30px;
+    margin-top: 20px;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+#DonItems {
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+#infoList {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.arrow {
+    float: right;
+    padding-top: 6px;
+    margin-right: 20px;
+}
+
+#li1 {
+    display: inline;
+    margin-left: 100px;
+}
+
+#li2 {
+    display: inline;
+    margin-left: 65px;
+}
+
+#li3 {
+    display: inline;
+    margin-left: 82px;
+}
+
+#li4 {
+    display: inline;
+    margin-left: 63px;
+}
+
+#li5 {
+    display: inline;
+    margin-left: 100px;
+}
+
+.logo-image {
+    margin-top: 19px;
+    margin-left: 5px;
+}
+
+.home-panel {
+    text-align: center;
+    padding: 15px;
+}
+
+.home-panel-p {
+    text-align: center;
+    padding: 5px;
+}
+
+.home-icons {
+    font-size: 150px;
+}
+
+#homeLogo1 {
+    margin-top: 30px;
+    margin-left: 110px;
+}
+
+#homeLogo2 {
+    margin-top: 50px;
+    margin-left: 60px;
+}
+
+#homeLogo3 {
+    margin-top: 50px;
+    margin-left: 80px;
+}

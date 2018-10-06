@@ -6,95 +6,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="center">
-    <h3>Submit a Request</h3>
-    <hr />
-    <p class="lead">Let us know what you need</p>
-</div>
-
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
         <div class="well">
-            <h4 class="note-heading"><span>To Note:</span></h4>
-                <ol style="margin-top:2em">
-                    <li style="padding-left:1em">You are allowed to submit one request per day.</li>
-                    <li style="padding-left:1em">Indicate clearly what you are looking for.</li>
-                    <li style="padding-left:1em">Remember to bring your student card when collecting a donation.</li>
-                </ol>
+            <h4 class="note-heading"><span>What do I need to know?</span></h4>
+            <ol style="margin-top:2em">
+                <li style="padding-left:1em">You are allowed to submit one request per day.</li>
+                <li style="padding-left:1em">You have a total of three requests active at once.</li>
+                <li style="padding-left:1em">Indicate clearly what you are looking for. Here is an example of a well-worded request: "I am looking for first year IT textbooks." </li>
+                <li style="padding-left:1em">Remember to bring your student card when collecting a donation.</li>
+            </ol>
         </div>
     </div>
-
-    <div class="col-sm-5 col-md-5 col-lg-5">
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
         @using (Html.BeginForm("Save", "Request"))
         {
             @Html.AntiForgeryToken()
             <div class="panel panel-default img-rounded">
                 <div class="panel-heading">New Request</div>
                 <div class="panel-body" id="request">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.StudentNumber, new { @class = "bold-text" })
-                    @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName().Remove(0, 1), @readonly = "readonly" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Description, new { @class = "bold-text" })
-                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Description)
-                </div>
-                @*<div class="form-group">
-                    @Html.LabelFor(m => m.Date, new { @class = "bold-text" })
-                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @Value = DateTime.Now.ToShortDateString(), @readonly = "readonly" })
-                </div>*@
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.StudentNumber, new { @class = "bold-text" })
+                        @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName().Remove(0, 1), @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description, new { @class = "bold-text" })
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Description)
+                    </div>
+                    @*<div class="form-group">
+                            @Html.LabelFor(m => m.Date, new { @class = "bold-text" })
+                            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @Value = DateTime.Now.ToShortDateString(), @readonly = "readonly" })
+                        </div>*@
+                    
+                    <div>
+                        <label>
+                            Repeat Request: @Html.CheckBox("checkbox")
+                        </label>
+                    </div>
+                    <div>
+                        <p>Date: <input type="text" id="datepicker"/></p>
+                    </div>
 
-                @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Id)
 
-                <div class="form-group center">
-                    <button type="submit" class="btn btn-primary register-button">Submit Request</button>                            
-                </div>
+                    <div class="form-group center">
+                        <button type="submit" class="btn btn-primary register-button">Submit</button>
+                    </div>
                 </div>
             </div>
         }
-</div>
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">Placeholder</div>
-            <div class="panel-body">
-                
-            </div>
-        </div>
     </div>
+
 </div>
-<hr/>
+<hr />
 
 
-@section scripts 
+@section scripts
 {
-    @*@Scripts.Render("~/bundles/jqueryval")*@
-    
-    
-    @*@@if (ViewBag != null)
-    {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-left",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                toastr.success('Added')
-            });
-        </script>*@
-    }
+    @Scripts.Render("~/bundles/jqueryui");
+    @Styles.Render("~/Content/themes/base/css")
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+}
 
 
