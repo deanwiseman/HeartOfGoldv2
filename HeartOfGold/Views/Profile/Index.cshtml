@@ -23,94 +23,103 @@
 </div>
 <hr style="margin: 10px;" />
 
-<div class="row">
+@if (TempData["NoResults"] != null)
+{
+    <p class="lead">You currently have no active requests.</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-3 center">
+                        <i class="fas fa-address-card" id="requestIcon"></i>
+                        <p class="lead">My Requests</p>
+                    </div>
+                    <div class="col-md-9">
+                        <ul class="list-group list-style">
+                            @*foreach output here over current student's requests*@
+                            @foreach (var r in Model.Requests)
+                            {
+                            <li class="list-group-item" style="margin-top: -1px;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Status:</label>
+                                        <label class="status" >@r.RequestStatus.Name</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Date Created:</label>
+                                        <label>@r.Date.ToString("dd MMMM yyyy")</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Request Type:</label>
+                                        <label>hgfh</label>
+                                    </div>
+                                </div>
+                            </li>
+                            }
 
-    <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-            <div class="row">
-                <div class="col-md-3 center">
-                    <i class="fas fa-address-card" id="requestIcon"></i>
-                    <p class="lead">My Requests</p>
+
+                            @*<li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Status:</label>
+                                        <label id="status-1">Unsuccessful</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Date Created:</label>
+                                        <label>02 August 2018</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Request Type:</label>
+                                        <label>Food</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Status:</label>
+                                        <label id="status-2">Successful</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Date Created:</label>
+                                        <label>10 October 2018</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Request Type:</label>
+                                        <label>Stationery</label>
+                                    </div>
+                                </div>
+                            </li>*@
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <ul class="list-group list-style">
-                        <li class="list-group-item" style="margin-top: -1px;">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Status:</label>
-                                    <label id="status-0">Open</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Date Created:</label>
-                                    <label>25 August 2018</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Request Type:</label>
-                                    <label>Clothes</label>
-                                </div>
-                            </div>
 
 
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Status:</label>
-                                    <label id="status-1">Unsuccessful</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Date Created:</label>
-                                    <label>02 August 2018</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Request Type:</label>
-                                    <label>Food</label>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Status:</label>
-                                    <label id="status-2">Successful</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Date Created:</label>
-                                    <label>10 October 2018</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Request Type:</label>
-                                    <label>Stationery</label>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </div>
-
-
         </div>
     </div>
-</div>
+}
 
 @section scripts
     {
 
+    @*Simple script to fetch all status lables into a nodelist, loop through their contents and set the colour accordingly.*@
     <script>
-        for (var i = 0; i < 3; i++) {
-            var statusLabel = document.getElementById('status-' + i);
+        const statusLabel = document.querySelectorAll('.status');
 
-            if (statusLabel.textContent === 'Open') {
-                statusLabel.style.color = 'black';
-            } else if (statusLabel.textContent === 'Successful') {
-                statusLabel.style.color = 'green';
+        statusLabel.forEach(function (current) {
+            if (current.textContent === 'Open') {
+                current.style.color = 'black';
+            } else if (current.textContent === 'Successful') {
+                current.style.color = 'green';
             } else {
-                statusLabel.style.color = 'orange';
+                current.style.color = 'orange';
             }
-            statusLabel.style.fontWeight = 700;
-        }
-
-
+            current.style.fontWeight = 700;
+        });                 
     </script>
 
 

@@ -6,21 +6,21 @@
 }
 
 @*<div class="row">
-    <div class="col-md-5 col-sm-5 col-lg-5">
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home")">
-                    <i class="fas fa-home"></i>
-                    &nbsp;Home
-                </a>
-            </li>
-            <li class="active">
-                <i class="fas fa-th-list"></i>
-                &nbsp;View Inventory
-            </li>
-        </ol>
-    </div>
-</div>*@
+        <div class="col-md-5 col-sm-5 col-lg-5">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+                        <i class="fas fa-home"></i>
+                        &nbsp;Home
+                    </a>
+                </li>
+                <li class="active">
+                    <i class="fas fa-th-list"></i>
+                    &nbsp;View Inventory
+                </li>
+            </ol>
+        </div>
+    </div>*@
 
 <h3>Donation Inventory</h3>
 <hr />
@@ -72,22 +72,35 @@
     <script>
 
         $(document).ready(function () {
-            $("#Inventory").DataTable();          
-        })       
+            $("#Inventory").DataTable();
+        })
 
         $('#Inventory').dataTable({
             "pageLength": 25
         });
     </script>
 
-    @if(TempData["Saved"] != null)
+    @if (TempData["Saved"] != null)
     {
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 toastr.success('Successfully added donation item.');
             });
 
         </script>
     }
+
+    else if (TempData["Updated"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                toastr.success('Successfully updated donation item.');
+            });
+
+        </script>
+
+    }
+    
+}
 }
 

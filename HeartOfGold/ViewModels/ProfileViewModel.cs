@@ -15,6 +15,8 @@ namespace HeartOfGold.ViewModels
         public string Surname { get; set; }
         public string Email { get; set; }
 
+        public Request Request { get; set; }
+
         public List<Request> Requests { get; set; }
 
     }

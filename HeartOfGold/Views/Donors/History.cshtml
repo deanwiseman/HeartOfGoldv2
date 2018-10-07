@@ -23,6 +23,7 @@
             <th>Date</th>
             <th>Donation</th>
             <th>Description</th>
+            <th>Quantity</th>
             <th>Category</th>
         </tr>
     </thead>
@@ -33,6 +34,7 @@
             <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy")</td>
             <td>@Html.DisplayFor(m => item.Name)</td>
             <td>@Html.DisplayFor(m => item.Description)</td>
+            <td>@Html.DisplayFor(m => item.Quantity)</td>
             <td>@Html.DisplayFor(m => item.Category.Name)</td>
         </tr>
         }

@@ -42,7 +42,7 @@
 }
 
 .nmu-img {
-    width: 70%;
+    width: 60%;
 }
 
 .p-margin {
@@ -144,9 +144,9 @@
     border: 1px black;
 }
 
-.form-control {
+/*.form-control {
     color: #c5c5c5;
-}
+}*/
 
 .alert-info {
     background-color: #828282
@@ -405,6 +405,7 @@ div#ItemFormFooter {
 .home-panel {
     text-align: center;
     padding: 15px;
+    background: #d0eaff;
 }
 
 .home-panel-p {
@@ -429,4 +430,12 @@ div#ItemFormFooter {
 #homeLogo3 {
     margin-top: 50px;
     margin-left: 80px;
+}
+
+#homeId {
+    margin: 10px;
+}
+
+.status {
+
 }

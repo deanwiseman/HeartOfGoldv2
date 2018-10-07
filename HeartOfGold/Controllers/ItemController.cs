@@ -102,6 +102,7 @@ namespace HeartOfGold.Controllers
             if (item.Id == 0)
                 {
                     _context.Items.Add(item);
+                    TempData["Saved"] = "Saved";
                 }
                 // Else, update it
                 else
@@ -112,14 +113,16 @@ namespace HeartOfGold.Controllers
                     itemInDb.Quantity = item.Quantity;
                     itemInDb.CategoryId = item.CategoryId;
                     itemInDb.DonorId = item.DonorId;
+                    TempData["Updated"] = "Updated";
 
                 // Soft-delete donation.
                 if (item.MustDelete == true)
                     itemInDb.IsActive = false;
+                    TempData["Deleted"] = "Deleted";
                 }
 
                 _context.SaveChanges();
-            TempData["Saved"] = "Saved";
+            
 
             return RedirectToAction("Index");         
         }
