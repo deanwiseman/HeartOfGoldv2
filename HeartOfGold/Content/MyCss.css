@@ -439,3 +439,8 @@ div#ItemFormFooter {
 .status {
 
 }
+
+#Faq .ui-accordion-header {
+    background-color: #103a5c;
+    color: white;
+}

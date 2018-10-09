@@ -5,45 +5,91 @@
 }
 
 <div class="container center help-div-width">
-    <h3>Stuck? Get help here!</h3>
-    <p class="lead">Frequenty Asked Questions</p>
+    <h3>Frequently Asked Questions</h3>
     <hr />
 
-
-    <div class="panel panel-default">
-        <div class="panel-heading">What exactly is Heart of Gold?</div>
-        <div class="panel-body">
-            It is a free-to-use platform for students within the School of ICT at Nelson Mandela University. Students who are disadvantaged can submit a request for items they are in need of.
+    <div id="Faq">
+        <h3>What exactly is Heart of Gold?</h3>
+        <div>
+            <p class="lead">
+                It is a free-to-use platform for students within the School of ICT at Nelson Mandela University. Students who are disadvantaged can submit a request for items they are in need of.
+            </p>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">How many requests am I allowed to submit?</div>
-        <div class="panel-body">
-            <strong>Two</strong> requests per day. However, exceptions can be made under special circumstances.
+        <h3>How many requests am I allowed to submit?</h3>
+        <div>
+            <p class="lead">
+                <strong>Two</strong> requests per day. However, exceptions can be made under special circumstances.
+            </p>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">Who can donate to the students?</div>
-        <div class="panel-body">
-            Anyone who wants to!
+        <h3>Who can donate to the students?</h3>
+        <div>
+            <p class="lead">
+                Anyone who wants to!
+            </p>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">How do I know what is happening with my submitted request?</div>
-        <div class="panel-body">
-            At the top of the web page, click on <strong>Student Requests</strong>. Then, select <strong>View My Requests</strong>. The status and progress of your request will be shown here!
+        <h3>How do I know what is happening with my submitted request?</h3>
+        <div>
+            <p class="lead">
+                At the top of the web page, click on <strong>Student Requests</strong>. Then, select <strong>View My Requests</strong>. The status and progress of your request will be shown here!
+            </p>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">I am still confused about a few things. Who can I contact?</div>
-        <div class="panel-body">
-            You are welcome to contact the website administrator at heartadmin@mandela.ac.za.
+        <h3>I am still confused about a few things. Who can I contact?</h3>
+        <div>
+            <p class="lead">
+                You are welcome to contact the website administrator at heartadmin@mandela.ac.za.
+            </p>
         </div>
+
+
     </div>
+    <hr />
+    @*<div class="panel panel-default">
+            <div class="panel-heading">What exactly is Heart of Gold?</div>
+            <div class="panel-body">
+                It is a free-to-use platform for students within the School of ICT at Nelson Mandela University. Students who are disadvantaged can submit a request for items they are in need of.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">How many requests am I allowed to submit?</div>
+            <div class="panel-body">
+                <strong>Two</strong> requests per day. However, exceptions can be made under special circumstances.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Who can donate to the students?</div>
+            <div class="panel-body">
+                Anyone who wants to!
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">How do I know what is happening with my submitted request?</div>
+            <div class="panel-body">
+                At the top of the web page, click on <strong>Student Requests</strong>. Then, select <strong>View My Requests</strong>. The status and progress of your request will be shown here!
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">I am still confused about a few things. Who can I contact?</div>
+            <div class="panel-body">
+                You are welcome to contact the website administrator at heartadmin@mandela.ac.za.
+            </div>
+        </div>*@
 </div>
 
-<hr />
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryui");
+    @Styles.Render("~/Content/themes/base/css")
+
+    <script>
+        $(function () {
+            $("#Faq").accordion();
+        });
+    </script>
+
+}
