@@ -405,7 +405,7 @@ div#ItemFormFooter {
 .home-panel {
     text-align: center;
     padding: 15px;
-    background: #d0eaff;
+    background: #ffc46e;
 }
 
 .home-panel-p {
@@ -443,4 +443,13 @@ div#ItemFormFooter {
 #Faq .ui-accordion-header {
     background-color: #103a5c;
     color: white;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#Faq .ui-state-active {
+    border: none;
+}
+
+.p-text {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

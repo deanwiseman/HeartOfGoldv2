@@ -38,6 +38,22 @@ namespace HeartOfGold.Controllers
             return View(viewModel);
         }
 
+        public ActionResult GetDonations(string type)
+        {
+            var items = _context.Items.Include(i => i.Category)
+                .Include(i => i.Donor)
+                .Where(i => i.IsActive == true)
+                .Where(i => i.Category.Name == type)
+                .ToList();
+
+            var viewModel = new InventoryViewModel
+            {
+                Donations = items
+            };
+
+            return View("Donations", viewModel);
+        }
+
         public ActionResult GetRemoved()
         {
             var items = _context.Items.Include(i => i.Category)

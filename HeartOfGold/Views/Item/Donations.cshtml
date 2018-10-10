@@ -1,7 +1,7 @@
 ﻿@model HeartOfGold.ViewModels.InventoryViewModel
 
 @{
-    ViewBag.Title = "Donation Inventory";
+    ViewBag.Title = "Donations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,10 +27,10 @@
 
 <p class="lead">Collection of donated items</p>
 
-<a href="@Url.Action("New", "Item", null)" class="btn btn-primary register-button">
+@*<a href="@Url.Action("New", "Item", null)" class="btn btn-primary register-button">
     <i class="fas fa-check"></i>
     &nbsp;New Donation
-</a>
+</a>*@
 
 <br />
 <br />
@@ -78,28 +78,7 @@
         $('#Inventory').dataTable({
             "pageLength": 25
         });
-    </script>
-
-    @if (TempData["Saved"] != null)
-    {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                toastr.success('Successfully added donation item.');
-            });
-
-        </script>
-    }
-
-    else if (TempData["Updated"] != null)
-    {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                toastr.success('Successfully updated donation item.');
-            });
-
-        </script>
-
-    }
-    
+    </script> 
 }
+
 

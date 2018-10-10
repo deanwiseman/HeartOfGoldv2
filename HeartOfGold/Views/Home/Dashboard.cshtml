@@ -132,11 +132,26 @@
                         <div class="col-md-6">
                             <p class="lead" id="DonItems">Donation items in numbers:</p>
                             <ul class="list-group" id="infoList">
-                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">Food <p class="lead" id="li1">@Model.TotalFoodItems</p> <i class="fas fa-arrow-right arrow"></i></li>
-                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">Stationery <p class="lead" id="li2">@Model.TotalStationeryItems</p><i class="fas fa-arrow-right arrow"></i></li>
-                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">Clothes <p class="lead" id="li3">@Model.TotalClothesItems</p><i class="fas fa-arrow-right arrow"></i></li>
-                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">Textbooks <p class="lead" id="li4">@Model.TotalTextbookItems</p><i class="fas fa-arrow-right arrow"></i></li>
-                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">Other<p class="lead" id="li5">@Model.TotalOtherItems</p> <i class="fas fa-arrow-right arrow"></i></li>
+                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
+                                Food <p class="lead" id="li1">@Model.TotalFoodItems</p>
+                                     <a href="@Url.Action("GetDonations","Item", new { @type = "Food" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                </li>
+                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
+                                Stationery <p class="lead" id="li2">@Model.TotalStationeryItems</p>
+                                           <a href="@Url.Action("GetDonations","Item", new { @type = "Stationery" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                </li>
+                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
+                                Clothes <p class="lead" id="li3">@Model.TotalClothesItems</p>
+                                        <a href="@Url.Action("GetDonations","Item", new { @type = "Clothing" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                </li>
+                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
+                                Textbooks <p class="lead" id="li4">@Model.TotalTextbookItems</p>
+                                          <a href="@Url.Action("GetDonations","Item", new { @type = "Textbook" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                 </li>
+                                <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
+                                Other<p class="lead" id="li5">@Model.TotalOtherItems</p>
+                                     <a href="@Url.Action("GetDonations","Item", new { @type = "Other" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                </li>
                             </ul>
                         </div>
                         
