@@ -42,7 +42,6 @@ namespace HeartOfGold.Controllers
             };
 
             return View("RequestForm", viewModel);
-
         }
       
         [ValidateAntiForgeryToken]
@@ -106,21 +105,12 @@ namespace HeartOfGold.Controllers
             return View("ViewRequests", _OnePageOfRequests);
         }
 
-        //public ActionResult GetMyRequests()
-        //{
-        //    //var userId = User.Identity.
-        //    //var myRequests = _context.Requests.Where(r => r.StudentNumber == userId).ToList();
-
-        //    //return View("ViewMyRequests", myRequests);
-        //}
-
         [HttpPost]
         public ActionResult ProcessRequest(Request request)
         {
             var requestInDb = _context.Requests.Single(r => r.Id == request.Id);
 
             requestInDb.RequestStatusId = request.SelectedStatusId;
-
 
             _context.SaveChanges();
 

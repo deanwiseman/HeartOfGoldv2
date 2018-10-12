@@ -20,11 +20,9 @@ namespace HeartOfGold.Controllers
         [Authorize(Roles = Roles.Student)]
         public ActionResult Index()
         {
-            var dsf = User.Identity.GetUserName();
             var name = User.Identity.Name;
             var StudentNumber = name.Remove(0, 1);
             var id = User.Identity.GetUserId();
-             
 
             var studentRequests = _context.Requests
                 .Include(r => r.RequestStatus)

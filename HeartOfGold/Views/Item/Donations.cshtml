@@ -5,37 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<div class="row">
-        <div class="col-md-5 col-sm-5 col-lg-5">
-            <ol class="breadcrumb">
-                <li>
-                    <a href="@Url.Action("Index", "Home")">
-                        <i class="fas fa-home"></i>
-                        &nbsp;Home
-                    </a>
-                </li>
-                <li class="active">
-                    <i class="fas fa-th-list"></i>
-                    &nbsp;View Inventory
-                </li>
-            </ol>
-        </div>
-    </div>*@
-
 <h3>Donation Inventory: @TempData["DonationType"].ToString()</h3>
 <hr />
 
 <p class="lead">Collection of donated items</p>
 
-@*<a href="@Url.Action("New", "Item", null)" class="btn btn-primary register-button">
-    <i class="fas fa-check"></i>
-    &nbsp;New Donation
-</a>*@
-
 <br />
 <br />
 
-@*@Html.CheckBoxFor(m => m.ShowDeletedDonations, new { data_url = Url.Action("GetRemoved", "Item"), id = "checkbox"})*@
 
 <table id="Inventory" class="table table-condensed table-hover">
     <thead>

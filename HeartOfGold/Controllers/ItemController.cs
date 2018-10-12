@@ -103,19 +103,6 @@ namespace HeartOfGold.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Item item)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var viewModel = new ItemFormViewModel
-            //    {
-            //        Item = item,
-            //        Categories = _context.ItemCategory.ToList(),
-            //        Donors = _context.Donors.ToList()
-
-            //    };
-
-            //    return View("ItemForm", viewModel);
-            //}
-
             // If item doesn't exist, add it
             if (item.Id == 0)
                 {

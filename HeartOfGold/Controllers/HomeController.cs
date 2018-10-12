@@ -35,7 +35,6 @@ namespace HeartOfGold.Controllers
         [Authorize(Roles = Roles.Administrator)]
         public ViewResult Dashboard()
         {
-
             // Total number of oustanding requests.
             var OutstandingRequests = _context.Requests.Where(r => r.RequestStatusId == 1).Count();
 
@@ -61,9 +60,7 @@ namespace HeartOfGold.Controllers
 
             var OtherItemsCount = _context.Items.Where(i => i.CategoryId == 5)
                 .Where(i => i.IsActive == true)
-                .Sum(i => i.Quantity);
-            
-
+                .Sum(i => i.Quantity);          
 
             var viewModel = new DashboardViewModel
             {

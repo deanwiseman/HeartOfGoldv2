@@ -8,7 +8,6 @@ namespace HeartOfGold.Controllers
 {
     public class DonorsController : Controller
     {
-
         private ApplicationDbContext _context;
 
         public DonorsController()
@@ -55,7 +54,6 @@ namespace HeartOfGold.Controllers
             mailer.Body = "Testing yo";
             mailer.IsHtml = true;
             mailer.Send();
-
 
             return RedirectToAction("Index", "Donors");
         }
