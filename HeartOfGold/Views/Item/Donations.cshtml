@@ -1,7 +1,7 @@
 ﻿@model HeartOfGold.ViewModels.InventoryViewModel
 
 @{
-    ViewBag.Title = "Donations";
+    ViewBag.Title =  TempData["DonationType"].ToString() + " Donations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,7 +22,7 @@
         </div>
     </div>*@
 
-<h3>Donation Inventory</h3>
+<h3>Donation Inventory: @TempData["DonationType"].ToString()</h3>
 <hr />
 
 <p class="lead">Collection of donated items</p>

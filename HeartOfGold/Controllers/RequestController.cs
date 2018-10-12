@@ -5,6 +5,7 @@ using HeartOfGold.Models;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using PagedList;
+using HeartOfGold.ViewModels;
 
 namespace HeartOfGold.Controllers
 {
@@ -32,8 +33,15 @@ namespace HeartOfGold.Controllers
         // GET: Requests
         [Authorize(Roles = Roles.Student)]
         public ActionResult SubmitRequest()
-        {          
-            return View("RequestForm");
+        {
+            var Categories = _context.ItemCategory.ToList();
+
+            var viewModel = new RequestFormViewModel
+            {
+                RequestCategories = Categories
+            };
+
+            return View("RequestForm", viewModel);
 
         }
       
@@ -49,7 +57,7 @@ namespace HeartOfGold.Controllers
             }
                 _context.SaveChanges();
 
-            ViewBag.Text = "Saved";
+            TempData["Saved"] = "Saved";
 
             return RedirectToAction("SubmitRequest");
         }

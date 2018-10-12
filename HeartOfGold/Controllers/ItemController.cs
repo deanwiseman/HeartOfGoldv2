@@ -46,6 +46,8 @@ namespace HeartOfGold.Controllers
                 .Where(i => i.Category.Name == type)
                 .ToList();
 
+            TempData["DonationType"] = type;
+
             var viewModel = new InventoryViewModel
             {
                 Donations = items
@@ -137,8 +139,7 @@ namespace HeartOfGold.Controllers
                     TempData["Deleted"] = "Deleted";
                 }
 
-                _context.SaveChanges();
-            
+                _context.SaveChanges();          
 
             return RedirectToAction("Index");         
         }

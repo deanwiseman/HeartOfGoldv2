@@ -1,5 +1,6 @@
 ﻿@model HeartOfGold.ViewModels.ProfileViewModel
 @using Microsoft.AspNet.Identity;
+
 @{
     ViewBag.Title = "My Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,50 +55,15 @@ else
                                     </div>
                                     <div class="col-md-4">
                                         <label>Request Type:</label>
-                                        <label>hgfh</label>
+                                        <label>@Html.DisplayFor(m => r.Category.Name)</label>
                                     </div>
                                 </div>
                             </li>
                             }
 
-
-                            @*<li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Status:</label>
-                                        <label id="status-1">Unsuccessful</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Date Created:</label>
-                                        <label>02 August 2018</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Request Type:</label>
-                                        <label>Food</label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Status:</label>
-                                        <label id="status-2">Successful</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Date Created:</label>
-                                        <label>10 October 2018</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Request Type:</label>
-                                        <label>Stationery</label>
-                                    </div>
-                                </div>
-                            </li>*@
                         </ul>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

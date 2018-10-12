@@ -6,38 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<div class="row">
-    <div class="col-md-5 col-sm-5 col-lg-5">
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home")">
-                    <i class="fas fa-home"></i>
-                    &nbsp;Home
-                </a>
-            </li>
-            <li>
-                <a href="@Url.Action("Index", "Item")">
-                    <i class="fas fa-th-list"></i>
-                    &nbsp;View Inventory
-                </a>
-            </li>
-            <li class="active">
-                <i class="far fa-save"></i>
-                &nbsp;New Donation
-            </li>
-        </ol>
-    </div>
-</div>*@
-
-
-
 <div class="container center">
     <h3>New Donation</h3>
     <hr />
     <p class="lead">Record a donation on the system</p>
 </div>
-
-
 
     <div class="row">
         <div class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
@@ -81,38 +54,23 @@
                                 <br />
                             </div>
                             </div>
-
                             @Html.HiddenFor(m => m.Item.Id)
                             @Html.AntiForgeryToken()
+                        
                         <div class="col-md-12 center">
+                            <hr style="margin-top:0;"/>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary register-button">Save Donation</button>
                                 @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
-                                @*@Html.ActionLink("Remove", "Remove", "Item", null, new { @class = "btn btn-default", @id = Model.Item.Id })*@
                             </div>
-                            </div>
+                        </div>
                             }
                         </div>
                     </div>                
             </div>
         </div>
-
-
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
-
-            <div class="alert alert-dismissible alert-success" id="Alert">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                Successfully added donation.
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-
 <hr />
+
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
@@ -131,22 +89,7 @@
             });
         </script>
     }
-
-    @*<script>
-            $(document).ready(function () {
-                $("#inventory .js-delete").on("click", function () {
-                    if (confirm("Are you sure")) {
-                        $.ajax({
-                            url: "/api/donations/" + $(this).attr("data-donation-id"),
-                            method: "POST",
-                            success: function () {
-                                console.log("Success");
-                            }
-                        });
-                    }
-                });
-            });
-        </script>*@
+   
 }
 
 

@@ -1,4 +1,4 @@
-﻿@model HeartOfGold.Models.Request
+﻿@model HeartOfGold.ViewModels.RequestFormViewModel
 @using Microsoft.AspNet.Identity;
 
 @{
@@ -28,29 +28,34 @@
                 <div class="panel-heading">New Request</div>
                 <div class="panel-body" id="request">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.StudentNumber, new { @class = "bold-text" })
-                        @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName().Remove(0, 1), @readonly = "readonly" })
+                        @Html.LabelFor(m => m.Request.StudentNumber, new { @class = "bold-text" })
+                        @Html.TextBoxFor(m => m.Request.StudentNumber, new { @class = "form-control", @Value = User.Identity.GetUserName().Remove(0, 1), @readonly = "readonly" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Description, new { @class = "bold-text" })
-                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Description)
+                        @Html.LabelFor(m => m.Request.CategoryId, new { @class = "bold-text", @title = "Select a type of request" })
+                        @Html.DropDownListFor(m => m.Request.CategoryId, new SelectList(Model.RequestCategories, "Id", "Name"), "What type of request is it?", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Request.CategoryId)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Request.Description, new { @class = "bold-text" })
+                        @Html.TextAreaFor(m => m.Request.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Request.Description)
                     </div>
                     @*<div class="form-group">
                             @Html.LabelFor(m => m.Date, new { @class = "bold-text" })
                             @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @Value = DateTime.Now.ToShortDateString(), @readonly = "readonly" })
                         </div>*@
-                    
+
                     <div>
                         <label>
                             Repeat Request: @Html.CheckBox("checkbox")
                         </label>
                     </div>
                     <div>
-                        <p>Date: <input type="text" id="datepicker"/></p>
+                        <p>Date: <input type="text" id="datepicker" /></p>
                     </div>
 
-                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Request.Id)
 
                     <div class="form-group center">
                         <button type="submit" class="btn btn-primary register-button">Submit</button>
@@ -59,10 +64,9 @@
             </div>
         }
     </div>
-
 </div>
-<hr />
 
+<hr />
 
 @section scripts
 {
@@ -74,6 +78,16 @@
             $("#datepicker").datepicker();
         });
     </script>
+
+    @if (TempData["Saved"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                toastr.success('Your request has been successfully logged.');
+            });
+
+        </script>
+    }
 }
 
 

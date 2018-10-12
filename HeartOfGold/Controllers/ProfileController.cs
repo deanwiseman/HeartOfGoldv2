@@ -35,15 +35,17 @@ namespace HeartOfGold.Controllers
             {
                 TempData["NoResults"] = "No Results.";
             }
-            var Student = _context.Users.Where(r => r.Id == id).First();
+
+            var _Student = _context.Users.Where(r => r.Id == id).First();
+            var _Categories = _context.ItemCategory.ToList();
 
             var viewModel = new ProfileViewModel
             {
                 Requests = studentRequests,
-                Name = Student.FirstName,
-                Surname = Student.Surname,
-                Email = Student.Email
-               
+                Name = _Student.FirstName,
+                Surname = _Student.Surname,
+                Email = _Student.Email,
+                Categories = _Categories             
             };
 
             return View(viewModel);

@@ -404,6 +404,10 @@
     <Compile Include="Migrations\201808201537390_EditRequestStudNumberValidationFrom10To9Length.Designer.cs">
       <DependentUpon>201808201537390_EditRequestStudNumberValidationFrom10To9Length.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810121757062_AddCategoryPropertyToRequestModel.cs" />
+    <Compile Include="Migrations\201810121757062_AddCategoryPropertyToRequestModel.Designer.cs">
+      <DependentUpon>201810121757062_AddCategoryPropertyToRequestModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -424,6 +428,7 @@
     <Compile Include="ViewModels\InventoryViewModel.cs" />
     <Compile Include="ViewModels\ItemFormViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\RequestFormViewModel.cs" />
     <Compile Include="ViewModels\RequestListViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
@@ -849,6 +854,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808201537390_EditRequestStudNumberValidationFrom10To9Length.resx">
       <DependentUpon>201808201537390_EditRequestStudNumberValidationFrom10To9Length.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810121757062_AddCategoryPropertyToRequestModel.resx">
+      <DependentUpon>201810121757062_AddCategoryPropertyToRequestModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
