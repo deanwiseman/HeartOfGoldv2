@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-<hr style="margin: 10px;" />
+<hr style="margin-top:5px" />
 
 @if (TempData["NoResults"] != null)
 {
@@ -31,7 +31,7 @@
 else
 {
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="row">
                     <div class="col-md-3 center">
@@ -39,16 +39,12 @@ else
                         <p class="lead">My Requests</p>
                     </div>
                     <div class="col-md-9">
-                        <ul class="list-group list-style">
+                        <ul class="list-group list-style" id="RequestList">
                             @*foreach output here over current student's requests*@
                             @foreach (var r in Model.Requests)
                             {
                             <li class="list-group-item" style="margin-top: -1px;">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Status:</label>
-                                        <label class="status" >@r.RequestStatus.Name</label>
-                                    </div>
                                     <div class="col-md-4">
                                         <label>Date Created:</label>
                                         <label>@r.Date.ToString("dd MMMM yyyy")</label>
@@ -57,16 +53,20 @@ else
                                         <label>Request Type:</label>
                                         <label>@Html.DisplayFor(m => r.Category.Name)</label>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label>Status:</label>
+                                        <label class="status">@r.RequestStatus.Name</label>
+                                    </div>
                                 </div>
                             </li>
                             }
-
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <hr style="margin:0;"/>
 }
 
 @section scripts
@@ -74,8 +74,8 @@ else
 
     @*Simple script to fetch all status lables into a nodelist, loop through their contents and set the colour accordingly.*@
     <script>
-        const statusLabel = document.querySelectorAll('.status');
 
+        const statusLabel = document.querySelectorAll('.status');
         statusLabel.forEach(function (current) {
             if (current.textContent === 'Open') {
                 current.style.color = 'black';
@@ -85,9 +85,20 @@ else
                 current.style.color = 'orange';
             }
             current.style.fontWeight = 700;
-        });                 
+        });   
+        
     </script>
 
+    @*<script>
+        $(document).ready(function () {
 
-}
+        }        var check = function () {
+                var count = $('#RequestList').children("li").length;
+                if (count > 2) {
+                    $('#RequestList:first').remove();
+                }
+            };
+            check();
+        })        
+    </script>*@
 

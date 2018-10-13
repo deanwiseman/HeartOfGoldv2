@@ -34,14 +34,25 @@ namespace HeartOfGold.Controllers
         [Authorize(Roles = Roles.Student)]
         public ActionResult SubmitRequest()
         {
-            var Categories = _context.ItemCategory.ToList();
-
-            var viewModel = new RequestFormViewModel
+            // Business rule: a student may only have 3 total requests at one point in time. Check against this first:
+            if (CanSubmitRequest())
             {
-                RequestCategories = Categories
-            };
+                var Categories = _context.ItemCategory.ToList();
 
-            return View("RequestForm", viewModel);
+                var viewModel = new RequestFormViewModel
+                {
+                    RequestCategories = Categories
+                };
+
+                return View("RequestForm", viewModel);
+
+            }
+            else
+            {
+                // add entry to TempData for use in displaying notification (with toastr)
+                TempData["RequestLimit"] = "Invalid request.";
+                return RedirectToAction("Index", "Home");
+            }           
         }
       
         [ValidateAntiForgeryToken]
@@ -115,6 +126,20 @@ namespace HeartOfGold.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("GetRequests");
+        }
+
+        public bool CanSubmitRequest()
+        {
+            // fetch student number of currently logged in student
+            var name = User.Identity.Name;
+            var StudentNumber = name.Remove(0, 1);
+
+            // count number of requests with 'open' status
+            var RequestCount = _context.Requests
+                .Where(r => r.StudentNumber == StudentNumber)
+                .Where(r => r.RequestStatusId == 1)
+                .Count();
+            return RequestCount < 3 ? true : false;
         }
     }
 }

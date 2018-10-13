@@ -10,16 +10,17 @@
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="center">
-    <p class="lead" id="Req_Header">STUDENT REQUESTS</p>
+<h3>Student Requests</h3>
     <hr />
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel body">
                 @using (Html.BeginForm())
                 {
+                    <label>Look into requests...</label>
                     <div class="form-group" id="searchFrmGrp">
                         <input type="submit" value="Search..." class="btn btn-primary register-button" id="srchBtn" />
                         @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Student number" })
@@ -34,48 +35,47 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
 
     @if (ViewBag.Results != null)
     {
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-1">
         <p>No requests for this student number found!</p>
     </div>
 
     }
 
-
-
-
-    @foreach (var request in Model)
+   @foreach (var request in Model)
     {
 
-        <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+        <div class="col-md-6 col-sm-10">
             <div class="panel panel-default">
                 <div class="panel-heading">Student Number: @request.StudentNumber</div>
                 <div class="panel-body">
                     @using (Html.BeginForm("ProcessRequest", "Request"))
                     {
                         <div class="form-group">
-                            <label><strong>Request Body</strong></label>
-                            @Html.TextAreaFor(r => request.Description, new { @class = "form-control", @readonly = "readonly" })
+                            <label class="fonta-weight">Request Body</label>
+                            <div id="textArea">
+                                @Html.TextAreaFor(r => request.Description, new { @class = "form-control", @readonly = "readonly", @id = "ReqBody", cols = 200, rows = 3 })
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label><strong>Current Status</strong></label>
+                            <label class="fonta-weight">Current Status</label>
                             @Html.TextBoxFor(r => request.RequestStatus.Name, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                         <div class="form-group">
-                            <label><strong>Date Submitted</strong></label>
-                            @Html.TextBoxFor(r => request.Date, "{0:dd/MM/yyyy}", new { @class = "form-control", @readonly = "readonly" })
+                            <label class="fonta-weight">Date Submitted</label>
+                            @Html.TextBoxFor(r => request.Date, "{0:dd MMMM yyyy}", new { @class = "form-control", @readonly = "readonly" })
+                            <hr style="margin-bottom:5px"/>
+                            <label><strong>Respond to this request:</strong></label>
                         </div>
                         @Html.HiddenFor(r => request.Id)
                         @Html.HiddenFor(r => request.StudentNumber)
-                        <div class="form-group">
+                        <div class="form-group center">
                             <button type="submit" class="btn btn bg-primary register-button">Process...</button>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group center">
                             <label class="radio-inline">
                                 @Html.RadioButtonFor(m => request.SelectedStatusId, "2")Successful
                             </label>
@@ -93,7 +93,7 @@
 
 <div class="row center">
     <div class="col-md-6 col-md-offset-3">
-        <h5>Browse...</h5>
+        <h5 style="margin-bottom: 0px;">Browse...</h5>
         @Html.PagedListPager((IPagedList)ViewBag.OnePageOfRequests, page => Url.Action("GetRequests", new { page = page }), PagedListRenderOptions.MinimalWithPageCountText)
     </div>
 </div>

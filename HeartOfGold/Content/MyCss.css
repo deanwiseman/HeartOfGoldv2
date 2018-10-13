@@ -454,3 +454,20 @@ div#ItemFormFooter {
 .p-text {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.fonta-weight {
+    font-weight: 500;
+}
+
+#ReqBody {
+    border: 0.1px #d6d6d6 solid;
+    width: 100%;
+    max-width: 100%;
+}
