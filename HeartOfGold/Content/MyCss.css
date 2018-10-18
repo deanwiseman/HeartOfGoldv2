@@ -471,3 +471,14 @@ div#ItemFormFooter {
     width: 100%;
     max-width: 100%;
 }
+
+.required:after {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}
+
+#registerP::first-letter {
+    font-weight: bold;
+    color: red;
+}
