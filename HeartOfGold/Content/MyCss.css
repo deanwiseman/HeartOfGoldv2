@@ -482,3 +482,19 @@ div#ItemFormFooter {
     font-weight: bold;
     color: red;
 }
+
+#calendarIcon {
+    font-size: 150px;
+    margin-left: 112px;
+    margin-top: 10%;
+    color: #4a4b4e;
+}
+
+#scheduleModal {
+    height: 90vh;
+}
+
+.schedmodalcontent {
+    width: 100vh;
+    height: 100vh;
+}

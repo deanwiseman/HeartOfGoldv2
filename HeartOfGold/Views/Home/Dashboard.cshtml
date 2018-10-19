@@ -16,36 +16,36 @@
                 @using (Html.BeginForm("SendEmail", "Email", new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
-                <div class="row padBot">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email.ToEmail, new { @class = "col-md-2 control-label" })
+                    <div class="row padBot">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email.ToEmail, new { @class = "col-md-2 control-label" })
                             @Html.TextBoxFor(m => m.Email.ToEmail, new { @class = "col-md-10 form-control" })
                         </div>
                         @Html.ValidationMessageFor(m => m.Email.ToEmail)
                     </div>
-                <div class="row padBot">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email.Subject, new { @class = "col-md-2 control-label" })
+                    <div class="row padBot">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email.Subject, new { @class = "col-md-2 control-label" })
                             @Html.TextBoxFor(m => m.Email.Subject, new { @class = "col-md-10 form-control" })
                             @Html.ValidationMessageFor(m => m.Email.Subject)
                         </div>
                     </div>
 
-                <div class="row padBot">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email.Body, new { @class = "col-md-2 control-label" })
-                        @Html.TextAreaFor(m => m.Email.Body, new { @class = "col-md-10 form-control", id = "messageBody" })
-                        @Html.ValidationMessageFor(m => m.Email.Body)
+                    <div class="row padBot">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email.Body, new { @class = "col-md-2 control-label" })
+                            @Html.TextAreaFor(m => m.Email.Body, new { @class = "col-md-10 form-control", id = "messageBody" })
+                            @Html.ValidationMessageFor(m => m.Email.Body)
+                        </div>
                     </div>
-                </div>
-                <div class="row center">
-                    <div class="form-group">
-                        <button type="Submit" class="btn btn-primary register-button">Send</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row center">
+                        <div class="form-group">
+                            <button type="Submit" class="btn btn-primary register-button">Send</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                </div>
-                        }
-                    </div>
+                }
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -58,7 +58,7 @@
                 <div class="col-md-1 center" style="padding-right: 0; padding-top: 4px;">
                     <i class="far fa-clock" style="font-size: 3rem;"></i>
                 </div>
-                <div class="col-md-3" style="padding-left: 0; padding-top: 7px; font-weight:100">                   
+                <div class="col-md-3" style="padding-left: 0; padding-top: 7px; font-weight:100">
                     <div id="time" style="margin-left: -10px">
                     </div>
                 </div>
@@ -133,39 +133,50 @@
                             <p class="lead" id="DonItems">Donation items in numbers:</p>
                             <ul class="list-group" id="infoList">
                                 <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
-                                Food <p class="lead" id="li1">@Model.TotalFoodItems</p>
-                                     <a href="@Url.Action("GetDonations","Item", new { @type = "Food" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                    Food <p class="lead" id="li1">@Model.TotalFoodItems</p>
+                                    <a href="@Url.Action("GetDonations","Item", new { @type = "Food" })"><i class="fas fa-arrow-right arrow"></i></a>
                                 </li>
                                 <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
-                                Stationery <p class="lead" id="li2">@Model.TotalStationeryItems</p>
-                                           <a href="@Url.Action("GetDonations","Item", new { @type = "Stationery" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                    Stationery <p class="lead" id="li2">@Model.TotalStationeryItems</p>
+                                    <a href="@Url.Action("GetDonations","Item", new { @type = "Stationery" })"><i class="fas fa-arrow-right arrow"></i></a>
                                 </li>
                                 <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
-                                Clothes <p class="lead" id="li3">@Model.TotalClothesItems</p>
-                                        <a href="@Url.Action("GetDonations","Item", new { @type = "Clothing" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                    Clothes <p class="lead" id="li3">@Model.TotalClothesItems</p>
+                                    <a href="@Url.Action("GetDonations","Item", new { @type = "Clothing" })"><i class="fas fa-arrow-right arrow"></i></a>
                                 </li>
                                 <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
-                                Textbooks <p class="lead" id="li4">@Model.TotalTextbookItems</p>
-                                          <a href="@Url.Action("GetDonations","Item", new { @type = "Textbook" })"><i class="fas fa-arrow-right arrow"></i></a>
-                                 </li>
+                                    Textbooks <p class="lead" id="li4">@Model.TotalTextbookItems</p>
+                                    <a href="@Url.Action("GetDonations","Item", new { @type = "Textbook" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                </li>
                                 <li class="list-group-item" style="padding: 3px;padding-left: 12px;">
-                                Other<p class="lead" id="li5">@Model.TotalOtherItems</p>
-                                     <a href="@Url.Action("GetDonations","Item", new { @type = "Other" })"><i class="fas fa-arrow-right arrow"></i></a>
+                                    Other<p class="lead" id="li5">@Model.TotalOtherItems</p>
+                                    <a href="@Url.Action("GetDonations","Item", new { @type = "Other" })"><i class="fas fa-arrow-right arrow"></i></a>
                                 </li>
                             </ul>
                         </div>
-                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default" id="dashboardStudent">
+                        <i class="far fa-calendar-alt" id="calendarIcon"></i>
+                        <div class="center">
+                            <a href="@Url.Action("Index", "Scheduler")">
+                                View Schedule
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            </div>
         </div>
     </div>
+</div>
 
 
 @section scripts
 {
+
+
     <script>
         function checkTheTime(i) {
             if (i < 10) {
@@ -206,4 +217,6 @@
 
         startTime();
     </script>
+
+ 
 }

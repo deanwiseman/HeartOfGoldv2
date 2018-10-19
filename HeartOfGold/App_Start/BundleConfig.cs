@@ -20,6 +20,10 @@ namespace HeartOfGold
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
+                "~/Scripts/moment.js",
+                "~/Scripts/fullcalendar/fullcalendar.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -32,12 +36,14 @@ namespace HeartOfGold
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-paper.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/fullcalendar.min.css",
                       "~/Content/site.css",
                       "~/Content/toastr.css",
                       "~/Content/MyCss.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
             "~/Content/themes/base/jquery-ui.css"));
+
         }
     }
 }
