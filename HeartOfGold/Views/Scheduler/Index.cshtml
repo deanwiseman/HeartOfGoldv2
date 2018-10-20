@@ -45,15 +45,15 @@
                 <form class="form-horizontal">
                     <input type="hidden" id="EventID" value="0" />
                     <div class="form-group">
-                        <label>Subject</label>
+                        <label>Subject:</label>
                         <input type="text" id="Subject" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
+                        <label>Description:</label>
                         <input type="text" id="Description" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Start Date</label>
+                        <label class="control-label">Start Date:</label>
                         <div class="input-group date" id="DatePicker">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">End Date</label>
+                        <label class="control-label">End Date:</label>
                         <div class="input-group date" id="DatePicker2">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -73,11 +73,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Colour</label>
+                        <label>Event Display Colour: </label>
                         <select id="Colour">
-                            <option value="default" class="form-control">Default</option>
-                            <option value="red" class="form-control">Red</option>
-                            <option value="blue" class="form-control">Blue</option>
+                            <option value="#18A8C4" selected="selected" class="form-control">Default (Open)</option>
+                            <option value="#B80000" class="form-control">Red (Closed)</option>
                         </select>
                     </div>
                     <div class="modal-footer center">
@@ -139,7 +138,8 @@
                     allDaySlot: false,
                     selectable: true,
                     slotMinutes: 15,
-                    themeSystem: 'bootstrap3',
+                    minTime: '8:00',
+                    maxTime: '17:00',
                     eventLimit: true,
                     weekends: false,
                     events: events,
@@ -164,11 +164,23 @@
                             description: '',
                             start: start,
                             end: end,
-                            colour: ''
+                            color: ''
                     
                         };
                         openEditModal();
                         $('#scheduler').fullCalendar('unselect');
+                    },
+                    editable: true,
+                    eventDrop: function (data) {
+                        var updatedData = {
+                            EventID: data.eventID,
+                            Subject: data.title,
+                            Start: data.start.format('DD/MM/YYYY HH:mm A'),
+                            End: data.end != null ? data.end.format('DD/MM/YYYY HH:mm A') : null,
+                            Description: data.description,
+                            ThemeColour: data.color
+                        };
+                        SaveEvent(updatedData);
                     }
                 })
             }

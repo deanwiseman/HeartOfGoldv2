@@ -7,17 +7,18 @@
 }
 
 <br />
-<div class="row center">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default" style="margin-bottom: 0;">
-            <h5 class="panel-style">Student Details</h5>
-            <div class="form-group">
-                <label>Student Number:</label>
-                <label>@User.Identity.GetUserName().Remove(0, 1)</label>
-            </div>
-            <div class="form-group">
-                <label>Name:</label>
-                <label>@Model.Name @Model.Surname</label>
+<div class="container">
+    <div class="row center">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <h5 class="panel-style">Student Details</h5>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <label>@Model.Email</label>
+                </div>
+                <div class="form-group">
+                    <label>Hello, <strong>@Model.Name @Model.Surname!</strong></label>
+                </div>
             </div>
         </div>
     </div>
@@ -30,37 +31,39 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="row">
-                    <div class="col-md-3 center">
-                        <i class="fas fa-address-card" id="requestIcon"></i>
-                        <p class="lead">My Requests</p>
-                    </div>
-                    <div class="col-md-9">
-                        <ul class="list-group list-style" id="RequestList">
-                            @*foreach output here over current student's requests*@
-                            @foreach (var r in Model.Requests)
-                            {
-                            <li class="list-group-item" style="margin-top: -1px;">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Date Created:</label>
-                                        <label>@r.Date.ToString("dd MMMM yyyy")</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Request Type:</label>
-                                        <label>@Html.DisplayFor(m => r.Category.Name)</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Status:</label>
-                                        <label class="status">@r.RequestStatus.Name</label>
-                                    </div>
-                                </div>
-                            </li>
-                            }
-                        </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="row">
+                        <div class="col-md-3 center">
+                            <i class="fas fa-address-card" id="requestIcon"></i>
+                            <p class="lead">My Requests</p>
+                        </div>
+                        <div class="col-md-9">
+                            <ul class="list-group list-style" id="RequestList">
+                                @*foreach output here over current student's requests*@
+                                @foreach (var r in Model.Requests)
+                                {
+                                    <li class="list-group-item" style="margin-top: -1px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Date Created:</label>
+                                                <label>@r.Date.ToString("dd MMMM yyyy")</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Request Type:</label>
+                                                <label>@Html.DisplayFor(m => r.Category.Name)</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Status:</label>
+                                                <label class="status">@r.RequestStatus.Name</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
