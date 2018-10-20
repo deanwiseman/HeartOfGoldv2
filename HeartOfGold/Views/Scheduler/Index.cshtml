@@ -5,9 +5,84 @@
 
 <h2>Appointments</h2>
 <hr />
-<a href="#" id="btnInit" class="btn btn-secondary">Initialise database!</a>
+
+@* http://www.dotnetawesome.com/2017/06/event-calendar-in-aspnet-mvc.html
+  The above article/tutorial was followed to implement the scheduler  
+*@
+
 <div id="scheduler"></div>
 
+<div id="Modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <button id="btnDeleteEvent" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"> Remove</span>
+                </button>
+                <button id="btnEditEvent" class="btn btn-default btn-sm pull-right" style="margin-right:4px;">
+                    <span class="glyphicon glyphicon-pencil"> Edit</span>
+                </button>
+                    <p id="eventDetails"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalSaveEvent" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" id="EventID" value="0" />
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" id="Subject" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Start Date</label>
+                        <div class="input-group date" id="DatePicker">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" id="StartDate" class="form-control" />
+                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">End Date</label>
+                        <div class="input-group date" id="DatePicker2">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" id="EndDate" class="form-control" />                          
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="Description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Colour</label>
+                        <select id="Colour">
+                            <option value="default" class="form-control">Default</option>
+                            <option value="red" class="form-control">Red</option>
+                            <option value="blue" class="form-control">Blue</option>
+                        </select>
+                    </div>
+                    <button type="button" id="SaveEvent" class="btn btn-success">Save Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts
 {
@@ -16,19 +91,159 @@
 
     <script>
         $(document).ready(function () {
-            $('#scheduler').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                defaultView: 'agendaDay',
-                contentHeight: 500,
-                editable: true,
-                allDaySlot: false,
-                selectable: true,
-                slotMinutes: 15
-            });
+            var events = [];
+            var selectedEvent = null;
+            RenderScheduler();
+
+            function RenderScheduler() {
+                events = [];
+                $.ajax({
+                    type: 'GET',
+                    url: '/scheduler/GetEvents',
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            events.push({
+                                eventID: v.EventID,
+                                title: v.Subject,
+                                description: v.Description,
+                                start: moment(v.Start),
+                                end: v.End != null ? moment(v.End) : null,
+                                color: v.ThemeColour
+                            });
+                        })
+
+                        GenerateEvents(events);
+                    },
+                    error: function () {
+                        alert('failed');
+                    }
+                })
+            }
+
+            function GenerateEvents(events) {
+                $('#scheduler').fullCalendar('destroy');
+                $('#scheduler').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    defaultView: 'agendaDay',
+                    defaultDate: new Date(),
+                    contentHeight: 500,
+                    editable: true,
+                    allDaySlot: false,
+                    selectable: true,
+                    slotMinutes: 15,
+                    eventLimit: true,
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        selectedEvent = calEvent;
+                        $('#Modal #eventTitle').text(calEvent.title);
+                        var $description = $('<div/>');
+                        $description.append($('<p/>').html('<b>Start: </b>' + calEvent.start.format('DD-MMM-YYYY HH:mm a')));
+                        if (calEvent.end != null) {
+                            $description.append($('<p/>').html('<b>End: </b>' + calEvent.end.format('DD-MMM-YYYY HH:mm a')));
+                        }
+                        $description.append($('<p/>').html('<b>Description: </b>' + calEvent.description));
+                        $('#Modal #eventDetails').empty().html($description);
+
+                        $('#Modal').modal();
+                    }
+                })
+            }
+
+            // Click event for editing an event
+            $('#btnEditEvent').click(function () {
+                openEditModal();
+            })
+
+            // Click event for saving event
+            $('#SaveEvent').click(function () {
+                if ($('#Subject').val().trim() == "") {
+                    alert('Subject required');
+                    return;
+                }
+                if ($('#StartDate').val().trim() == "") {
+                    alert('Subject required');
+                    return;
+                }
+                else {
+                    var startDate = moment($('#StartDate').val(), "DD/MM/YYYY HH:mm A").toDate();
+                    var endDate = moment($('#EndDate').val(), "DD/MM/YYYY HH:mm A").toDate();
+                    if (startDate > endDate) {
+                        alert('Invalid end date');
+                        return;
+                    }
+                }
+
+                var data = {
+                    EventID: $('#EventID').val(),
+                    Subject: $('#Subject').val().trim(),
+                    Start: $('#StartDate').val().trim(),
+                    End: $('#EndDate').val(),
+                    Description: $('#Description').val(),
+                    ThemeColour: $('#Colour').val()
+                }
+                SaveEvent(data);
+
+            })
+
+            function SaveEvent(data) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'Scheduler/SaveEvent',
+                    data: data,
+                    success: function (data) {
+                        if (data.status) {
+                            RenderScheduler();
+                            $('#ModalSaveEvent').modal('hide');
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to delete event.');
+                    }
+
+                })
+            }
+
+            // Click event for deleting an event
+            $('#btnDeleteEvent').click(function () {
+                if (selectedEvent !== null && confirm('Are you sure you want to remove this event?')) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'Scheduler/DeleteEvent',
+                        data: { 'eventID': selectedEvent.eventID },
+                        success: function (data) {
+                            if (data.status) {
+                                RenderScheduler();
+                                $('#Modal').modal('hide');
+                            }
+                        },
+                        error: function () {
+                            alert('Failed to delete event.');
+                        }
+                    })
+                }
+            })
+
+            $('#DatePicker,#DatePicker2').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm A'
+            })
+
+            function openEditModal() {
+                if (selectedEvent != null) {
+                    $('#eventID').val(selectedEvent.eventID);
+                    $('#Subject').val(selectedEvent.title);
+                    $('#StartDate').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
+                    $('#EndDate').val(selectedEvent.end != null ? selectedEvent.format('DD/MM/YYYY HH:mm A') : '');
+                    $('#Description').val(selectedEvent.description);
+                    $('#Colour').val(selectedEvent.color);
+                }
+
+                $('#Modal').modal('hide');
+                $('#ModalSaveEvent').modal();
+            }
         })
     </script>
 

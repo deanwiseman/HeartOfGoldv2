@@ -42,6 +42,7 @@ namespace HeartOfGold.Models
         public DbSet<Donor> Donors { get; set; }
         public DbSet<RequestStatus> RequestStatus { get; set; }
         public DbSet<Request> Requests { get; set; }
+        public DbSet<Event> Events { get; set; }
 
 
         public ApplicationDbContext()

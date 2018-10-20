@@ -22,7 +22,8 @@ namespace HeartOfGold
 
             bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
                 "~/Scripts/moment.js",
-                "~/Scripts/fullcalendar/fullcalendar.js"));
+                "~/Scripts/fullcalendar/fullcalendar.js",
+                "~/Scripts/bootstrap-datetimepicker.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -36,6 +37,7 @@ namespace HeartOfGold
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-paper.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/fullcalendar.min.css",
                       "~/Content/site.css",
                       "~/Content/toastr.css",
