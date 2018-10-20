@@ -23,5 +23,10 @@ namespace HeartOfGold.Models
         public DateTime? End { get; set; }
 
         public string ThemeColour { get; set; }
+
+        public Event()
+        {
+            this.End = Start.AddMinutes(15);
+        }
     }
 }

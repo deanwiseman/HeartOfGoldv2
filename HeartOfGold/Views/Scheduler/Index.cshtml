@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Appointments</h2>
+<h3 class="center">Collection Events</h3>
 <hr />
 
 @* http://www.dotnetawesome.com/2017/06/event-calendar-in-aspnet-mvc.html
@@ -19,14 +19,16 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><span id="eventTitle"></span></h4>
             </div>
-            <div class="modal-body">
-                <button id="btnDeleteEvent" class="btn btn-default btn-sm pull-right">
+            <div class="modal-body">               
+                    <p id="eventDetails"></p>
+           </div>
+            <div class="modal-footer">
+                <button id="btnDeleteEvent" class="btn btn-default">
                     <span class="glyphicon glyphicon-remove"> Remove</span>
                 </button>
-                <button id="btnEditEvent" class="btn btn-default btn-sm pull-right" style="margin-right:4px;">
+                <button id="btnEditEvent" class="btn btn-default" style="margin-right:4px;">
                     <span class="glyphicon glyphicon-pencil"> Edit</span>
                 </button>
-                    <p id="eventDetails"></p>
             </div>
         </div>
     </div>
@@ -47,13 +49,17 @@
                         <input type="text" id="Subject" class="form-control" />
                     </div>
                     <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" id="Description" class="form-control" />
+                    </div>
+                    <div class="form-group">
                         <label class="control-label">Start Date</label>
                         <div class="input-group date" id="DatePicker">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                             <input type="text" id="StartDate" class="form-control" />
-                           
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -62,13 +68,10 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
-                            <input type="text" id="EndDate" class="form-control" />                          
+                            <input type="text" id="EndDate" class="form-control" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="Description" class="form-control" rows="3"></textarea>
-                    </div>
+
                     <div class="form-group">
                         <label>Colour</label>
                         <select id="Colour">
@@ -77,7 +80,9 @@
                             <option value="blue" class="form-control">Blue</option>
                         </select>
                     </div>
-                    <button type="button" id="SaveEvent" class="btn btn-success">Save Event</button>
+                    <div class="modal-footer center">
+                        <button type="button" id="SaveEvent" class="btn btn-default register-button">Save Event</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -107,7 +112,7 @@
                                 title: v.Subject,
                                 description: v.Description,
                                 start: moment(v.Start),
-                                end: v.End != null ? moment(v.End) : null,
+                                end: v.End != null ? moment(v.End) : moment(v.Start).add(15, 'minutes'),
                                 color: v.ThemeColour
                             });
                         })
@@ -128,14 +133,15 @@
                         center: 'title',
                         right: 'month,agendaWeek,agendaDay'
                     },
-                    defaultView: 'agendaDay',
+                    defaultView: 'month',
                     defaultDate: new Date(),
                     contentHeight: 500,
-                    editable: true,
                     allDaySlot: false,
                     selectable: true,
                     slotMinutes: 15,
+                    themeSystem: 'bootstrap3',
                     eventLimit: true,
+                    weekends: false,
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
                         selectedEvent = calEvent;
@@ -149,6 +155,20 @@
                         $('#Modal #eventDetails').empty().html($description);
 
                         $('#Modal').modal();
+                    },
+                    selectable: true,
+                    select: function (start, end) {
+                        selectedEvent = {
+                            eventID: 0,
+                            title: '',
+                            description: '',
+                            start: start,
+                            end: end,
+                            colour: ''
+                    
+                        };
+                        openEditModal();
+                        $('#scheduler').fullCalendar('unselect');
                     }
                 })
             }
@@ -236,7 +256,7 @@
                     $('#eventID').val(selectedEvent.eventID);
                     $('#Subject').val(selectedEvent.title);
                     $('#StartDate').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
-                    $('#EndDate').val(selectedEvent.end != null ? selectedEvent.format('DD/MM/YYYY HH:mm A') : '');
+                    $('#EndDate').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
                     $('#Description').val(selectedEvent.description);
                     $('#Colour').val(selectedEvent.color);
                 }

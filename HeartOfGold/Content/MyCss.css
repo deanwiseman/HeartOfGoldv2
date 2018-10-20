@@ -297,7 +297,7 @@ div#ItemFormFooter {
 }
 
 #mailIcon {
-    font-size: 150px;
+    /*font-size: 150px;*/
     margin-left: 29%;
     margin-top: 10%;
     color: #4a4b4e;
