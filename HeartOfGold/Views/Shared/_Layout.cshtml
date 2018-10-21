@@ -12,8 +12,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @*<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />*@
-
 </head>
 <body>   
     @{ 
@@ -34,30 +32,16 @@
         </div>
     </div>
 
-    
-
-    @*<div class="footer">
-            <ul class="list-inline text-center">
-                <li>@Html.ActionLink("Contact Us", "About", "Home")</li>
-                <li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>
-                <li>&copy; Developed by Dean Wiseman</li>
-            </ul>
-        </div>*@
-
-
     <div class="hidden-sm hidden-xs">
-        <div class="navbar navbar-inverse navbar-color navbar-fixed-bottom container-fluid">
+        <div class="navbar navbar-inverse navbar-color navbar-fixed-bottom container-fluid" role="navigation">
             <div class="navbar-collapse collapse navbar-fontsize center">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Get in contact", "About", "Home")</li>
-                    @*<li>@Html.ActionLink("Need Help?", "ViewHelp", "Help")</li>*@
+                    <li>Developed by Dean Wiseman 2018</li>
                 </ul>
             </div>
         </div>
     </div>
-
-
-    @*<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>*@
 
     @RenderSection("scripts", required: false)
 </body>

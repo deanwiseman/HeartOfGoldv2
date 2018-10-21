@@ -18,16 +18,20 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                <hr style="margin:5px;"/>
             </div>
             <div class="modal-body">               
                     <p id="eventDetails"></p>
            </div>
             <div class="modal-footer">
+                <hr style="margin:10px;"/>
                 <button id="btnDeleteEvent" class="btn btn-default">
-                    <span class="glyphicon glyphicon-remove"> Remove</span>
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Remove
                 </button>
-                <button id="btnEditEvent" class="btn btn-default" style="margin-right:4px;">
-                    <span class="glyphicon glyphicon-pencil"> Edit</span>
+                <button id="btnEditEvent" class="btn btn-primary register-button" style="margin-right:4px;">
+                    <i class="far fa-edit"></i>
+                    Edit
                 </button>
             </div>
         </div>
@@ -39,11 +43,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                @*<h4 class="modal-title"><span id="eventTitle"></span></h4>*@
+                <div class="center">
+                    <h3>Event</h3>
+                </div>
+                <hr style="margin:5px;" />
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <input type="hidden" id="EventID" value="0" />
+                    <input type="hidden" id="EventID" />
                     <div class="form-group">
                         <label>Subject:</label>
                         <input type="text" id="Subject" class="form-control" />
@@ -265,7 +273,7 @@
 
             function openEditModal() {
                 if (selectedEvent != null) {
-                    $('#eventID').val(selectedEvent.eventID);
+                    $('#EventID').val(selectedEvent.eventID);
                     $('#Subject').val(selectedEvent.title);
                     $('#StartDate').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
                     $('#EndDate').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
@@ -277,23 +285,5 @@
                 $('#ModalSaveEvent').modal();
             }
         })
-    </script>
-
-    <script>
-        $('btnInit').click(function () {
-            $.ajax({
-                type: 'POST',
-                url: 'Scheduler/Index',
-                success: function (response) {
-                    if (response == 'True') {
-                        $('#scheduler').fullCalendar('refetchEvents');
-                        alert('Db populated');
-                    }
-                    else {
-                        alert('Error')
-                    }
-                }
-            });
-        });
     </script>
 }
