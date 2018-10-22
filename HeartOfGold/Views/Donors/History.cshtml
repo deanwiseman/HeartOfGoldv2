@@ -1,19 +1,72 @@
-﻿@model IEnumerable<HeartOfGold.Models.Item>
+﻿@model HeartOfGold.ViewModels.DonorHistoryViewModel
 
 @{
     ViewBag.Title = "Donation History";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Donor History for @ViewBag.Donor</h3>
+<h3>Donor History for <span id="DonorName">@ViewBag.Donor</span></h3>
 <p class="lead">
     View the donation history
 </p>
 
-<a href="@Url.Action("SendEmail", "Donors", null)" class="btn btn-primary register-button">
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="emailModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-header">
+                <h4 class="modal-title note-heading"><span>New Email</span></h4>
+                <p class="lead center">Send an email right here</p>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("SendEmail", "Email", new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="control-label" style="padding-right:5px">Message Template:</label>
+                        <select id="template"style="width:130px">
+                            <option>None</option>
+                            <option value="ThankYou">Thank You</option>
+                            <option value="DonationDrive">Donation Drive</option>
+                        </select>
+                    </div>
+                    <div class="row padBot">
+                        <div class="form-group">
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.Email.ToEmail, new { @class = "col-md-2 control-label" })
+                            @Html.TextBoxFor(m => m.Email.ToEmail, new { @class = "col-md-10 form-control" })
+                        </div>
+                    </div>
+                    <div class="row padBot">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email.Subject, new { @class = "col-md-2 control-label" })
+                            @Html.TextBoxFor(m => m.Email.Subject, new { @class = "col-md-10 form-control" })
+                        </div>
+                    </div>
+
+                    <div class="row padBot">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email.Body, new { @class = "col-md-2 control-label" })
+                            @Html.TextAreaFor(m => m.Email.Body, new { @class = "col-md-10", id = "messageBody", @cols="100" })
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <div class="form-group">
+                            <button type="Submit" class="btn btn-primary register-button">Send</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<button type="button" class="btn btn-primary register-button" data-toggle="modal" data-target="#emailModal">
     <i class="far fa-envelope"></i>
     &nbsp;Send Email
-</a>
+</button>
 
 <hr />
 
@@ -28,15 +81,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Donations)
         {
-        <tr>
-            <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy")</td>
-            <td>@Html.DisplayFor(m => item.Name)</td>
-            <td>@Html.DisplayFor(m => item.Description)</td>
-            <td>@Html.DisplayFor(m => item.Quantity)</td>
-            <td>@Html.DisplayFor(m => item.Category.Name)</td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy")</td>
+                <td>@Html.DisplayFor(m => item.Name)</td>
+                <td>@Html.DisplayFor(m => item.Description)</td>
+                <td>@Html.DisplayFor(m => item.Quantity)</td>
+                <td>@Html.DisplayFor(m => item.Category.Name)</td>
+            </tr>
         }
     </tbody>
 
@@ -46,9 +99,35 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script>
         $(document).ready(function () {
             $("#DonationHistory").DataTable();
+        });
+    </script>
+
+    <script>
+        var donorName = $('#DonorName').val()
+
+        function OpenEmailModal() {
+            $('#').val(donorName);
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var donorName = $('#DonorName').html();
+            var thankYouMessage = 'Hi there, would just like to say a big thanks from the heart of gold team.\n Sincerely,\n Heart of Gold';
+            var donationDriveMessage = 'Good day ' + donorName + ',\n There is currently a shortage of donations at NMU and we are in desperate need of a few things. It would be gratefully appreciated if you could help out.\nSincerely,\nHeartOfGold';
+
+            $('#template').change(function () {
+                if ($(this).val() == 'ThankYou') {
+                    $('#messageBody').val(thankYouMessage)
+                } else if ($(this).val() == 'DonationDrive') {
+                    $('#messageBody').val(donationDriveMessage)
+                };
+            });
         });
     </script>
 }

@@ -39,8 +39,12 @@ namespace HeartOfGold.Controllers
                 .Where(i => i.DonorId == id)
                 .ToList();
 
+            var viewModel = new DonorHistoryViewModel
+            {
+                Donations = donationHistoryData
+            };
 
-            return View("History", donationHistoryData);
+            return View("History", viewModel);
         }
 
         public ActionResult SendEmail()
@@ -65,8 +69,8 @@ namespace HeartOfGold.Controllers
             if(donor.Id == 0)
             {
                 _context.Donors.Add(donor);
+                TempData["Saved"] = "Saved";
             }
-
             else
             {
                 var donorInDb = _context.Donors.Single(d => d.Id == donor.Id);
@@ -78,6 +82,23 @@ namespace HeartOfGold.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public JsonResult DeleteDonor(int DonorID)
+        {
+            bool status = false;
+            var temp = _context.Donors.Where(a => a.Id == DonorID).FirstOrDefault();
+
+            if (temp != null)
+            {
+                _context.Donors.Remove(temp);
+                _context.SaveChanges();
+                status = true;
+            }
+
+            return new JsonResult { Data = new { status = status } };
         }
     }
 }

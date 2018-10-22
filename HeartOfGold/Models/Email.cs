@@ -11,13 +11,13 @@ namespace HeartOfGold.Models
     public class Email
     {
         [Display(Name = "To" )]
-        [Required]
+        [Required(ErrorMessage = "Please enter destination address.")]
         public string ToEmail { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The email subject is required.")]
         public string Subject { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Please create a body for the email.")]
         public string Body { get; set; }
 
     }

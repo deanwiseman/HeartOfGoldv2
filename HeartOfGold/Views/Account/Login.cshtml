@@ -11,7 +11,7 @@
         <h3 class="center" style="color: #f2f2f2">Log In</h3>
         <section id="loginForm">
             <hr style="border-top: 1px solid #f2f2f2" />
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", @autocomplete = "off" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -21,7 +21,7 @@
                     <div class="col-md-10">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon"><i class="fas fa-user" style="font-size: 1.3em; color:#f2f2f2"></i></span>
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @style="color: white" })
                         </div>
                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                     </div>

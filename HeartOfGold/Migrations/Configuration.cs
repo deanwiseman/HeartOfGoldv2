@@ -9,7 +9,7 @@ namespace HeartOfGold.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(HeartOfGold.Models.ApplicationDbContext context)

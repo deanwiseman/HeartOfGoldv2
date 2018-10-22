@@ -1,7 +1,7 @@
 ﻿@model HeartOfGold.ViewModels.DonorViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Donors";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="DonorModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">               
+            <div class="modal-header">
                 <h4 class="modal-title note-heading"><span>New Donor</span></h4>
                 <p class="lead center">Enter details about the donor</p>
             </div>
@@ -42,31 +42,27 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<br />
 <div class="center">
-    <h3>List of Donors</h3>
+    <p class="lead" style="font-size:24px">Who's donated to us?</p>
     <hr />
-    <p class="lead">People that have donated</p>
 </div>
-@*<div class="row">
-        <div class="col-md-6">
-            <div class="alert alert-info" role="alert">Note: Click on the name of a donor to view their donation history.</div>
-        </div>
-    </div>*@
 
-<div class="row center">
-    <div class="col-md-12">
-        <div class="form-group">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary register-button" data-toggle="modal" data-target="#DonorModal">
-                New Donor
-            </button>
-            @Html.ActionLink("Send email", "SendEmail", null, new { @class = "btn btn-primary register-button" })
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="alert alert-success center" role="alert">Note: Click on the name of a donor to view their donation history.</div>
         </div>
     </div>
 </div>
 
-<
+<div class="row center">
+    <button type="button" class="btn btn-primary register-button" data-toggle="modal" data-target="#DonorModal">
+        <i class="fas fa-check"></i>&nbsp;New Donor
+    </button>
+</div>
 
+    
 <br />
 
 <div class="row">
@@ -102,6 +98,20 @@
             $("#Donors").DataTable();
         })
     </script>
+
+    @if (TempData["Saved"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                };
+                toastr.success('Successfully added donor to the system.');
+            });
+
+        </script>
+    }
 
 }
 

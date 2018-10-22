@@ -8,6 +8,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using HeartOfGold.App_Start;
+using HeartOfGold.Models;
+using HeartOfGold.Migrations;
 
 namespace HeartOfGold
 {

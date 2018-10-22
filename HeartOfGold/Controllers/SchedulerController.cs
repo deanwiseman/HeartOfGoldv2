@@ -66,6 +66,7 @@ namespace HeartOfGold.Controllers
             bool status = false;
 
             var temp = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
+
             if (temp != null)
             {
                 _context.Events.Remove(temp);

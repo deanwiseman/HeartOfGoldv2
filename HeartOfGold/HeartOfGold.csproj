@@ -49,21 +49,6 @@
     <Reference Include="AutoMapper, Version=4.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
-    </Reference>
-    <Reference Include="Glimpse.AspNet, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glimpse.AspNet.1.8.0\lib\net45\Glimpse.AspNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Glimpse.EF6, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -263,7 +248,6 @@
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Dtos\DonationDto.cs" />
-    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -291,10 +275,6 @@
     <Compile Include="Migrations\201807031153531_RemoveSecondFKFromItem.cs" />
     <Compile Include="Migrations\201807031153531_RemoveSecondFKFromItem.Designer.cs">
       <DependentUpon>201807031153531_RemoveSecondFKFromItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807031346367_AddDonorModel.cs" />
-    <Compile Include="Migrations\201807031346367_AddDonorModel.Designer.cs">
-      <DependentUpon>201807031346367_AddDonorModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807031350437_AddDonorTable.cs" />
     <Compile Include="Migrations\201807031350437_AddDonorTable.Designer.cs">
@@ -425,6 +405,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DonorHistoryViewModel.cs" />
     <Compile Include="ViewModels\DonorViewModel.cs" />
     <Compile Include="ViewModels\InventoryViewModel.cs" />
     <Compile Include="ViewModels\ItemFormViewModel.cs" />
@@ -691,6 +672,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <None Include="Properties\PublishProfiles\heartofgold - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -852,7 +834,9 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -941,9 +925,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807031153531_RemoveSecondFKFromItem.resx">
       <DependentUpon>201807031153531_RemoveSecondFKFromItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807031346367_AddDonorModel.resx">
-      <DependentUpon>201807031346367_AddDonorModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807031350437_AddDonorTable.resx">
       <DependentUpon>201807031350437_AddDonorTable.cs</DependentUpon>
