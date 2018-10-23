@@ -27,6 +27,7 @@ namespace HeartOfGold.Controllers
             var studentRequests = _context.Requests
                 .Include(r => r.RequestStatus)
                 .Where(r => r.StudentNumber == StudentNumber)
+                .OrderBy(r => r.RequestStatus.Name)
                 .ToList();
 
             if (studentRequests.Count == 0)

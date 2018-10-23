@@ -10,16 +10,17 @@
     View the donation history
 </p>
 
+@Html.HiddenFor(d => Model.Donor.Id, new { @id="DonorID"})
+
 <!-- Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="emailModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content" id="modalContent">
             <div class="modal-header">
                 <h4 class="modal-title note-heading"><span>New Email</span></h4>
-                <p class="lead center">Send an email right here</p>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("SendEmail", "Email", new { @class = "form-horizontal" }))
+                @using (Html.BeginForm("SendDonorEmail", "Email", new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-group">
@@ -34,7 +35,7 @@
                         <div class="form-group">
                             @Html.ValidationSummary("", new { @class = "text-danger" })
                             @Html.LabelFor(m => m.Email.ToEmail, new { @class = "col-md-2 control-label" })
-                            @Html.TextBoxFor(m => m.Email.ToEmail, new { @class = "col-md-10 form-control" })
+                            @Html.TextBoxFor(m => m.Email.ToEmail, new { @class = "col-md-10 form-control", @id="txtDonorEmail" })
                         </div>
                     </div>
                     <div class="row padBot">
@@ -47,7 +48,7 @@
                     <div class="row padBot">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email.Body, new { @class = "col-md-2 control-label" })
-                            @Html.TextAreaFor(m => m.Email.Body, new { @class = "col-md-10", id = "messageBody", @cols="100" })
+                            @Html.TextAreaFor(m => m.Email.Body, new { @class = "form-control", id = "messageBody", @cols="100", @wrap="hard" })
                         </div>
                     </div>
                     <div class="row center">
@@ -63,7 +64,7 @@
 </div><!-- /.modal -->
 
 
-<button type="button" class="btn btn-primary register-button" data-toggle="modal" data-target="#emailModal">
+<button type="button" class="btn btn-primary register-button" id="btnNewEmail">
     <i class="far fa-envelope"></i>
     &nbsp;Send Email
 </button>
@@ -84,7 +85,7 @@
         @foreach (var item in Model.Donations)
         {
             <tr>
-                <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy")</td>
+                <td><label>@item.DateAdded.ToString("dd MMM yyyy")</label></td>
                 <td>@Html.DisplayFor(m => item.Name)</td>
                 <td>@Html.DisplayFor(m => item.Description)</td>
                 <td>@Html.DisplayFor(m => item.Quantity)</td>
@@ -107,17 +108,22 @@
         });
     </script>
 
-    <script>
-        var donorName = $('#DonorName').val()
-
-        function OpenEmailModal() {
-            $('#').val(donorName);
-        }
-    </script>
-
-    <script>
+    <script>       
         $(document).ready(function () {
+
+            $('#btnNewEmail').click(function () {
+                OpenEmailModal();
+            })
+
+            function OpenEmailModal() {
+                $('#emailModal').modal();
+                GetDonorEmail(donorID);
+            }
+
             var donorName = $('#DonorName').html();
+            var donorEmail = null;
+            var donorID = $('#DonorID').val();
+
             var thankYouMessage = 'Hi there, would just like to say a big thanks from the heart of gold team.\n Sincerely,\n Heart of Gold';
             var donationDriveMessage = 'Good day ' + donorName + ',\n There is currently a shortage of donations at NMU and we are in desperate need of a few things. It would be gratefully appreciated if you could help out.\nSincerely,\nHeartOfGold';
 
@@ -128,7 +134,24 @@
                     $('#messageBody').val(donationDriveMessage)
                 };
             });
+
+            function GetDonorEmail(id) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Donors/GetEmail',
+                    data: { 'DonorID': donorID },
+                    success: function (data) {
+                        donorEmail = data;
+                        $('#txtDonorEmail').val(donorEmail);
+                    }
+                })
+
+            }
         });
+    </script>
+
+    <script>
+
     </script>
 }
 

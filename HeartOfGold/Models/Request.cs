@@ -39,6 +39,8 @@ namespace HeartOfGold.Models
         [NotMapped]
         public byte SelectedStatusId { get; set; }
 
+        public bool IsRepeat { get; set; }
+
         // Constructor initialises the status of a request to 'Open' (id = 1)
         public Request()
         {

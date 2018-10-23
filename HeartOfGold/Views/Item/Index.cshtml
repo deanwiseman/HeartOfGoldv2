@@ -38,7 +38,7 @@
                 <td>@item.Description</td>
                 <td>@item.Quantity</td>
                 <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
-                <td>@Html.DisplayFor(m => item.DateAdded, "{0:dd/MM/yyyy}")</td>
+                <td>@item.DateAdded.ToString("dd MMM yyyy")</td>
             </tr>
         }
     </tbody>

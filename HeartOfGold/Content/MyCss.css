@@ -498,3 +498,13 @@ div#ItemFormFooter {
     width: 100vh;
     height: 100vh;
 }
+
+#RepeatTooltip {
+    border-bottom: 1px dotted black;
+    display:inline;
+    margin-left:20px;
+}
+
+#tooltipdiv {
+    display: inline;
+}

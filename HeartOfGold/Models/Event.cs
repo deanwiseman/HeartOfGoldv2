@@ -24,9 +24,16 @@ namespace HeartOfGold.Models
 
         public string ThemeColour { get; set; }
 
+        // These two properties are purely used for implementing repeat events within the fullcalendar.io library. See more: https://fullcalendar.io/docs/eventConstraint
+        public int? StartDayOfWeek { get; set; }
+        public int? EndDayOfWeek { get; set; }
+
         public Event()
         {
-            this.End = Start.AddMinutes(15);
+            if (End == null)
+            {
+                this.End = Start.AddMinutes(5);
+            }
         }
     }
 }

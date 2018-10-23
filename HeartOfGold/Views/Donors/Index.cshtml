@@ -112,6 +112,18 @@
 
         </script>
     }
+    else if (TempData["Emailed"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                };
+                toastr.info('Email successfully sent.');
+            })
+        </script>
+    }
 
 }
 

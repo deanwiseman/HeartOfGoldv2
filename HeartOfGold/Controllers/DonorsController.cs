@@ -30,9 +30,9 @@ namespace HeartOfGold.Controllers
 
         public ActionResult History(int id)
         {
-            var donorName = _context.Donors.Single(d => d.Id == id);
+            var donor = _context.Donors.Single(d => d.Id == id);
 
-            ViewBag.Donor = donorName.FullName;
+            ViewBag.Donor = donor.FullName;
 
             var donationHistoryData = _context.Items.Include(i => i.Category)
                 .Include(i => i.Donor)
@@ -41,7 +41,8 @@ namespace HeartOfGold.Controllers
 
             var viewModel = new DonorHistoryViewModel
             {
-                Donations = donationHistoryData
+                Donations = donationHistoryData,
+                Donor = donor
             };
 
             return View("History", viewModel);
@@ -99,6 +100,14 @@ namespace HeartOfGold.Controllers
             }
 
             return new JsonResult { Data = new { status = status } };
+        }
+
+        [Authorize(Roles = Roles.Administrator)]
+        public JsonResult GetEmail(int DonorID)
+        {
+            var emailAddress = _context.Donors.Where(d => d.Id == DonorID).Select(d => d.Email).Single();
+
+            return new JsonResult { Data = emailAddress, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

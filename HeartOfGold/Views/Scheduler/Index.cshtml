@@ -53,7 +53,7 @@
                 <form class="form-horizontal">
                     <input type="hidden" id="EventID" />
                     <div class="form-group">
-                        <label>Subject:</label>
+                        <label>Student Number:</label>
                         <input type="text" id="Subject" class="form-control" />
                     </div>
                     <div class="form-group">
@@ -78,6 +78,10 @@
                             </span>
                             <input type="text" id="EndDate" class="form-control" />
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="margin-right:5px">Repeat Request:</label>
+                        <input type="checkbox" id="repeatCheck"/>
                     </div>
 
                     <div class="form-group">
@@ -108,7 +112,6 @@
             RenderScheduler();
 
             function RenderScheduler() {
-                events = [];
                 $.ajax({
                     type: 'GET',
                     url: '/scheduler/GetEvents',
@@ -200,6 +203,7 @@
 
             // Click event for saving event
             $('#SaveEvent').click(function () {
+                var data = null;
                 if ($('#Subject').val().trim() == "") {
                     alert('Subject required');
                     return;
@@ -217,14 +221,33 @@
                     }
                 }
 
-                var data = {
-                    EventID: $('#EventID').val(),
-                    Subject: $('#Subject').val().trim(),
-                    Start: $('#StartDate').val().trim(),
-                    End: $('#EndDate').val(),
-                    Description: $('#Description').val(),
-                    ThemeColour: $('#Colour').val()
+                if ($('#repeatCheck').is(':checked')) {
+                    var dow1 = moment($('#StartDate').val()).day();
+                    var dow2 = moment($('#EndDate').val()).day();
+
+                    data = {
+                        EventID: $('#EventID').val(),
+                        Subject: $('#Subject').val().trim(),
+                        Start: $('#StartDate').val().trim(),
+                        End: $('#EndDate').val(),
+                        Description: $('#Description').val(),
+                        ThemeColour: $('#Colour').val(),
+                        StartDayOfWeek: dow1,
+                        EndDayOfWeek: dow2
+
+                    }} else {
+                    data = {
+                        EventID: $('#EventID').val(),
+                        Subject: $('#Subject').val().trim(),
+                        Start: $('#StartDate').val().trim(),
+                        End: $('#EndDate').val(),
+                        Description: $('#Description').val(),
+                        ThemeColour: $('#Colour').val()
+                    }
                 }
+
+                
+
                 SaveEvent(data);
 
             })
@@ -241,7 +264,7 @@
                         }
                     },
                     error: function () {
-                        alert('Failed to delete event.');
+                        alert('Failed to create event.');
                     }
 
                 })

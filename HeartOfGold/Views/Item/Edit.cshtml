@@ -10,73 +10,74 @@
     <p class="lead">Update a donation on the system</p>
 </div>
 
-<div class="row">
-    <div class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                @using (Html.BeginForm("Save", "Item", new { id = "inventory" }))
-                {
-                    <div class="col-md-12 col-md-offset-1">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Item.Name, new { @class = "bold-text" })
-                            @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
-                            @Html.ValidationMessageFor(m => m.Item.Name)
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-offset-xs-0">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Save", "Item", new { id = "inventory" }))
+                    {
+                        <div class="col-md-12 col-md-offset-1">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.Name, new { @class = "bold-text" })
+                                @Html.TextBoxFor(m => m.Item.Name, new { @class = "form-control", @placeholder = "Provide a name for this donation" })
+                                @Html.ValidationMessageFor(m => m.Item.Name)
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-md-offset-1">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Item.Description, new { @class = "bold-text" })
-                            @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control", @placeholder = "Describe the donation briefly" })
-                            @Html.ValidationMessageFor(m => m.Item.Description)
+                        <div class="col-md-12 col-md-offset-1">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.Description, new { @class = "bold-text" })
+                                @Html.TextBoxFor(m => m.Item.Description, new { @class = "form-control", @placeholder = "Describe the donation briefly" })
+                                @Html.ValidationMessageFor(m => m.Item.Description)
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-md-offset-1">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Item.DonorId, new { @class = "bold-text" })
-                            @Html.DropDownListFor(m => m.Item.DonorId, new SelectList(Model.Donors, "Id", "FullName"), "Who was the donor?", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Item.DonorId)
+                        <div class="col-md-12 col-md-offset-1">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.DonorId, new { @class = "bold-text" })
+                                @Html.DropDownListFor(m => m.Item.DonorId, new SelectList(Model.Donors, "Id", "FullName"), "Who was the donor?", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Item.DonorId)
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-md-offset-1">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Item.Quantity, new { @class = "bold-text" })
-                            @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved", @id = "qty", @field = "quantity", @name="quantity" })
-                            <input type='button' value='-' field='quantity' onclick="minus()"/>
-                            <input type='button' value='+' field='quantity' onclick="plus()" />
-                            @Html.ValidationMessageFor(m => m.Item.Quantity)
+                        <div class="col-md-12 col-md-offset-1">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.Quantity, new { @class = "bold-text" })
+                                @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved", @id = "qty", @field = "quantity", @name = "quantity" })
+                                <input type='button' value='-' field='quantity' onclick="minus()" />
+                                <input type='button' value='+' field='quantity' onclick="plus()" />
+                                @Html.ValidationMessageFor(m => m.Item.Quantity)
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-md-offset-1">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Item.CategoryId, new { @class = "bold-text" })
-                            @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "What type of donation is it?", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Item.CategoryId)
+                        <div class="col-md-12 col-md-offset-1">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.CategoryId, new { @class = "bold-text" })
+                                @Html.DropDownListFor(m => m.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "What type of donation is it?", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Item.CategoryId)
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-md-offset-1">
-                        <div class="checkbox">
-                            <label>
-                                @Html.CheckBoxFor(m => m.Item.MustDelete) Remove this donation?
-                            </label>
+                        <div class="col-md-12 col-md-offset-1">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(m => m.Item.MustDelete) Remove this donation?
+                                </label>
 
+                            </div>
                         </div>
-                    </div>
-                    <br />
-                    @Html.HiddenFor(m => m.Item.Id)
-                    @Html.AntiForgeryToken()
-                    <div class="col-md-12 center">
-                        <hr style="margin-top:0;" />
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary register-button">Update Donation</button>
-                            @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
+                        <br />
+                        @Html.HiddenFor(m => m.Item.Id)
+                        @Html.AntiForgeryToken()
+                        <div class="col-md-12 center">
+                            <hr style="margin-top:0;" />
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary register-button">Update Donation</button>
+                                @Html.ActionLink("Back to Inventory", "Index", "Item", null, new { @class = "btn btn-default" })
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <hr />
 
 @section scripts

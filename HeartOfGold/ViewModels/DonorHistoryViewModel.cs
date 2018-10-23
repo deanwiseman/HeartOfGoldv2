@@ -10,6 +10,8 @@ namespace HeartOfGold.ViewModels
     {
         public Email Email { get; set; }
 
+        public Donor Donor { get; set; }
+
         public IEnumerable<Item> Donations { get; set; }
     }
 }

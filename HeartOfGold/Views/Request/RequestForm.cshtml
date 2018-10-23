@@ -41,20 +41,14 @@
                         @Html.TextAreaFor(m => m.Request.Description, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Request.Description)
                     </div>
-                    @*<div class="form-group">
-                            @Html.LabelFor(m => m.Date, new { @class = "bold-text" })
-                            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @Value = DateTime.Now.ToShortDateString(), @readonly = "readonly" })
-                        </div>*@
-
-                    <div>
+                    <div class="form-group">
                         <label>
-                            Repeat Request: @Html.CheckBox("checkbox")
+                            @Html.CheckBoxFor(m => m.Request.IsRepeat, new { @id = "RepeatRequest"}) Repeat Request
                         </label>
+                        <div id="tooltipdiv">
+                        <label title="Selecting this means you would like your request to repeat over a period of time. This is for students with special circumstances that need many donations." id="RepeatTooltip">What is this?</label>
+                        </div>
                     </div>
-                    <div>
-                        <p>Date: <input type="text" id="datepicker" /></p>
-                    </div>
-
                     @Html.HiddenFor(m => m.Request.Id)
 
                     <div class="form-group center">
@@ -88,6 +82,17 @@
 
         </script>
     }
+
+    <script>
+        $(document).ready(function () {
+            $('#RepeatTooltip').tooltip({
+                opacity: 0.7
+            });
+            if ($('#RepeatRequest').is(':checked')) {
+                $('#datepicker').show();
+            }
+        })
+    </script>
 }
 
 
