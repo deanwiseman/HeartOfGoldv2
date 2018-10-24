@@ -396,6 +396,10 @@
     <Compile Include="Migrations\201810232028085_AddDowToEventModel.Designer.cs">
       <DependentUpon>201810232028085_AddDowToEventModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810242306207_AddCollectionDateToRequestModel.cs" />
+    <Compile Include="Migrations\201810242306207_AddCollectionDateToRequestModel.Designer.cs">
+      <DependentUpon>201810242306207_AddCollectionDateToRequestModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -1025,6 +1029,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810232028085_AddDowToEventModel.resx">
       <DependentUpon>201810232028085_AddDowToEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810242306207_AddCollectionDateToRequestModel.resx">
+      <DependentUpon>201810242306207_AddCollectionDateToRequestModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

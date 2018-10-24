@@ -41,6 +41,8 @@ namespace HeartOfGold.Models
 
         public bool IsRepeat { get; set; }
 
+        public string CollectionDate { get; set; }
+
         // Constructor initialises the status of a request to 'Open' (id = 1)
         public Request()
         {
