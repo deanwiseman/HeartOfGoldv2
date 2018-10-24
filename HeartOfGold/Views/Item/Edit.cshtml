@@ -38,12 +38,19 @@
                                 @Html.ValidationMessageFor(m => m.Item.DonorId)
                             </div>
                         </div>
-                        <div class="col-md-12 col-md-offset-1">
+                        <div class="col-md-10 col-md-offset-1">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Item.Quantity, new { @class = "bold-text" })
                                 @Html.TextBoxFor(m => m.Item.Quantity, new { @class = "form-control", @placeholder = "Indicate the quantity involved", @id = "qty", @field = "quantity", @name = "quantity" })
-                                <input type='button' value='-' field='quantity' onclick="minus()" />
-                                <input type='button' value='+' field='quantity' onclick="plus()" />
+                                <div class="form-inline">
+                                    <button type="button" onclick="minus()" class="btn-sm">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" onclick="plus()" class="btn-sm">
+                                        <i class="fas fa-plus"></i>
+
+                                    </button>
+                                </div>
                                 @Html.ValidationMessageFor(m => m.Item.Quantity)
                             </div>
                         </div>
