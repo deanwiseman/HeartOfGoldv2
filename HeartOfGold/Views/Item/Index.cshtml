@@ -10,10 +10,41 @@
 
 <p class="lead">Collection of donated items</p>
 
-<a href="@Url.Action("New", "Item", null)" class="btn btn-primary register-button">
-    <i class="fas fa-check"></i>
-    &nbsp;New Donation
-</a>
+
+<div style="display:inline-block">
+    <a href="@Url.Action("New", "Item", null)" class="btn btn-primary register-button">
+        <i class="fas fa-check"></i>
+        &nbsp;New Donation
+    </a>
+</div>
+
+<div style="display:inline-block">
+    @using (@Html.BeginForm("Index", "Item"))
+    {      
+        <div class="form-group">
+            <label class="control-label">Start Date:</label>
+            <div class="input-group date" id="From">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <input type="text" id="StartDate" class="form-control" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">End Date:</label>
+            <div class="input-group date" id="To">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <input type="text" id="EndDate" class="form-control" />
+            </div>
+        </div>
+        <div class="form-inline">
+            <input type="submit" value="submit" />
+        </div>
+    }
+</div>
 
 <br />
 <br />
@@ -21,6 +52,7 @@
 <table id="Inventory" class="table table-condensed table-hover">
     <thead>
         <tr style="background-color:#e6e6e6 ">
+            <th>Donate this?</th>
             <th>Donation</th>
             <th>Category</th>
             <th>Description</th>
@@ -33,6 +65,7 @@
         @foreach (var item in Model.Donations)
         {
             <tr>
+                <td>@Html.ActionLink("Select", "Donate", "Item", new { id = item.Id }, null)</td>
                 <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
                 <td>@Html.DisplayFor(m => item.Category.Name)</td>
                 <td>@item.Description</td>
@@ -50,14 +83,18 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryui");
+    @Scripts.Render("~/bundles/fullcalendar");
+
     <script>
-
         $(document).ready(function () {
-            $("#Inventory").DataTable();
-        })
+            var table = $('#Inventory').DataTable({
+                pageLength: 25
+            });
 
-        $('#Inventory').dataTable({
-            "pageLength": 25
+            $('#From').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm A'
+            })
         });
     </script>
 
@@ -88,6 +125,6 @@
         </script>
 
     }
-    
+
 }
 

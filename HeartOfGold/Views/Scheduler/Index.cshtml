@@ -112,6 +112,7 @@
             RenderScheduler();
 
             function RenderScheduler() {
+                events = [];
                 $.ajax({
                     type: 'GET',
                     url: '/scheduler/GetEvents',

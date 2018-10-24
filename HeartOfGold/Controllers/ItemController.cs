@@ -147,6 +147,44 @@ namespace HeartOfGold.Controllers
             };
 
             return View("Edit", viewModel);
-        }      
+        }
+
+        public ActionResult Donate(int id)
+        {
+            var itemToRemove = _context.Items.SingleOrDefault(i => i.Id == id);
+
+            if (itemToRemove != null)
+            {
+                itemToRemove.Quantity = itemToRemove.Quantity - 1;
+                
+                if (itemToRemove.Quantity == 0)
+                {
+                    itemToRemove.IsActive = false;
+                }
+                _context.SaveChanges();
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+            return RedirectToAction("Index", "Request");
+        }
+
+        //[HttpPost]
+        //public JsonResult DonateThisItem(int id)
+        //{
+        //    bool status = false;
+        //    var itemToDonate = _context.Items.Where(i => i.Id == id).FirstOrDefault();
+
+        //    if (itemToDonate != null)
+        //    {
+        //        itemToDonate.Quantity -= 1;
+        //        _context.SaveChanges();
+        //        status = true;
+        //    }
+
+        //    return new JsonResult { Data = new { status = status } };
+        //}
     }
 }

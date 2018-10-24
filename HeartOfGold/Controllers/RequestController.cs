@@ -125,7 +125,13 @@ namespace HeartOfGold.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("GetRequests");
+            if(request.SelectedStatusId == 2)
+            {
+                return RedirectToAction("Index", "Scheduler");
+            }
+
+            return RedirectToAction("Index");
+            
         }
 
         public bool CanSubmitRequest()

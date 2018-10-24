@@ -11,5 +11,6 @@ namespace HeartOfGold.ViewModels
         public Request Request { get; set; }
 
         public IEnumerable<Category> RequestCategories { get; set; }
+
     }
 }

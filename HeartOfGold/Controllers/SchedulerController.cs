@@ -64,7 +64,6 @@ namespace HeartOfGold.Controllers
         public JsonResult DeleteEvent(int eventID)
         {
             bool status = false;
-
             var temp = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
 
             if (temp != null)

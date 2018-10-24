@@ -21,7 +21,7 @@ namespace HeartOfGold.Models
         [StringLength(255)]
         public string Description { get; set; }
 
-        [Range(1, 999)]
+        [Range(0, 999)]
         [Required]
         public int Quantity { get; set; }
 

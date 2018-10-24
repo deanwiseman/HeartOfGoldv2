@@ -680,7 +680,9 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <None Include="Properties\PublishProfiles\heartofgold - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\heartofgold - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\heartofgold - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />

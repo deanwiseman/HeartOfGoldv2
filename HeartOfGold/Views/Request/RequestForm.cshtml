@@ -6,6 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@**
+    Popup modal that displays the current inventory of Donations in order for the admin to designate items to the request being processed.
+*@
+
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
         <div class="well">
@@ -38,19 +42,12 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Request.Description, new { @class = "bold-text" })
-                        @Html.TextAreaFor(m => m.Request.Description, new { @class = "form-control" })
+                        @Html.TextAreaFor(m => m.Request.Description, new { @class = "form-control", @id = "ReqBody", cols = 200, rows = 3 })
                         @Html.ValidationMessageFor(m => m.Request.Description)
                     </div>
-                    <div class="form-group">
-                        <label>
-                            @Html.CheckBoxFor(m => m.Request.IsRepeat, new { @id = "RepeatRequest"}) Repeat Request
-                        </label>
-                        <div id="tooltipdiv">
-                        <label title="Selecting this means you would like your request to repeat over a period of time. This is for students with special circumstances that need many donations." id="RepeatTooltip">What is this?</label>
-                        </div>
-                    </div>
-                    @Html.HiddenFor(m => m.Request.Id)
 
+                    @Html.HiddenFor(m => m.Request.Id)
+                    <label>Selecting <strong>Submit</strong> will log your request. An admin will get to it shortly. Please keep an eye on your <strong>My Requests</strong> page to track the status of your request.</label>
                     <div class="form-group center">
                         <button type="submit" class="btn btn-primary register-button">Submit</button>
                     </div>
@@ -64,6 +61,7 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryui");
     @Styles.Render("~/Content/themes/base/css")
 
