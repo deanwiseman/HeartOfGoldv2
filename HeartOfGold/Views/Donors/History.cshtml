@@ -19,7 +19,7 @@
             <div class="modal-header">
                 <h4 class="modal-title note-heading"><span>New Email</span></h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="modalbody">
                 @using (Html.BeginForm("SendDonorEmail", "Email", new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
@@ -48,7 +48,7 @@
                     <div class="row padBot">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email.Body, new { @class = "col-md-2 control-label" })
-                            @Html.TextAreaFor(m => m.Email.Body, new { @class = "form-control", id = "messageBody", @cols="100", @wrap="hard" })
+                            @Html.TextAreaFor(m => m.Email.Body, new { @class = "form-control", @id = "messageBody", cols = 120, rows = 5 })
                         </div>
                     </div>
                     <div class="row center">
@@ -124,8 +124,8 @@
             var donorEmail = null;
             var donorID = $('#DonorID').val();
 
-            var thankYouMessage = 'Hi there, would just like to say a big thanks from the heart of gold team.\n Sincerely,\n Heart of Gold';
-            var donationDriveMessage = 'Good day ' + donorName + ',\n There is currently a shortage of donations at NMU and we are in desperate need of a few things. It would be gratefully appreciated if you could help out.\nSincerely,\nHeartOfGold';
+            var thankYouMessage = ' Good day, you recently donated to an item\n Sincerely,\n Heart of Gold';
+            var donationDriveMessage = ' Good day ' + donorName + ',\n There is currently a shortage of donations at NMU and there are many students who are in desperate need. It would be gratefully appreciated if you could help out. Any donation will find its way to a student in need. \nSincerely,\nHeartOfGold Team';
 
             $('#template').change(function () {
                 if ($(this).val() == 'ThankYou') {

@@ -297,7 +297,7 @@ div#ItemFormFooter {
 }
 
 #mailIcon {
-    /*font-size: 150px;*/
+    font-size: 150px;
     margin-left: 29%;
     margin-top: 10%;
     color: #4a4b4e;
@@ -305,6 +305,8 @@ div#ItemFormFooter {
 
 #messageBody {
     border: black 0.1px solid;
+    width: 100%;
+    max-width: 80%;
 }
 
 #modalContent {
@@ -507,4 +509,25 @@ div#ItemFormFooter {
 
 #tooltipdiv {
     display: inline;
+}
+
+.block {
+    display: block;
+}
+
+#statusbody {
+  margin-left: 0;
+  margin-right: 5%;
+}
+
+.statusP {
+    font-size:16px;
+}
+
+hr {
+    border-color: #A0A0A0;
+}
+
+#modalbody {
+    margin-left: 3%;
 }

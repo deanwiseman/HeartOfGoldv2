@@ -400,6 +400,22 @@
     <Compile Include="Migrations\201810242306207_AddCollectionDateToRequestModel.Designer.cs">
       <DependentUpon>201810242306207_AddCollectionDateToRequestModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810251232428_AddAllocatedDonationItemToRequestModel.cs" />
+    <Compile Include="Migrations\201810251232428_AddAllocatedDonationItemToRequestModel.Designer.cs">
+      <DependentUpon>201810251232428_AddAllocatedDonationItemToRequestModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810251353335_ChangeCollectionDateFromStringToDateTime.cs" />
+    <Compile Include="Migrations\201810251353335_ChangeCollectionDateFromStringToDateTime.Designer.cs">
+      <DependentUpon>201810251353335_ChangeCollectionDateFromStringToDateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810260811188_AddNullableIntRequestKeyToEventModel.cs" />
+    <Compile Include="Migrations\201810260811188_AddNullableIntRequestKeyToEventModel.Designer.cs">
+      <DependentUpon>201810260811188_AddNullableIntRequestKeyToEventModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810260845554_RemoveDowFromEventModel.cs" />
+    <Compile Include="Migrations\201810260845554_RemoveDowFromEventModel.Designer.cs">
+      <DependentUpon>201810260845554_RemoveDowFromEventModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -1032,6 +1048,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810242306207_AddCollectionDateToRequestModel.resx">
       <DependentUpon>201810242306207_AddCollectionDateToRequestModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810251232428_AddAllocatedDonationItemToRequestModel.resx">
+      <DependentUpon>201810251232428_AddAllocatedDonationItemToRequestModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810251353335_ChangeCollectionDateFromStringToDateTime.resx">
+      <DependentUpon>201810251353335_ChangeCollectionDateFromStringToDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810260811188_AddNullableIntRequestKeyToEventModel.resx">
+      <DependentUpon>201810260811188_AddNullableIntRequestKeyToEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810260845554_RemoveDowFromEventModel.resx">
+      <DependentUpon>201810260845554_RemoveDowFromEventModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

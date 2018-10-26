@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HeartOfGold.Models
 {
@@ -24,9 +25,8 @@ namespace HeartOfGold.Models
 
         public string ThemeColour { get; set; }
 
-        // These two properties are purely used for implementing repeat events within the fullcalendar.io library. See more: https://fullcalendar.io/docs/eventConstraint
-        public int? StartDayOfWeek { get; set; }
-        public int? EndDayOfWeek { get; set; }
+        // This property represents a stored key for the related request.
+        public int? RequestKey { get; set; }
 
         public Event()
         {

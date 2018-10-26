@@ -37,11 +37,13 @@ namespace HeartOfGold.Models
         public byte? CategoryId { get; set; }
 
         [NotMapped]
+        [Required(ErrorMessage = "Please decide on an appropriate action")]
         public byte SelectedStatusId { get; set; }
 
-        public bool IsRepeat { get; set; }
+        public DateTime? CollectionDate { get; set; }
 
-        public string CollectionDate { get; set; }
+        public string AllocatedDonationItem { get; set; }
+
 
         // Constructor initialises the status of a request to 'Open' (id = 1)
         public Request()

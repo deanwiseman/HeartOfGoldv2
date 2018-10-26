@@ -24,14 +24,18 @@
                     <p id="eventDetails"></p>
            </div>
             <div class="modal-footer">
-                <hr style="margin:10px;"/>
+                <hr style="margin:10px;" />
                 <button id="btnDeleteEvent" class="btn btn-default">
                     <span class="glyphicon glyphicon-remove"></span>
                     Remove
                 </button>
-                <button id="btnEditEvent" class="btn btn-primary register-button" style="margin-right:4px;">
+                <button id="btnEditEvent" class="btn btn-primary register-button">
                     <i class="far fa-edit"></i>
                     Edit
+                </button>
+                <button id="btnCompleteEvent" class="btn btn-primary register-button" style="margin-right:4px;">
+                    <i class="fas fa-check"></i>
+                    Mark as Complete
                 </button>
             </div>
         </div>
@@ -52,6 +56,7 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <input type="hidden" id="EventID" />
+                    <input type="hidden" id="RequestKey"/>
                     <div class="form-group">
                         <label>Student Number:</label>
                         <input type="text" id="Subject" class="form-control" />
@@ -79,15 +84,11 @@
                             <input type="text" id="EndDate" class="form-control" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label style="margin-right:5px">Repeat Request:</label>
-                        <input type="checkbox" id="repeatCheck"/>
-                    </div>
 
                     <div class="form-group">
                         <label>Event Display Colour: </label>
-                        <select id="Colour">
-                            <option value="#18A8C4" selected="selected" class="form-control">Default (Open)</option>
+                        <select id="Colour" style="width:120px">
+                            <option value="#00B233" selected="selected" class="form-control">Green (Open)</option>
                             <option value="#B80000" class="form-control">Red (Closed)</option>
                         </select>
                     </div>
@@ -109,6 +110,12 @@
         $(document).ready(function () {
             var events = [];
             var selectedEvent = null;
+
+            toastr.options = {
+                "closeButton": true,
+                "preventDuplicates": true
+            };
+
             RenderScheduler();
 
             function RenderScheduler() {
@@ -124,14 +131,15 @@
                                 description: v.Description,
                                 start: moment(v.Start),
                                 end: v.End != null ? moment(v.End) : moment(v.Start).add(15, 'minutes'),
-                                color: v.ThemeColour
+                                color: v.ThemeColour,
+                                requestkey: v.RequestKey
                             });
                         })
 
                         GenerateEvents(events);
                     },
                     error: function () {
-                        alert('failed');
+                        alert('Failed to fetch event data and render the scheduler.');
                     }
                 })
             }
@@ -172,12 +180,12 @@
                     select: function (start, end) {
                         selectedEvent = {
                             eventID: 0,
+                            requestkey: 0,
                             title: '',
                             description: '',
                             start: start,
                             end: end,
-                            color: ''
-                    
+                            color: ''                   
                         };
                         openEditModal();
                         $('#scheduler').fullCalendar('unselect');
@@ -190,9 +198,20 @@
                             Start: data.start.format('DD/MM/YYYY HH:mm A'),
                             End: data.end != null ? data.end.format('DD/MM/YYYY HH:mm A') : null,
                             Description: data.description,
-                            ThemeColour: data.color
+                            ThemeColour: data.color,
+                            RequestKey: data.requestkey
                         };
-                        SaveEvent(updatedData);
+
+                        var startDate = moment(updatedData.Start, "DD/MM/YYYY HH:mm A").toDate();
+                        var endDate = moment(updatedData.End, "DD/MM/YYYY HH:mm A").toDate();
+
+                        if (startDate < moment()) {
+                            toastr.error('Cannot create an event in the past.');
+                            return;
+                        } else {
+                            SaveEvent(updatedData);
+                        }
+                        
                     }
                 })
             }
@@ -206,48 +225,41 @@
             $('#SaveEvent').click(function () {
                 var data = null;
                 if ($('#Subject').val().trim() == "") {
-                    alert('Subject required');
+                    toastr.info('The event subject is required.');
+                    return;
+                }
+                if ($('#Description').val().trim() == "") {
+                    toastr.info("Please enter a description for this event.");
                     return;
                 }
                 if ($('#StartDate').val().trim() == "") {
-                    alert('Subject required');
+                    toastr.info('Please enter a starting date.');
                     return;
                 }
                 else {
                     var startDate = moment($('#StartDate').val(), "DD/MM/YYYY HH:mm A").toDate();
                     var endDate = moment($('#EndDate').val(), "DD/MM/YYYY HH:mm A").toDate();
                     if (startDate > endDate) {
-                        alert('Invalid end date');
+                        alert.warning('End date cannot be before the starting date.');
+                        return;
+                    }
+                    @* 
+                        moment() gets the current date. Check if we're not trying to create an event in the past...   
+                    *@
+                    if (startDate < moment()) {
+                        alert.warning('Cannot create an event in the past.');
                         return;
                     }
                 }
-
-                if ($('#repeatCheck').is(':checked')) {
-                    var dow1 = moment($('#StartDate').val()).day();
-                    var dow2 = moment($('#EndDate').val()).day();
-
                     data = {
                         EventID: $('#EventID').val(),
-                        Subject: $('#Subject').val().trim(),
-                        Start: $('#StartDate').val().trim(),
-                        End: $('#EndDate').val(),
-                        Description: $('#Description').val(),
-                        ThemeColour: $('#Colour').val(),
-                        StartDayOfWeek: dow1,
-                        EndDayOfWeek: dow2
-
-                    }} else {
-                    data = {
-                        EventID: $('#EventID').val(),
+                        RequestKey: $('#RequestKey').val(),
                         Subject: $('#Subject').val().trim(),
                         Start: $('#StartDate').val().trim(),
                         End: $('#EndDate').val(),
                         Description: $('#Description').val(),
                         ThemeColour: $('#Colour').val()
-                    }
-                }
-
-                
+                    }                               
 
                 SaveEvent(data);
 
@@ -265,7 +277,7 @@
                         }
                     },
                     error: function () {
-                        alert('Failed to create event.');
+                        toastr.error('Failed to create event.');
                     }
 
                 })

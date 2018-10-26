@@ -18,7 +18,6 @@ namespace HeartOfGold.Controllers
         // GET: Scheduler
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -34,6 +33,7 @@ namespace HeartOfGold.Controllers
         [Authorize(Roles = Roles.Administrator)]
         public JsonResult SaveEvent(Event TheEvent)
         {
+            var requestID = Session["RequestID"] as int?;
             bool status = false;
 
             if(TheEvent.EventID > 0)
@@ -42,18 +42,42 @@ namespace HeartOfGold.Controllers
                 var temp = _context.Events.Where(e => e.EventID == TheEvent.EventID).FirstOrDefault();
                 if (temp != null)
                 {
+                    // Set the updated values
                     temp.Subject = TheEvent.Subject;
                     temp.Start = TheEvent.Start;
                     temp.End = TheEvent.End;
                     temp.Description = TheEvent.Description;
                     temp.ThemeColour = TheEvent.ThemeColour;
+
+                    // Fetch the request linked to the event,
+                    var currentRequest = _context.Requests.Single(r => r.Id == TheEvent.RequestKey);
+                    // Update the collection date accordingly. This allows updates to the tracking of a student's own requests.
+                    currentRequest.CollectionDate = TheEvent.Start;
                 }
             }
             else
             {
-                // Else, add event to the database.
+                // Else, create a new event
+
+                if(requestID != null)
+                {
+                    // Put the passed through requestID into the Event object
+                    TheEvent.RequestKey = (int)requestID;
+
+                    // Get request object where = Key/Id
+                    var currentRequest = _context.Requests.Single(r => r.Id == requestID);
+
+                    // Set that request's collectiondate to the chosen startdate in the event creation.
+                    currentRequest.CollectionDate = TheEvent.Start;
+
+                    // Update request's status to 'Awaiting Collection'
+                    currentRequest.RequestStatusId = 6;
+                }
+
+                // add event to the database.
                 _context.Events.Add(TheEvent);
             }
+
             _context.SaveChanges();
             status = true;
 

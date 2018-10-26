@@ -108,6 +108,7 @@ namespace HeartOfGold.Controllers
 
             if (requests.Count() == 0)
                 ViewBag.HasResults = "There are no outstanding student requests at this point.";
+
             var pageNumber = page ?? 1;
             var _OnePageOfRequests = requests.ToPagedList(pageNumber, 1);
 
@@ -119,17 +120,24 @@ namespace HeartOfGold.Controllers
         [HttpPost]
         public ActionResult ProcessRequest(Request request)
         {
+            // Fetch current request from db,
             var requestInDb = _context.Requests.Single(r => r.Id == request.Id);
 
+            // Set its status to the one the user decides
             requestInDb.RequestStatusId = request.SelectedStatusId;
 
             _context.SaveChanges();
 
+            // If the request was marked as successful, redirect to Scheduler in order to create an event
             if(request.SelectedStatusId == 2)
             {
+                // Pass requestID of current request to subsequent controller
+                Session["RequestID"] = request.Id;
+
                 return RedirectToAction("Index", "Scheduler");
             }
 
+            // Else just redirect to current Index
             return RedirectToAction("Index");
             
         }

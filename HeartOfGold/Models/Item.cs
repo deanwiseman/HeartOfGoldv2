@@ -46,7 +46,6 @@ namespace HeartOfGold.Models
         [NotMapped]
         public bool MustDelete { get; set; }
 
-
         public Item()
         {
             this.IsActive = true;
