@@ -79,6 +79,13 @@ namespace HeartOfGold.Controllers
 
                 // add event to the database.
                 _context.Events.Add(TheEvent);
+               
+                // Send email to student to notify them of newly created event
+                // Create email object
+                Email Email = new Email() { Subject = "Heart of Gold: Collect your donation", Body = $"Good day,\nYour collection is ready. At this time: " + TheEvent.Start, ToEmail = "s" + TheEvent.Subject + "@mandela.ac.za" };
+                EmailController EmailController = new EmailController();
+                EmailController.SendEmail(Email);
+
             }
 
             _context.SaveChanges();

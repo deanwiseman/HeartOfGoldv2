@@ -15,7 +15,7 @@ namespace HeartOfGold.Controllers
             return View();
         }
 
-        public ActionResult SendEmail(Email email)
+        public void SendEmail(Email email)
         {
             Mailer.GmailUsername = "heart.of.gold.mandela@gmail.com";
             Mailer.GmailPassword = "Newtonpark2525";
@@ -26,8 +26,6 @@ namespace HeartOfGold.Controllers
             mailer.Body = email.Body;
             mailer.IsHtml = true;
             mailer.Send();
-
-            return RedirectToAction("Dashboard", "Home");
         }
 
         public ActionResult SendDonorEmail(Email email)

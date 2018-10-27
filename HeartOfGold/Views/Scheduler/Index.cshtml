@@ -89,6 +89,7 @@
                         </select>
                     </div>
                     <div class="modal-footer center">
+                        <input id="emailCheck"type="checkbox" name="SendEmail" value="true"/>
                         <button type="button" id="SaveEvent" class="btn btn-default register-button">Save Event</button>
                     </div>
                 </form>
@@ -108,6 +109,11 @@
             var selectedEvent = null;
 
             $('#Colour').val("#00B233");
+            $('#Subject:text').filter(function () {
+                return this.value.match(/^[sS]{1}[2]{1}[0-9]*$/);
+            })
+                .alert("Invalid student number.");
+            ;
 
             toastr.options = {
                 "closeButton": true,
@@ -222,6 +228,7 @@
             // Click event for saving event
             $('#SaveEvent').click(function () {
                 var data = null;
+                var emailCheck = false;
                 if ($('#Subject').val().trim() == "") {
                     toastr.info('The event subject is required.');
                     return;
@@ -248,20 +255,27 @@
                         toastr.warning('Cannot create an event in the past.');
                         return;
                     }
+
+                    if ($('#emailCheck').is(':checked')) {
+                        emailCheck = true;
+                    }
                 }
-                    data = {
-                        EventID: $('#EventID').val(),
-                        RequestKey: $('#RequestKey').val(),
-                        Subject: $('#Subject').val().trim(),
-                        Start: $('#StartDate').val().trim(),
-                        End: $('#EndDate').val(),
-                        Description: $('#Description').val(),
-                        ThemeColour: $('#Colour').val()
-                    }                               
+                data = {
+                    EventID: $('#EventID').val(),
+                    RequestKey: $('#RequestKey').val(),
+                    Subject: $('#Subject').val().trim(),
+                    Start: $('#StartDate').val().trim(),
+                    End: $('#EndDate').val(),
+                    Description: $('#Description').val(),
+                    ThemeColour: $('#Colour').val()
+                }
 
-                SaveEvent(data);
-
-            })
+                if (confirm('This will send an email to notify the student. Are you sure?')) {
+                    SaveEvent(data);
+                    toastr.success('Event created and student notified!');
+                }
+                
+            });
 
             function SaveEvent(data) {
                 $.ajax({
@@ -270,8 +284,8 @@
                     data: data,
                     success: function (data) {
                         if (data.status) {
-                            RenderScheduler();
-                            $('#ModalSaveEvent').modal('hide');
+                             RenderScheduler();
+                             $('#ModalSaveEvent').modal('hide');                            
                         }
                     },
                     error: function () {
