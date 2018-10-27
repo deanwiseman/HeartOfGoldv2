@@ -33,10 +33,6 @@
                     <i class="far fa-edit"></i>
                     Edit
                 </button>
-                <button id="btnCompleteEvent" class="btn btn-primary register-button" style="margin-right:4px;">
-                    <i class="fas fa-check"></i>
-                    Mark as Complete
-                </button>
             </div>
         </div>
     </div>
@@ -88,7 +84,7 @@
                     <div class="form-group">
                         <label>Event Display Colour: </label>
                         <select id="Colour" style="width:120px">
-                            <option value="#00B233" selected="selected" class="form-control">Green (Open)</option>
+                            <option value="#00B233" class="form-control">Green (Open)</option>
                             <option value="#B80000" class="form-control">Red (Closed)</option>
                         </select>
                     </div>
@@ -110,6 +106,8 @@
         $(document).ready(function () {
             var events = [];
             var selectedEvent = null;
+
+            $('#Colour').val("#00B233");
 
             toastr.options = {
                 "closeButton": true,
@@ -139,7 +137,7 @@
                         GenerateEvents(events);
                     },
                     error: function () {
-                        alert('Failed to fetch event data and render the scheduler.');
+                        toastr.error('Failed to fetch event data and render the scheduler.');
                     }
                 })
             }
@@ -240,14 +238,14 @@
                     var startDate = moment($('#StartDate').val(), "DD/MM/YYYY HH:mm A").toDate();
                     var endDate = moment($('#EndDate').val(), "DD/MM/YYYY HH:mm A").toDate();
                     if (startDate > endDate) {
-                        alert.warning('End date cannot be before the starting date.');
+                        toastr.warning('End date cannot be before the starting date.');
                         return;
                     }
                     @* 
                         moment() gets the current date. Check if we're not trying to create an event in the past...   
                     *@
                     if (startDate < moment()) {
-                        alert.warning('Cannot create an event in the past.');
+                        toastr.warning('Cannot create an event in the past.');
                         return;
                     }
                 }
@@ -283,25 +281,31 @@
                 })
             }
 
+
             // Click event for deleting an event
             $('#btnDeleteEvent').click(function () {
                 if (selectedEvent !== null && confirm('Are you sure you want to remove this event?')) {
                     $.ajax({
                         type: 'POST',
                         url: 'Scheduler/DeleteEvent',
-                        data: { 'eventID': selectedEvent.eventID },
+                        data: {
+                            'eventID': selectedEvent.eventID,
+                            'RequestKey': selectedEvent.requestkey },
                         success: function (data) {
                             if (data.status) {
+                                toastr.info("This event has been deleted.");
                                 RenderScheduler();
                                 $('#Modal').modal('hide');
                             }
                         },
                         error: function () {
-                            alert('Failed to delete event.');
+                            toastr.error('Failed to delete event.');
                         }
                     })
                 }
-            })
+            });
+
+            
 
             $('#DatePicker,#DatePicker2').datetimepicker({
                 format: 'DD/MM/YYYY HH:mm A'

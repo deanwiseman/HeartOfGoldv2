@@ -49,10 +49,13 @@ namespace HeartOfGold.Controllers
                     temp.Description = TheEvent.Description;
                     temp.ThemeColour = TheEvent.ThemeColour;
 
-                    // Fetch the request linked to the event,
-                    var currentRequest = _context.Requests.Single(r => r.Id == TheEvent.RequestKey);
-                    // Update the collection date accordingly. This allows updates to the tracking of a student's own requests.
-                    currentRequest.CollectionDate = TheEvent.Start;
+                    if (TheEvent.RequestKey != null)
+                    {
+                        // Fetch the request linked to the event,
+                        var currentRequest = _context.Requests.Single(r => r.Id == TheEvent.RequestKey);
+                        // Update the collection date accordingly. This allows updates to the tracking of a student's own requests.
+                        currentRequest.CollectionDate = TheEvent.Start;
+                    }
                 }
             }
             else
@@ -84,20 +87,34 @@ namespace HeartOfGold.Controllers
             return new JsonResult { Data = new { status = status } };
         }
 
+        [Authorize]
         [HttpPost]
-        public JsonResult DeleteEvent(int eventID)
+        public JsonResult DeleteEvent(int eventID, int RequestKey)
         {
             bool status = false;
-            var temp = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
 
-            if (temp != null)
+            var currentEvent = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
+
+            if (currentEvent != null)
             {
-                _context.Events.Remove(temp);
-                _context.SaveChanges();
+                _context.Events.Remove(currentEvent);
+
                 status = true;
             }
 
+            if (RequestKey > 0)
+            {
+                var currentRequest = _context.Requests.Where(r => r.Id == RequestKey).FirstOrDefault();
+                if (currentRequest != null)
+                {
+                    currentRequest.RequestStatusId = 4;
+                }
+            }
+
+            _context.SaveChanges();
+
             return new JsonResult { Data = new { status = status } };
         }
+
     }
 }

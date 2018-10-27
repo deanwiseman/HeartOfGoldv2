@@ -22,7 +22,8 @@
                         <li><p class="lead statusP" style="margin-bottom: 5px;"><strong>Open</strong> - The request has recently been created, and is awaiting a response.</p></li>
                         <li><p class="lead statusP" style="margin-bottom: 5px;"><strong>Successful</strong> - The admin has indicated that your request is successful, but has not yet created a collection event.</p></li>
                         <li><p class="lead statusP" style="margin-bottom: 5px;"><strong>Unsuccessful</strong>  - Your request did not make it. Please try again or contact the Heart of Gold admin.</p></li>
-                        <li><p class="lead statusP"><strong>Awaiting Collection</strong>  - A time and date has been set for you to collect your donation.</p></li>
+                        <li><p class="lead statusP" style="margin-bottom: 5px;"><strong>Awaiting Collection</strong>  - A time and date has been set for you to collect your donation.</p></li>
+                        <li><p class="lead statusP"><strong>Collected</strong>  - You have collected your donation and this request is now completed.</p></li>
                     </ul>
         </div>
             </div>
@@ -88,7 +89,13 @@ else
                                                 <label>Status:</label>
                                                 <label class="status">@r.RequestStatus.Name</label>
                                             </div>
-                                            @if (r.CollectionDate != null)
+                                            @if (r.RequestStatusId == 4)
+                                            {
+                                                <div class="col-md-6 col-md-offset-3">
+                                                    <label><strong>This request is now complete. Thank you.</strong></label>
+                                                </div>
+                                            }
+                                            else if (r.CollectionDate != null)
                                             {
                                                 <div class="col-md-6 col-md-offset-3">
                                                     <label>Collection Date:</label>
@@ -146,7 +153,7 @@ else
 @*<script>
         $(document).ready(function () {
 
-        }        var check = function () {
+        }       var check = function () {
                 var count = $('#RequestList').children("li").length;
                 if (count > 2) {
                     $('#RequestList:first').remove();
