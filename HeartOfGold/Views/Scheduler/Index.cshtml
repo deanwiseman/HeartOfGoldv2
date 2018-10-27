@@ -55,7 +55,7 @@
                     <input type="hidden" id="RequestKey"/>
                     <div class="form-group">
                         <label>Student Number:</label>
-                        <input type="text" id="Subject" class="form-control" />
+                        <input type="text" id="Subject" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
@@ -109,11 +109,6 @@
             var selectedEvent = null;
 
             $('#Colour').val("#00B233");
-            $('#Subject:text').filter(function () {
-                return this.value.match(/^[sS]{1}[2]{1}[0-9]*$/);
-            })
-                .alert("Invalid student number.");
-            ;
 
             toastr.options = {
                 "closeButton": true,

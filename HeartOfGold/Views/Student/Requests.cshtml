@@ -1,0 +1,44 @@
+﻿@model HeartOfGold.ViewModels.StudentRequestsViewModel
+
+
+@{
+    ViewBag.Title = "Requests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Requests</h2>
+
+<table id="requests" class="table table-bordered table-hover">
+    <thead>
+        <tr style="background-color:#e6e6e6 ">
+            <th>Description</th>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Collection Date</th>
+            <th>Allocated Donation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model.Requests)
+        {
+        <tr>
+            <td>@Html.DisplayFor(r => request.Description)</td>
+            <td>@Html.DisplayFor(r => request.Date)</td>
+            <td>@Html.DisplayFor(r => request.Category.Name)</td>
+            <td>@Html.DisplayFor(r => request.CollectionDate)</td>
+            <td>@Html.DisplayFor(r => request.AllocatedDonationItem)</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+        <script>
+            $(document).ready(function () {
+                $("#requests").DataTable();
+            })
+        </script>
+
+ }
+

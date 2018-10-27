@@ -95,16 +95,22 @@ else
                                                     <label><strong>This request is now complete. Thank you.</strong></label>
                                                 </div>
                                             }
-                                            else if (r.CollectionDate != null)
+                                            else if (r.RequestStatusId == 2)
                                             {
-                                                <div class="col-md-6 col-md-offset-3">
+                                                <div class="col-md-6">
+                                                    <label>Your donation: @r.AllocatedDonationItem</label>
+                                                </div>
+                                            }
+                                            @if (r.CollectionDate != null)
+                                            {
+                                                <div class="col-md-6">
                                                     <label>Collection Date:</label>
                                                     <label>@r.CollectionDate.Value.ToString("dd MMM yyyy H:mm tt")</label>
                                                 </div>
                                             }
                                             else
                                             {
-                                                <div class="col-md-6 col-md-offset-3">
+                                                <div class="col-md-6">
                                                     <label>The admin has not yet added a collection date.</label>
                                                 </div>
                                             }

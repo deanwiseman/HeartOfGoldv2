@@ -20,7 +20,7 @@
 
 <div style="display:inline-block">
     @using (@Html.BeginForm("Index", "Item"))
-    {      
+    {
         <div class="form-group">
             <label class="control-label">Start Date:</label>
             <div class="input-group date" id="From">
@@ -48,34 +48,66 @@
 
 <br />
 <br />
-
-<table id="Inventory" class="table table-condensed table-hover">
-    <thead>
-        <tr style="background-color:#e6e6e6 ">
-            <th>Donate this?</th>
-            <th>Donation</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Donated By</th>
-            <th>Date Added</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Donations)
-        {
-            <tr>
-                <td>@Html.ActionLink("Select", "Donate", "Item", new { id = item.Id }, null)</td>
-                <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
-                <td>@Html.DisplayFor(m => item.Category.Name)</td>
-                <td>@item.Description</td>
-                <td>@item.Quantity</td>
-                <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
-                <td>@item.DateAdded.ToString("dd MMM yyyy")</td>
+@if (TempData["SelectingDonationItem"] != null)
+{
+    <table id="Inventory" class="table table-condensed table-hover">
+        <thead>
+            <tr style="background-color:#e6e6e6 ">
+                <th>Donate this?</th>
+                <th>Donation</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Donated By</th>
+                <th>Date Added</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Donations)
+            {
+                <tr>
+                    <td>@Html.ActionLink("Select", "Donate", "Item", new { id = item.Id }, null)</td>
+                    <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
+                    <td>@Html.DisplayFor(m => item.Category.Name)</td>
+                    <td>@item.Description</td>
+                    <td>@item.Quantity</td>
+                    <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
+                    <td>@item.DateAdded.ToString("dd MMM yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <table id="Inventory" class="table table-condensed table-hover">
+        <thead>
+            <tr style="background-color:#e6e6e6 ">
+                <th>Donation</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Donated By</th>
+                <th>Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Donations)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Name, "Edit", "Item", new { id = item.Id }, null)</td>
+                    <td>@Html.DisplayFor(m => item.Category.Name)</td>
+                    <td>@item.Description</td>
+                    <td>@item.Quantity</td>
+                    <td>@Html.DisplayFor(m => item.Donor.FullName)</td>
+                    <td>@item.DateAdded.ToString("dd MMM yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
 
 
 <br />

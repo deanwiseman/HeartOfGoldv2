@@ -23,7 +23,7 @@ namespace HeartOfGold.Controllers
         }
 
         // GET all donated items in the database (that have not been soft-deleted. See: IsActive property)
-        public ActionResult Index()
+        public ActionResult Index(string SelectDonation)
         {
             var items = _context.Items.Include(i => i.Category)
                 .Include(i => i.Donor)
@@ -34,6 +34,11 @@ namespace HeartOfGold.Controllers
             {
                 Donations = items
             };
+
+            if(SelectDonation.Length > 0)
+            {
+                TempData["SelectingDonationItem"] = "value";
+            }
 
             return View(viewModel);
         }
@@ -151,15 +156,21 @@ namespace HeartOfGold.Controllers
 
         public ActionResult Donate(int id)
         {
-            var itemToRemove = _context.Items.SingleOrDefault(i => i.Id == id);
+            var itemToDonate = _context.Items.SingleOrDefault(i => i.Id == id);
+            string donationItemName = "";
 
-            if (itemToRemove != null)
+            if (itemToDonate != null)
             {
-                itemToRemove.Quantity = itemToRemove.Quantity - 1;
+                // Remove 1 from total quantity. Business rule: we only give out 1 donation item at a time for fairness sake.
+                itemToDonate.Quantity = itemToDonate.Quantity - 1;
+
+                donationItemName = itemToDonate.Name;
+
+                Session["Donation"] = donationItemName;
                 
-                if (itemToRemove.Quantity == 0)
+                if (itemToDonate.Quantity == 0)
                 {
-                    itemToRemove.IsActive = false;
+                    itemToDonate.IsActive = false;
                 }
                 _context.SaveChanges();
             }

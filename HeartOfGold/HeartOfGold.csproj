@@ -441,6 +441,7 @@
     <Compile Include="ViewModels\RequestFormViewModel.cs" />
     <Compile Include="ViewModels\RequestListViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
+    <Compile Include="ViewModels\StudentRequestsViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -918,6 +919,7 @@
     <Content Include="Views\Shared\_AdminNavBar.cshtml" />
     <Content Include="Views\Item\Donations.cshtml" />
     <Content Include="Views\Scheduler\Index.cshtml" />
+    <Content Include="Views\Student\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

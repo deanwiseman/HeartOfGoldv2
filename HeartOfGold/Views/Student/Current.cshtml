@@ -23,7 +23,7 @@
         @foreach (var student in Model.Users)
         {
             <tr>
-                <td>@Html.ActionLink(student.UserName, "test", "test", new { id = student.Id }, null)</td>
+                <td>@Html.ActionLink(student.UserName, "ViewStudentRequests", "Student", new { StudentNumber = student.UserName.Remove(0,1) }, null)</td>
                 <td>@Html.DisplayFor(m => student.FirstName)</td>
                 <td>@Html.DisplayFor(m => student.Surname)</td>
                 <td>@Html.DisplayFor(m => student.Email)</td>

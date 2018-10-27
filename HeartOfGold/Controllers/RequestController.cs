@@ -72,13 +72,25 @@ namespace HeartOfGold.Controllers
             return RedirectToAction("SubmitRequest");
         }
 
-        public ActionResult GetRequests(int? page, string searchString)
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult GetRequests(int? page, string searchString, int? StatusFilter)
         {
             // Get all requests that are currently of 'Open' status.
             var requests = _context.Requests.Include(r => r.RequestStatus)
                 .Where(r => r.RequestStatusId == 1)
                 .OrderBy(r => r.Id)
                 .AsEnumerable();
+
+            if(StatusFilter != null)
+            {
+                if(StatusFilter == 1)
+                {
+                     requests = _context.Requests.Include(r => r.RequestStatus)
+                    .Where(r => r.RequestStatusId == 1)
+                    .OrderBy(r => r.Id)
+                    .AsEnumerable();
+                }
+            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -123,6 +135,11 @@ namespace HeartOfGold.Controllers
             // Fetch current request from db,
             var requestInDb = _context.Requests.Single(r => r.Id == request.Id);
 
+            if(Session["Donation"] != null)
+            {
+                requestInDb.AllocatedDonationItem = Session["Donation"].ToString();
+            }           
+
             // Set its status to the one the user decides
             requestInDb.RequestStatusId = request.SelectedStatusId;
 
@@ -131,7 +148,7 @@ namespace HeartOfGold.Controllers
             // If the request was marked as successful, redirect to Scheduler in order to create an event
             if(request.SelectedStatusId == 2)
             {
-                // Pass requestID of current request to subsequent controller
+                // Put requestID of current request into session variable -> subsequent controller
                 Session["RequestID"] = request.Id;
 
                 return RedirectToAction("Index", "Scheduler");
