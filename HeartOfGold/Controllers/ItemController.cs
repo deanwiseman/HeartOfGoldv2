@@ -35,10 +35,11 @@ namespace HeartOfGold.Controllers
                 Donations = items
             };
 
-            if(SelectDonation.Length > 0)
+            if(SelectDonation == "Yes")
             {
                 TempData["SelectingDonationItem"] = "value";
             }
+
 
             return View(viewModel);
         }

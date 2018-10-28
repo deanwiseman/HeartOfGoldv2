@@ -38,18 +38,15 @@ namespace HeartOfGold.Controllers
         [Authorize(Roles = Roles.Administrator)]
         public ActionResult ViewStudentRequests(string studentNumber)
         {
-
             var requests = _context.Requests.Include(r => r.RequestStatus)
                 .Include(r => r.Category)
                 .Where(r => r.StudentNumber == studentNumber)
-                .OrderByDescending(r => r.Id)
                 .ToList();
 
             var viewModel = new StudentRequestsViewModel
             {
                 Requests = requests
             };
-
 
             return View("Requests", viewModel);
         }

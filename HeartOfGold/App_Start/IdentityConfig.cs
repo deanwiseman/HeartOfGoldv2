@@ -11,8 +11,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using HeartOfGold.Models;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;

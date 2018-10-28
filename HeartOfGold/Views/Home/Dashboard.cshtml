@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="emailModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content" id="modalContent">
@@ -48,7 +48,7 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->*@
+</div><!-- /.modal -->
 
 <div class="container">
     <div class="row">
@@ -79,7 +79,7 @@
                                     </a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="@Url.Action("Index", "Item")">
+                                    <a href="@Url.Action("Index", "Item", new { SelectDonation = "No" }, null)">
                                         <i class="fas fa-th-list"></i>
                                         &nbsp;Donation Inventory
                                     </a>

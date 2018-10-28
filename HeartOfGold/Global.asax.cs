@@ -18,7 +18,7 @@ namespace HeartOfGold
         protected void Application_Start()
         {
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+          //  GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

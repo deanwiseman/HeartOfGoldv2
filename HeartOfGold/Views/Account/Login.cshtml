@@ -31,7 +31,7 @@
                     <div class="col-md-10">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon"><i class="fas fa-lock" style="font-size: 1.3em; color: #f2f2f2"></i></span>
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style="color:white" })
                         </div>
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>

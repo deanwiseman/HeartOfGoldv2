@@ -72,8 +72,7 @@ namespace HeartOfGold.Controllers
             return RedirectToAction("SubmitRequest");
         }
 
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult GetRequests(int? page, string searchString, int? StatusFilter)
+        public ActionResult GetRequests(int? page, string searchString)
         {
             // Get all requests that are currently of 'Open' status.
             var requests = _context.Requests.Include(r => r.RequestStatus)
@@ -81,16 +80,6 @@ namespace HeartOfGold.Controllers
                 .OrderBy(r => r.Id)
                 .AsEnumerable();
 
-            if(StatusFilter != null)
-            {
-                if(StatusFilter == 1)
-                {
-                     requests = _context.Requests.Include(r => r.RequestStatus)
-                    .Where(r => r.RequestStatusId == 1)
-                    .OrderBy(r => r.Id)
-                    .AsEnumerable();
-                }
-            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -150,9 +139,13 @@ namespace HeartOfGold.Controllers
             {
                 // Put requestID of current request into session variable -> subsequent controller
                 Session["RequestID"] = request.Id;
+                TempData["Successful"] = "value";
 
                 return RedirectToAction("Index", "Scheduler");
             }
+
+            // TempData entry for toastr notification
+            TempData["Unsuccessful"] = "value";
 
             // Else just redirect to current Index
             return RedirectToAction("Index");

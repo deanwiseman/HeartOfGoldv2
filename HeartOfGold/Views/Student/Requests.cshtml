@@ -6,13 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Requests</h2>
+<h3>Requests By</h3>
 
 <table id="requests" class="table table-bordered table-hover">
     <thead>
         <tr style="background-color:#e6e6e6 ">
-            <th>Description</th>
-            <th>Date</th>
+            <th>Request Description</th>
+            <th>Date Created</th>
             <th>Category</th>
             <th>Collection Date</th>
             <th>Allocated Donation</th>
@@ -23,10 +23,28 @@
         {
         <tr>
             <td>@Html.DisplayFor(r => request.Description)</td>
-            <td>@Html.DisplayFor(r => request.Date)</td>
+            <td>@request.Date.ToString("dd MMM yyyy")</td>
             <td>@Html.DisplayFor(r => request.Category.Name)</td>
-            <td>@Html.DisplayFor(r => request.CollectionDate)</td>
-            <td>@Html.DisplayFor(r => request.AllocatedDonationItem)</td>
+            <td>
+                @if (request.CollectionDate != null)
+                {
+                    @request.CollectionDate.Value.ToString("dd MMM yyyy hh:mm")
+                }
+                else
+                {
+                    <label>No collection date has been set.</label>
+                }
+            </td>
+            <td>
+                @if (request.AllocatedDonationItem != null)
+                {
+                    @Html.DisplayFor(r => request.AllocatedDonationItem)
+                }
+                else
+                {
+                    <label>Not yet allocated.</label>
+                }
+            </td>
         </tr>
         }
     </tbody>

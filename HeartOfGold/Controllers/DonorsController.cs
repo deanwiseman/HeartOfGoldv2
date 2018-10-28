@@ -37,6 +37,7 @@ namespace HeartOfGold.Controllers
             var donationHistoryData = _context.Items.Include(i => i.Category)
                 .Include(i => i.Donor)
                 .Where(i => i.DonorId == id)
+                .Where(i => i.IsActive == true)
                 .ToList();
 
             var viewModel = new DonorHistoryViewModel

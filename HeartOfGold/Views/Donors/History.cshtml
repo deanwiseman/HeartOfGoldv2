@@ -25,9 +25,9 @@
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label class="control-label" style="padding-right:5px">Message Template:</label>
-                        <select id="template"style="width:130px">
+                        <select id="template"style="width:150px">
                             <option>None</option>
-                            <option value="ThankYou">Thank You</option>
+                            <option value="DonationReceived">Donation Received</option>
                             <option value="DonationDrive">Donation Drive</option>
                         </select>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="row padBot">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email.Subject, new { @class = "col-md-2 control-label" })
-                            @Html.TextBoxFor(m => m.Email.Subject, new { @class = "col-md-10 form-control" })
+                            @Html.TextBoxFor(m => m.Email.Subject, new { @class = "col-md-10 form-control", @id="emailSubject" })
                         </div>
                     </div>
 
@@ -124,14 +124,16 @@
             var donorEmail = null;
             var donorID = $('#DonorID').val();
 
-            var thankYouMessage = ' Good day, you recently donated to an item\n Sincerely,\n Heart of Gold';
-            var donationDriveMessage = ' Good day ' + donorName + ',\n There is currently a shortage of donations at NMU and there are many students who are in desperate need. It would be gratefully appreciated if you could help out. Any donation will find its way to a student in need. \nSincerely,\nHeartOfGold Team';
+            var thankYouMessage = ' Dear ' + donorName + ', \n\n We have received your donation and it is greately appreciated! Your donation is going to help a student in need at the Nelson Mandela University.\n\n Thank you. \n\n Kind Regards,\n Heart Of Gold Administrator';
+            var donationDriveMessage = ' Good day ' + donorName + ',\n\n We are currently experiencing a large amount of incoming requests from students for general donations. These students would gratefully appreciate absolutely any donation.\n\n Please contact me if theres anything you can do to assist.\n\n Kind Regards,\n Heart of Gold Administrator';
 
             $('#template').change(function () {
-                if ($(this).val() == 'ThankYou') {
-                    $('#messageBody').val(thankYouMessage)
+                if ($(this).val() == 'DonationReceived') {
+                    $('#messageBody').val(thankYouMessage);
+                    $('#emailSubject').val('Donation Received');
                 } else if ($(this).val() == 'DonationDrive') {
                     $('#messageBody').val(donationDriveMessage)
+                    $('#emailSubject').val('Donation Drive');
                 };
             });
 

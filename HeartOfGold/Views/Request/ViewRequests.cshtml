@@ -32,14 +32,6 @@
                     </div>
                 }
             </div>
-            <select id="filterRequests" name="StatusFilter" role="menu">
-                <option value="1">Open</option>
-                <option value="2">Successful</option>
-                <option value="3">Unsuccesful</option>
-                <option value="4">Collected</option>
-                <option value="5">Cancelled</option>
-                <option value="6">Awaiting Request</option>
-            </select>
         </div>
     </div>
 
@@ -122,7 +114,7 @@
 {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
             $('#filterRequests').change(function () {
                 var data = null;
                 var data = $(this).find(":selected").val();
@@ -133,5 +125,14 @@
                 });
             });
 
-    </script>
+    </script>*@
+
+    @if(TempData["Unsuccessful"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                toastr.success('Request processed. You marked it as unsuccessful.');
+            });
+        </script>
+    }
 }

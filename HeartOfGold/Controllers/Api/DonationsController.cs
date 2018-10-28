@@ -5,6 +5,7 @@ using System.Web.Http;
 using HeartOfGold.Models;
 using HeartOfGold.Dtos;
 using AutoMapper;
+using System.Net.Http;
 
 namespace HeartOfGold.Controllers.Api
 {
